@@ -4,7 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
-	private int startBalls = 5;
+	private int startBalls = 3;
 	public int balls;
 	public int score = 0;
 
@@ -42,12 +42,14 @@ public class GameManager : MonoBehaviour {
 	{
 		balls = balls + deltaBalls;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
+		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
 	}
 	
 	private void InitBalls()
 	{
 		balls = startBalls;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
+		score = 0;
 	}
 	
 	private void InitLevels()
@@ -58,7 +60,10 @@ public class GameManager : MonoBehaviour {
 	
 	public void AddToScore(int extraScore)
 	{
+		//check if updated score breaks thru threshold
+		if ( score < Level.instance.minimumScore && (score + extraScore) > Level.instance.minimumScore ) EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
 		score = score + extraScore;
+		
 	}
 					
 }

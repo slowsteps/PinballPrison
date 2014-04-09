@@ -10,7 +10,10 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	public void Awake()
 	{
 		if (isStartPoint) currentMagnet = this;
+		EventManager.Subscribe(OnEvent);
 	}
+	
+	
 
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
@@ -26,5 +29,14 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	}
 
 
+	public void OnEvent(string customEvent)
+	{
+		switch(customEvent)
+		{
+		case EventManager.EVENT_BALL_EXIT:
+			if (isStartPoint) currentMagnet = this;
+			break;
+		}
+	}
 	
 }

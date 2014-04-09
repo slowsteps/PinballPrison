@@ -12,6 +12,9 @@ public class EventManager {
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
+	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
+	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
+	
 	
 
 	public delegate void Callbackmethod(string customevent);

@@ -8,6 +8,6 @@ public class ScoreDisplay : MonoBehaviour {
 
 	void Update () {
 		displayScore = GameManager.instance.score;
-		guiText.text = displayScore.ToString();		
+		guiText.text = displayScore + "/" + Level.instance.minimumScore;		
 	}
 }

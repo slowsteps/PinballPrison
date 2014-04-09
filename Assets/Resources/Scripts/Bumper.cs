@@ -10,7 +10,7 @@ public class Bumper : MonoBehaviour {
 	public void OnCollisionEnter2D (Collision2D inColl)
 	{
 		inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
-		GameManager.instance.AddToScore(2);
+		GameManager.instance.AddToScore(1);
 	}
 	
 }

@@ -74,11 +74,16 @@ public class Ball : MonoBehaviour {
 		if (selectedBall == this)
 		{ 		
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
-			//Debug.DrawLine(transform.position,cursor.transform.position,Color.green);
+			
 			Vector3 startPos = transform.position;
 			startPos.z=-1;
 			Vector3 endPos = cursor.transform.position;
 			endPos.z=-1;
+			
+			Vector3 radius = endPos - startPos;
+			radius = Vector3.ClampMagnitude(radius,1.5f);
+			endPos = startPos + radius;
+			
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 		}
