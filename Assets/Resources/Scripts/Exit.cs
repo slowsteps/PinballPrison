@@ -42,4 +42,9 @@ public class Exit : MonoBehaviour {
 		}
 	}
 	
+	void OnDestroy()
+	{
+		EventManager.UnSubscribe(OnEvent);
+	}
+	
 }

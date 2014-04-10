@@ -10,6 +10,7 @@ public class ScoreDisplay : MonoBehaviour {
 	{
 		enabled = false;
 		EventManager.Subscribe(OnEvent);
+		gameObject.SetActive(false);
 	}
 
 
@@ -18,17 +19,21 @@ public class ScoreDisplay : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
+			gameObject.SetActive(true);
 			enabled = true;
 			break;
 		case EventManager.EVENT_BALL_EXIT:
 			enabled = false;
+			gameObject.SetActive(false);
+			break;
+		case EventManager.EVENT_OUT_OF_BALLS:
+			gameObject.SetActive(false);
 			break;
 		}
 	}
 	
 	
 	void Update () {
-		print ("start updating score");
 		displayScore = GameManager.instance.score;
 		guiText.text = displayScore + "/" + Level.instance.minimumScore;		
 	}

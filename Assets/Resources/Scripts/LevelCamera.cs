@@ -16,6 +16,10 @@ public class LevelCamera : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			camera.enabled = true;
 			break;
+		case EventManager.EVENT_OUT_OF_BALLS:
+			camera.enabled = false;
+			break;
+			
 		}
 	}
 	

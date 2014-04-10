@@ -3,8 +3,9 @@ using System.Collections;
 
 public class GUIButton : MonoBehaviour {
 
-	public buttonEnum myButton = buttonEnum.LEVEL1;
-	public enum buttonEnum {LEVEL1,LEVEL2};
+	public buttonEnum myButton = buttonEnum.LEVEL;
+	public enum buttonEnum {LEVEL,START,MENU};
+	public int levelNumber=1;
 
 	
 	
@@ -12,19 +13,20 @@ public class GUIButton : MonoBehaviour {
 	{
 		switch(myButton)
 		{
-		case buttonEnum.LEVEL1:
-			LoadLevel("Level1_Prefab");
-			break;
-		case buttonEnum.LEVEL2:
-			LoadLevel("Level2_Prefab");
+		case buttonEnum.LEVEL:
+			LoadLevel(levelNumber);
 			break;
 		}
 	
 	}
 
-	private void LoadLevel(string inLevelName)
+	private void LoadLevel(int inLevelNum)
 	{
-		Instantiate(Resources.Load("Prefabs/"+inLevelName));
+		if (GameManager.instance.lives > 0)
+		{
+			Instantiate(Resources.Load("Prefabs/Level"+inLevelNum+"_Prefab"));
+		}
+		else print ("out of lives");
 	}
 		
 				

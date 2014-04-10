@@ -8,13 +8,16 @@ public class EventManager {
 	
 	private List<Callbackmethod> callbackMethods; 
 
+	public const string EVENT_GAME_START = "EVENT_GAME_START";
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
+	public const string EVENT_OUT_OF_LIVES = "EVENT_OUT_OF_LIVES";
+	public const string EVENT_LIVES_UPDATED = "EVENT_LIVES_UPDATED";
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
-	
+	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
 	
 
 	public delegate void Callbackmethod(string customevent);
@@ -31,11 +34,16 @@ public class EventManager {
 		EventManager.instance.callbackMethods.Add(incallback);
 	}
 	
+	public static void UnSubscribe(Callbackmethod incallback) {
+		EventManager.instance.callbackMethods.Remove(incallback);
+	}
+	
 
 	public static void fireEvent(string customevent) {
 		
 		foreach (Callbackmethod method in EventManager.instance.callbackMethods) {
 			method(customevent);	
+			//Debug.Log(method.Target);
 		}
 		
 	}

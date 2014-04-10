@@ -13,7 +13,6 @@ public class BallHitZone : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
-		print ("down");
 		myBall.OnHitZoneDown();
 	}
 	
