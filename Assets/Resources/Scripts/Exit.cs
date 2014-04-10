@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
 		EventManager.Subscribe(OnEvent);
@@ -17,7 +18,7 @@ public class Exit : MonoBehaviour {
 		particleSystem.time = 0f;
 		particleSystem.Play();
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
-		Invoke("DelayedEvent",2f);
+		Invoke("DelayedEvent",2f);		
 	}
 	
 	private void DelayedEvent()

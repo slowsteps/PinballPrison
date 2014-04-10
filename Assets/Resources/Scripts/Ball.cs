@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour {
 		}
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
+		gameObject.SetActive(false);
 	}
 	
 	public void OnEvent(string customEvent)
@@ -38,7 +39,7 @@ public class Ball : MonoBehaviour {
 			Init();
 			break;
 		case EventManager.EVENT_BALL_EXIT:
-			Init();
+			print ("level complete");
 			break;
 		}
 	}
@@ -54,7 +55,6 @@ public class Ball : MonoBehaviour {
 		if (MagnetSpawnPoint.currentMagnet) transform.position = MagnetSpawnPoint.currentMagnet.transform.position;
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 	}
-	
 	
 	void Update () 
 	{

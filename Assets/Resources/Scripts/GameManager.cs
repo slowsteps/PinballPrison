@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
 	private void InitLevels()
 	{
 //		Instantiate(Resources.Load("Prefabs/Level1_Prefab"));
-		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
+//		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 	}
 	
 	public void AddToScore(int extraScore)
