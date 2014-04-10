@@ -21,7 +21,7 @@ public class LivesRefill : MonoBehaviour {
 			if (GameManager.instance.lives < 5)	StartCoroutine("UpdateText");
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(true);
+			gameObject.SetActive(false);
 			StopCoroutine("UpdateText");
 			break;
 		}
