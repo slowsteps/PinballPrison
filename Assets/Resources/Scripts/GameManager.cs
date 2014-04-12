@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	private int startBalls = 3;
 	public int balls;
 	public int score = 0;
-	public int lives = 2;
+	public int lives = 5;
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
 

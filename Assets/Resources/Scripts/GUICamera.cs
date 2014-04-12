@@ -15,7 +15,7 @@ public class GUICamera : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			camera.enabled = false;
+			//camera.enabled = false;
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			camera.enabled = true;
