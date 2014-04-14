@@ -4,12 +4,14 @@ using System.Collections;
 public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
+	private Vector3 origPos;
 
 
 	void Awake()
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
+		origPos = transform.position;
 	}
 	
 
@@ -23,7 +25,8 @@ public class GUIMenu : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(false);
+			iTween.MoveTo(gameObject,iTween.Hash("x",8,"time",0.5f,"easetype",iTween.EaseType.easeInBack));
+			//gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			Show();
@@ -37,6 +40,7 @@ public class GUIMenu : MonoBehaviour {
 	private void Show()
 	{
 		gameObject.SetActive(true);
+		iTween.MoveTo(gameObject,iTween.Hash("x",origPos.x,"time",0.5f,"easetype",iTween.EaseType.easeOutBack));
 		EventManager.fireEvent(EventManager.EVENT_MENU_SHOW);
 	}
 	

@@ -15,7 +15,8 @@ public class Ball : MonoBehaviour {
 	public bool isCaptured = false;
 	
 
-	void Start () {
+	void Start () 
+	{
 		instance = this;
 		tag = "ball";
 		if (cursor==null) 
@@ -49,45 +50,40 @@ public class Ball : MonoBehaviour {
 	}
 	
 	
-	private void Init() {
+	private void Init() 
+	{
 		gameObject.SetActive(true);
 		rigidbody2D.isKinematic = true;
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
 		transform.position = origPos;
-		//rigidbody2D.isKinematic = false;
 		if (MagnetSpawnPoint.currentMagnet) transform.position = MagnetSpawnPoint.currentMagnet.transform.position;
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 	}
 	
 	void Update () 
 	{
-	
 		if (Input.GetMouseButtonDown(0))
 		{
+			clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			OnHitZoneDown();
 		}
 	
 		if (Input.GetMouseButton(0))
 		{
 			clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			DrawCursor();
-													
+			DrawCursor();										
 		}
 
 		if (Input.GetMouseButtonUp(0))
 		{
 			OnHitZoneUp();
-		}
-		
-				
-								
-		if (Input.GetKeyDown(KeyCode.R)) isPullMode = -1*isPullMode;
-				
+		}		
 	}
 
 	private void DrawCursor()
 	{
+		
 		if (selectedBall == this)
 		{ 		
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
@@ -98,45 +94,51 @@ public class Ball : MonoBehaviour {
 			endPos.z=-1;
 			
 			Vector3 radius = endPos - startPos;
-				radius = Vector3.ClampMagnitude(radius,1.5f);
-				endPos = startPos + radius;
-				
-				cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
-				cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
+			radius = Vector3.ClampMagnitude(radius,1.5f);
+			endPos = startPos + radius;
+			//cursor.GetComponent<LineRenderer>().SetWidth(0.15f/radius.magnitude,0f);
+			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
+			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
 		}
 	}
 	
-	//BUG? ball and hitzone have collider conflicts, so both need to trigger mousedowns and ups.
-	void OnMouseDown()
-	{
-		//OnHitZoneDown();
-	}
-
-	void OnMouseUp()
-	{
-		//OnHitZoneUp();
-	}
-
+	
 	//Called from BallHitZone, larger radius than ball
 	public void OnHitZoneDown()
 	{
-		selectedBall = this;
-		ScrollCamera.instance.SetTarget(gameObject);
-		cursor.SetActive(true);
+		
+		cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
+		
+		Vector3 startPos = transform.position;
+		startPos.z=-1;
+		Vector3 endPos = cursor.transform.position;
+		endPos.z=-1;
+		
+		Vector3 radius = endPos - startPos;
+	
+		if (radius.magnitude < 4)		
+		{
+			selectedBall = this;
+			ScrollCamera.instance.SetTarget(gameObject);
+			cursor.SetActive(true);
+		}
 	}
 
 	
 	
 	public void OnHitZoneUp()
 	{
-		rigidbody2D.isKinematic = false;
-		selectedBall = null;
-		rigidbody2D.gravityScale = 1f;
-		catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
-		if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
-		rigidbody2D.AddForce(catapultForce);
-		cursor.SetActive(false);
+		if (selectedBall == this)
+		{
+			rigidbody2D.isKinematic = false;
+			selectedBall = null;
+			rigidbody2D.gravityScale = 1f;
+			catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
+			if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
+			rigidbody2D.AddForce(catapultForce);
+			cursor.SetActive(false);
+		}
 	}
 
 }
