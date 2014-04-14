@@ -62,13 +62,26 @@ public class Ball : MonoBehaviour {
 	
 	void Update () 
 	{
+	
+		if (Input.GetMouseButtonDown(0))
+		{
+			OnHitZoneDown();
+		}
+	
 		if (Input.GetMouseButton(0))
 		{
 			clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			DrawCursor();
 													
 		}
+
+		if (Input.GetMouseButtonUp(0))
+		{
+			OnHitZoneUp();
+		}
 		
+				
+								
 		if (Input.GetKeyDown(KeyCode.R)) isPullMode = -1*isPullMode;
 				
 	}
@@ -85,23 +98,24 @@ public class Ball : MonoBehaviour {
 			endPos.z=-1;
 			
 			Vector3 radius = endPos - startPos;
-			radius = Vector3.ClampMagnitude(radius,1.5f);
-			endPos = startPos + radius;
-			
-			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
-			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
+				radius = Vector3.ClampMagnitude(radius,1.5f);
+				endPos = startPos + radius;
+				
+				cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
+				cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
+
 		}
 	}
 	
 	//BUG? ball and hitzone have collider conflicts, so both need to trigger mousedowns and ups.
 	void OnMouseDown()
 	{
-		OnHitZoneDown();
+		//OnHitZoneDown();
 	}
 
 	void OnMouseUp()
 	{
-		OnHitZoneUp();
+		//OnHitZoneUp();
 	}
 
 	//Called from BallHitZone, larger radius than ball

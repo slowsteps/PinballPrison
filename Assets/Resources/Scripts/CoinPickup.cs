@@ -9,14 +9,16 @@ public class CoinPickup : MonoBehaviour {
 	{
 		if (ball.tag == "ball") 
 		{
-		GameManager.instance.AddToScore(scoreValue);
-		gameObject.SetActive(false);
+			GameManager.instance.AddToScore(scoreValue);
+			//gameObject.SetActive(false);
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			Destroy(collider2D);
+			if (particleSystem)
+			{
+				particleSystem.time = 0f;
+				particleSystem.Play();
+			}
 		}
-	}
-	
-	private void Update()
-	{
-		transform.Rotate(Vector3.up,Time.deltaTime);
 	}
 
 

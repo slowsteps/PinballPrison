@@ -13,13 +13,13 @@ public class BallHitZone : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
-		myBall.OnHitZoneDown();
+		//myBall.OnHitZoneDown();
 	}
 	
 	
 	void OnMouseUp()
 	{
-		myBall.OnHitZoneUp();
+		//myBall.OnHitZoneUp();
 	}
 	
 	

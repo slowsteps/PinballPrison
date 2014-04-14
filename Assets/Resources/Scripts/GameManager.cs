@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
 			isMinimimScoreReached = true;
 		}
 		score = score + extraScore;
-		
+		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay(score);
 	}
 					
 }

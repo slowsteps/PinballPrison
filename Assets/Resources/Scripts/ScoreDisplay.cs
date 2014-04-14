@@ -4,10 +4,12 @@ using System.Collections;
 public class ScoreDisplay : MonoBehaviour {
 
 	private int displayScore;
+	public static ScoreDisplay instance;
 
 
 	void Start()
 	{
+		instance = this;
 		enabled = false;
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
@@ -29,12 +31,12 @@ public class ScoreDisplay : MonoBehaviour {
 		case EventManager.EVENT_OUT_OF_BALLS:
 			gameObject.SetActive(false);
 			break;
+		
 		}
 	}
 	
 	
-	void Update () {
-		displayScore = GameManager.instance.score;
-		guiText.text = displayScore + "/" + Level.instance.minimumScore;		
+	public void UpdateScoreDisplay(int inScore) {
+		guiText.text = inScore + "/" + Level.instance.minimumScore;		
 	}
 }
