@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+
+
 
 public class Settings : MonoBehaviour {
+	
+	public static bool  hasPlayerClicked = false;
 
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

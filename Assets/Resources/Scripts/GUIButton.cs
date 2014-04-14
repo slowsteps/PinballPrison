@@ -11,6 +11,9 @@ public class GUIButton : MonoBehaviour {
 	
 	public void OnMouseDown()
 	{
+	
+		Settings.hasPlayerClicked = true;
+	
 		switch(myButton)
 		{
 		case buttonEnum.LEVEL:
@@ -27,7 +30,9 @@ public class GUIButton : MonoBehaviour {
 	{
 		if (GameManager.instance.lives > 0)
 		{
-			Instantiate(Resources.Load("Prefabs/Level"+inLevelNum+"_Prefab"));
+			GameObject go = Instantiate(Resources.Load("Prefabs/Level"+inLevelNum+"_Prefab")) as GameObject;
+			go.name ="Loaded level number " + inLevelNum;
+			EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 		}
 		else print ("out of lives");
 	}

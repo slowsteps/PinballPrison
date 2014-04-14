@@ -12,10 +12,7 @@ public class GUIMenu : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 	}
 	
-	void Start() 
-	{
-		print ("start called");
-	}
+
 	
 	
 	public void OnEvent(string customEvent)

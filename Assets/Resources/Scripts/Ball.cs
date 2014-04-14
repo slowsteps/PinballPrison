@@ -55,7 +55,7 @@ public class Ball : MonoBehaviour {
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
 		transform.position = origPos;
-		rigidbody2D.isKinematic = false;
+		//rigidbody2D.isKinematic = false;
 		if (MagnetSpawnPoint.currentMagnet) transform.position = MagnetSpawnPoint.currentMagnet.transform.position;
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 	}
@@ -116,6 +116,7 @@ public class Ball : MonoBehaviour {
 	
 	public void OnHitZoneUp()
 	{
+		rigidbody2D.isKinematic = false;
 		selectedBall = null;
 		rigidbody2D.gravityScale = 1f;
 		catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;

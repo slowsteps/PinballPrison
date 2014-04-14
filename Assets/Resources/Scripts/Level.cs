@@ -8,9 +8,16 @@ public class Level : MonoBehaviour {
 			
 	void Start () {
 		
+		if (!Settings.hasPlayerClicked)
+		{
+			GameObject.Destroy(gameObject);
+			gameObject.SetActive(false);
+			
+		}
+		
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
+		
 	}
 	
 	public void OnEvent(string customEvent)

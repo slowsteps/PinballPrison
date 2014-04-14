@@ -3,10 +3,21 @@ using System.Collections;
 
 public class Spinner : MonoBehaviour {
 
-	public float spinningSpeed = 10f;
-			
-	// Update is called once per frame
+	public Vector3 spinAngles;
+	public float delay=0;	
+	
+	void Start()
+	{
+		enabled = false;
+		Invoke("startTurning",delay);
+	}
+		
+	private void startTurning()
+	{
+		enabled = true;
+	}	
+		
 	void Update () {
-		transform.Rotate(Vector3.forward,spinningSpeed*Time.deltaTime);
+		transform.Rotate(60f*spinAngles*(Time.deltaTime));
 	}
 }
