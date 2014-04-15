@@ -6,17 +6,18 @@ public class ScrollCamera : MonoBehaviour {
 	public static ScrollCamera instance;
 	public GameObject lookatTarget = null;
 	private Vector3 targetPos = Vector3.zero;
+	public Vector3 origPos;
 	
 	
 	void Start () 
 	{
+		origPos = transform.position;
 		instance = this;
 		EventManager.Subscribe(OnEvent);
 		enabled = false;
 		camera.enabled = false;
 		#if UNITY_EDITOR
 		camera.orthographicSize = 5.68f;
-		Debug.Log("in editor");
 		#endif
 		#if UNITY_IPHONE && !UNITY_EDITOR
 		camera.orthographicSize = Screen.height/200f;

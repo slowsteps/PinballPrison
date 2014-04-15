@@ -32,7 +32,7 @@ public class LivesRefill : MonoBehaviour {
 		while (GameManager.instance.lives < 5)
 		{
 			remainingTime--;
-			guiText.text = "Extra live in " + remainingTime + " secs";
+			guiText.text = "Extra live in " + (30 + remainingTime) + " secs";
 			if (remainingTime == 0 ) remainingTime = 30;
 			yield return new WaitForSeconds(1);
 		}

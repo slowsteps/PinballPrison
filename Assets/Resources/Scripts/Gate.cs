@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public class Gate : TargetGroupEffect {
 
-	//private List<Target> targets;
 	public bool isBarrierActive = true;
 	private bool isAllActivated = false;
+	public bool hasResetTime = false;
+	public float resetTime = 10f;
 
 	void Awake()
 	{
@@ -30,18 +31,43 @@ public class Gate : TargetGroupEffect {
 				break;
 			}
 		}
-			
-		gameObject.SetActive(!isAllActivated);
-		SwitchOn();
+		
+		Switch();
+		
 	}
 		
 			
-	private void SwitchOn()
+	private void Switch()
 	{
-		if (isBarrierActive && isAllActivated) gameObject.SetActive(false);
-		if (isBarrierActive && !isAllActivated) gameObject.SetActive(true);
-		if (!isBarrierActive && isAllActivated) gameObject.SetActive(true);
-		if (!isBarrierActive && !isAllActivated) gameObject.SetActive(false);
-	}
+		if (gameObject.activeSelf && isAllActivated) 
+		{
+			if (hasResetTime) Invoke("ResetGate",resetTime);
+			gameObject.SetActive(false);
+		}
+
+		else if (!gameObject.activeSelf && !isAllActivated) 
+		{
+			gameObject.SetActive(true);
+		}
 						
+		else if (!gameObject.activeSelf && isAllActivated) 
+		{
+			if (hasResetTime) Invoke("ResetGate",resetTime);
+			gameObject.SetActive(true);
+			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		}
+		
+	}
+
+	private void ResetGate()
+	{
+		if (gameObject.activeSelf) gameObject.SetActive(false);
+		else {
+			gameObject.SetActive(true);
+			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		}
+		isAllActivated = false;
+		foreach (Target aTarget in targets) aTarget.Reset();
+	}					
+																		
 }

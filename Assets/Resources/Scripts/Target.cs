@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Target : MonoBehaviour {
 
@@ -11,7 +12,7 @@ public class Target : MonoBehaviour {
 	public bool isActivated = false;
 	public bool isToggle = false;
 	public bool isLight = false;
-	public TargetGroupEffect targetGroupEffect;
+	public List<TargetGroupEffect> targetGroupEffects;
 	private Sprite targetUp;
 	public Sprite targetDown;
 	
@@ -20,6 +21,7 @@ public class Target : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
 		if (isLight) collider2D.isTrigger = true;
+		//targetGroupEffects = new List<TargetGroupEffect>();
 	}
 	
 	void Start()
@@ -34,7 +36,7 @@ public class Target : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			if (targetGroupEffect) targetGroupEffect.AddTarget(this);
+			foreach(TargetGroupEffect tg in targetGroupEffects) tg.AddTarget(this);
 			break;
 		}
 	}
@@ -76,12 +78,22 @@ public class Target : MonoBehaviour {
 			isActivated = true;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
-			collider2D.isTrigger = true;
+			Destroy(gameObject.collider2D);
 		}
-		if (targetGroupEffect) targetGroupEffect.ReportTargetHit(this);
-	
+		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 	}
 
+
+	public void Reset()
+	{
+		if (!isToggle)
+		{
+			isActivated = false;
+			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
+			else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
+			gameObject.AddComponent<BoxCollider2D>();
+		}
+	}
 
 	public void OnDestroy()
 	{

@@ -13,10 +13,12 @@ public class Ball : MonoBehaviour {
 	public static Ball selectedBall = null;
 	public static Ball instance = null;
 	public bool isCaptured = false;
+	private bool isFirstClick = true;
 	
 
 	void Start () 
 	{
+		enabled = false;
 		instance = this;
 		tag = "ball";
 		if (cursor==null) 
@@ -49,20 +51,35 @@ public class Ball : MonoBehaviour {
 		}
 	}
 	
+//	public void OnCollisionEnter2D (Collision2D inColl)
+//	{
+//		print ("ball collides with: " + inColl.collider.name);
+//		Time.timeScale = 0.1f;
+//		Debug.DrawRay(inColl.contacts[0].point,inColl.contacts[0].normal,Color.green,10f);
+//	}
 	
 	private void Init() 
 	{
+		print ("Init");
+		transform.position = origPos;
+		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
+		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);
 		rigidbody2D.isKinematic = true;
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
-		transform.position = origPos;
-		if (MagnetSpawnPoint.currentMagnet) transform.position = MagnetSpawnPoint.currentMagnet.transform.position;
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		enabled = true;
 	}
 	
 	void Update () 
 	{
+		if (isFirstClick)
+		{
+			isFirstClick = false;
+			return;
+		}
+		
 		if (Input.GetMouseButtonDown(0))
 		{
 			clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

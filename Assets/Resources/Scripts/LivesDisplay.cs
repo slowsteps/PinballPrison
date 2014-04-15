@@ -18,12 +18,16 @@ public class LivesDisplay : MonoBehaviour {
 			UpdateText();
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(true);
-			UpdateText();
+			gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_LIVES_UPDATED:
 			UpdateText();
 			break;
+		case EventManager.EVENT_MENU_SHOW:
+			gameObject.SetActive(true);
+			UpdateText();
+			break;
+			
 		}
 	}
 	

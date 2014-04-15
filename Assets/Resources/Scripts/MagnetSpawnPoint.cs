@@ -4,12 +4,17 @@ using System.Collections;
 public class MagnetSpawnPoint : MonoBehaviour {
 
 	public static MagnetSpawnPoint currentMagnet;
+	public static MagnetSpawnPoint currentSavePoint;
+	public static MagnetSpawnPoint startPointMagnet;
 	public bool isStartPoint = false;
+	public bool isSafePoint = false;
 
 
 	public void Awake()
 	{
-		if (isStartPoint) currentMagnet = this;
+		if (isStartPoint) {
+			startPointMagnet = this;
+		}
 		EventManager.Subscribe(OnEvent);
 	}
 	
@@ -25,9 +30,17 @@ public class MagnetSpawnPoint : MonoBehaviour {
 			ball.rigidbody2D.angularVelocity = 0f;
 			iTween.MoveTo(ball.gameObject,iTween.Hash("position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 			currentMagnet = this;
+			if (isSafePoint) currentSavePoint = this;
 		}
 	}
 
+	void OnDisable()
+	{
+		if (currentMagnet == this) 
+		{
+			if (Ball.instance.rigidbody2D.gravityScale == 0f) Ball.instance.rigidbody2D.gravityScale = 1f; ;
+		}
+	}
 
 	public void OnEvent(string customEvent)
 	{
