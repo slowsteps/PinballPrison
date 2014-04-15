@@ -28,7 +28,8 @@ public class MagnetSpawnPoint : MonoBehaviour {
 			ball.rigidbody2D.gravityScale = 0f;
 			ball.rigidbody2D.velocity = Vector3.zero;
 			ball.rigidbody2D.angularVelocity = 0f;
-			iTween.MoveTo(ball.gameObject,iTween.Hash("position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
+			ball.transform.position = transform.position;
+			//iTween.MoveTo(ball.gameObject,iTween.Hash("position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 			currentMagnet = this;
 			if (isSafePoint) currentSavePoint = this;
 		}
@@ -36,9 +37,9 @@ public class MagnetSpawnPoint : MonoBehaviour {
 
 	void OnDisable()
 	{
-		if (currentMagnet == this) 
+		if (currentMagnet == this && Ball.instance) 
 		{
-			if (Ball.instance.rigidbody2D.gravityScale == 0f) Ball.instance.rigidbody2D.gravityScale = 1f; ;
+			if (Ball.instance.rigidbody2D.gravityScale == 0f) Ball.instance.rigidbody2D.gravityScale = Ball.instance.currentGravityScale;
 		}
 	}
 

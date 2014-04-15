@@ -23,7 +23,6 @@ public class Danger : MonoBehaviour {
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		print ("danger impact");
 		ImpactParticles.SetActive(true);
 		ImpactParticles.particleSystem.time = 0f;
 		ImpactParticles.particleSystem.Play();
