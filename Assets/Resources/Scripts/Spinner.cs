@@ -10,6 +10,8 @@ public class Spinner : MonoBehaviour {
 	{
 		enabled = false;
 		Invoke("startTurning",delay);
+		HingeJoint2D joint = gameObject.GetComponent<HingeJoint2D>();
+		if (joint) joint.connectedAnchor = (Vector2) transform.position;
 	}
 		
 	private void startTurning()
