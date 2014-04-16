@@ -9,9 +9,9 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	public bool isStartPoint = false;
 	public bool isSafePoint = false;
 
-
 	public void Awake()
 	{
+		enabled = false;
 		if (isStartPoint) {
 			startPointMagnet = this;
 		}
@@ -22,16 +22,22 @@ public class MagnetSpawnPoint : MonoBehaviour {
 
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		
 		if (!isStartPoint && ball.tag == "ball") 
 		{
 			ball.rigidbody2D.gravityScale = 0f;
 			ball.rigidbody2D.velocity = Vector3.zero;
 			ball.rigidbody2D.angularVelocity = 0f;
-			ball.transform.position = transform.position;
-			//iTween.MoveTo(ball.gameObject,iTween.Hash("position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
+			iTween.MoveTo(ball.gameObject,iTween.Hash("name","magnet","position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 			currentMagnet = this;
 			if (isSafePoint) currentSavePoint = this;
+		}
+	}
+	
+	public void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			iTween.StopByName("magnet");
 		}
 	}
 
@@ -43,10 +49,18 @@ public class MagnetSpawnPoint : MonoBehaviour {
 		}
 	}
 
+	void OnDestroy()
+	{
+		EventManager.UnSubscribe(OnEvent);
+	}
+
 	public void OnEvent(string customEvent)
 	{
 		switch(customEvent)
 		{
+		case EventManager.EVENT_LEVEL_START:
+			enabled = true;
+			break;
 		case EventManager.EVENT_BALL_EXIT:
 			if (isStartPoint) currentMagnet = this;
 			break;

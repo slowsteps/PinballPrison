@@ -5,11 +5,9 @@ public class Ball : MonoBehaviour {
 
 
 	private Vector3 origPos = Vector3.zero;
-	private Vector3 origScale;
 	private Vector2 catapultForce = Vector2.zero;
 	public GameObject mainCam = null;
 	public GameObject cursor = null;
-	public GameObject cursorMouseUp;
 	public Vector3 clickPos = Vector3.zero;
 	private int isPullMode = 1;
 	public static Ball selectedBall = null;
@@ -25,10 +23,8 @@ public class Ball : MonoBehaviour {
 		instance = this;
 		tag = "ball";
 		cursor.SetActive(false);
-		cursorMouseUp.SetActive(false);
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
-		origScale = transform.localScale;
 		gameObject.SetActive(false);
 	}
 	
@@ -52,12 +48,7 @@ public class Ball : MonoBehaviour {
 		}
 	}
 	
-//	public void OnCollisionEnter2D (Collision2D inColl)
-//	{
-//		print ("ball collides with: " + inColl.collider.name);
-//		Time.timeScale = 0.1f;
-//		Debug.DrawRay(inColl.contacts[0].point,inColl.contacts[0].normal,Color.green,10f);
-//	}
+
 	
 	private void Init() 
 	{
@@ -68,7 +59,7 @@ public class Ball : MonoBehaviour {
 		rigidbody2D.isKinematic = true;
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
-		//iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 		enabled = true;
 	}
 	
@@ -79,30 +70,42 @@ public class Ball : MonoBehaviour {
 			isFirstClick = false;
 			return;
 		}
+		
 		clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		if (Input.GetMouseButtonDown(0))
-		{
-			if (gameObject.GetComponent<iTween>()) 
-			{
-				print ("killing tween on ball");
-				Destroy(gameObject.GetComponent<iTween>());
-				transform.localScale = origScale;
-			}
-			//clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			OnHitZoneDown();
-		}
+		
 	
 		if (Input.GetMouseButton(0))
 		{
-			//clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			OnHitZoneDown();
-			DrawCursor();										
+			//check for touch sliding off the screen
+			if (IsInsideScreen()) 
+			{
+				//select ball and draw rubber band when closeby
+				OnDown();									
+			}
+			else 
+			{
+				DeselectBall();
+			}
 		}
-
-		if (Input.GetMouseButtonUp(0))
+		else 
 		{
-			OnHitZoneUp();
-		}		
+			//valid onscreen mouseup
+			if (IsInsideScreen()) OnUp();
+			//swipe off screen
+			else DeselectBall(); 
+		}
+	}
+
+	private bool IsInsideScreen()
+	{
+		if (Input.mousePosition.x > 0 && Input.mousePosition.x < Screen.width - 1 && Input.mousePosition.y > 17 && Input.mousePosition.y < Screen.height - 1) return true;
+		else return false;
+	}
+
+	private void DeselectBall()
+	{
+		selectedBall = null;
+		cursor.SetActive(false);
 		
 	}
 
@@ -110,7 +113,7 @@ public class Ball : MonoBehaviour {
 	{
 		
 		if (selectedBall == this)
-		{ 		
+		{
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
 			
 			Vector3 startPos = transform.position;
@@ -121,7 +124,7 @@ public class Ball : MonoBehaviour {
 			Vector3 radius = endPos - startPos;
 			radius = Vector3.ClampMagnitude(radius,1.5f);
 			endPos = startPos + radius;
-			//cursor.GetComponent<LineRenderer>().SetWidth(0.15f/radius.magnitude,0f);
+
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
@@ -130,7 +133,7 @@ public class Ball : MonoBehaviour {
 	
 	
 	//Called from BallHitZone, larger radius than ball
-	public void OnHitZoneDown()
+	public void OnDown()
 	{
 		
 		cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
@@ -148,17 +151,18 @@ public class Ball : MonoBehaviour {
 			ScrollCamera.instance.SetTarget(gameObject);
 			cursor.SetActive(true);
 		}
+		
+		DrawCursor();
+		
 	}
 
 	
 	
-	public void OnHitZoneUp()
+	public void OnUp()
 	{
+		
 		if (selectedBall == this)
 		{
-			cursorMouseUp.SetActive(true);
-			cursorMouseUp.transform.position = new Vector3(clickPos.x,clickPos.y,0);
-			
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
 			rigidbody2D.gravityScale = currentGravityScale;
