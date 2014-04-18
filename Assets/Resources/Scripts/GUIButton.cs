@@ -30,8 +30,9 @@ public class GUIButton : MonoBehaviour {
 	{
 		if (GameManager.instance.lives > 0)
 		{
-			GameObject go = Instantiate(Resources.Load("Prefabs/Level"+inLevelNum+"_Prefab")) as GameObject;
-			go.name ="Loaded level number " + inLevelNum;
+			//GameObject go = Instantiate(Resources.Load("Prefabs/Level"+inLevelNum+"_Prefab")) as GameObject;
+			//go.name ="Loaded level number " + inLevelNum;
+			Application.LoadLevelAdditive("Level"+inLevelNum);
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 		}
 		else print ("out of lives");

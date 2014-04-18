@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour {
 	private Vector2 catapultForce = Vector2.zero;
 	public GameObject mainCam = null;
 	public GameObject cursor = null;
+	public float clickRadius = 0.5f;
 	public Vector3 clickPos = Vector3.zero;
 	private int isPullMode = 1;
 	public static Ball selectedBall = null;
@@ -145,7 +146,7 @@ public class Ball : MonoBehaviour {
 		
 		Vector3 radius = endPos - startPos;
 	
-		if (radius.magnitude < 4)		
+		if (radius.magnitude < clickRadius)		
 		{
 			selectedBall = this;
 			ScrollCamera.instance.SetTarget(gameObject);
