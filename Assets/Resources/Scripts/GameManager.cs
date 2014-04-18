@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public int lives = 5;
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
+	public int shotsPlayed = 0;
 
 
 	void Start () {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			isMinimimScoreReached = false;
 			StopLivesRefill();
+			shotsPlayed = 0;
 			break;
 		case EventManager.EVENT_BALL_DEATH:
 			UpdateBalls(-1);
@@ -36,7 +38,14 @@ public class GameManager : MonoBehaviour {
 		case EventManager.EVENT_BALL_EXIT:
 			InitBalls();
 			break;
+		case EventManager.EVENT_BALL_SHOT:
+			BallShot();
+			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
+			UpdateLives(-1);
+			InitBalls();
+			break;
+		case EventManager.EVENT_OUT_OF_SHOTS:
 			UpdateLives(-1);
 			InitBalls();
 			break;
@@ -54,6 +63,13 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
+	private void BallShot()
+	{
+		if (shotsPlayed == Level.instance.allowedShots)
+		{
+			EventManager.fireEvent(EventManager.EVENT_OUT_OF_SHOTS);
+		}
+	}
 	
 	private void StartLivesRefill()
 	{
@@ -73,8 +89,8 @@ public class GameManager : MonoBehaviour {
 			EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
 			print ("lives incr " + lives);
 		}
-	}	
-				
+	}				
+								
 	private void UpdateBalls(int deltaBalls = 0)
 	{
 		balls = balls + deltaBalls;
@@ -107,7 +123,7 @@ public class GameManager : MonoBehaviour {
 	public void AddToScore(int extraScore)
 	{
 		//check if updated score breaks thru threshold
-		if ( !isMinimimScoreReached && (score + extraScore) > Level.instance.minimumScore )
+		if ( !isMinimimScoreReached && (score + extraScore) > Level.instance.requiredScore )
 		{
 			EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
 			isMinimimScoreReached = true;
