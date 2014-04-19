@@ -43,11 +43,13 @@ public class Gate : TargetGroupEffect {
 		{
 			if (hasResetTime) Invoke("ResetGate",resetTime);
 			gameObject.SetActive(false);
+			TextFeedback.Display("Gate Open");
 		}
 
 		else if (!gameObject.activeSelf && !isAllActivated) 
 		{
 			gameObject.SetActive(true);
+			TextFeedback.Display("Gate Closed");
 		}
 						
 		else if (!gameObject.activeSelf && isAllActivated) 

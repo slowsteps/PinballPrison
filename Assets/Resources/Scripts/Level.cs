@@ -4,7 +4,15 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
 	public static Level instance;
-	public int minimumScore = 10;
+	public bool hasMinScore = true;
+	public bool hasMaxShots = false;
+	public bool hasMaxTime = false;
+	public bool hasCollectables = false;
+	
+	public int requiredScore = 10;
+	public int allowedShots = 0;
+	public float allowedTime = 0;
+	public int requiredCollectables = 0;
 			
 	void Start () {
 		
@@ -17,6 +25,7 @@ public class Level : MonoBehaviour {
 		
 		instance = this;
 		EventManager.Subscribe(OnEvent);
+		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 		
 	}
 	

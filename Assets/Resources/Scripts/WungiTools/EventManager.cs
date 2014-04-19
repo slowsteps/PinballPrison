@@ -10,11 +10,13 @@ public class EventManager {
 
 	public const string EVENT_GAME_START = "EVENT_GAME_START";
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
+	public const string EVENT_BALL_SHOT = "EVENT_BALL_SHOT";
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
 	public const string EVENT_OUT_OF_LIVES = "EVENT_OUT_OF_LIVES";
+	public const string EVENT_OUT_OF_SHOTS = "EVENT_OUT_OF_SHOTS";
 	public const string EVENT_LIVES_UPDATED = "EVENT_LIVES_UPDATED";
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";

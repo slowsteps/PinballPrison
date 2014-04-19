@@ -45,6 +45,9 @@ public class Ball : MonoBehaviour {
 		case EventManager.EVENT_OUT_OF_BALLS:
 			gameObject.SetActive(false);
 			break;
+		case EventManager.EVENT_OUT_OF_SHOTS:
+			gameObject.SetActive(false);
+			break;
 			
 		}
 	}
@@ -171,6 +174,9 @@ public class Ball : MonoBehaviour {
 			if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
 			rigidbody2D.AddForce(catapultForce);
 			cursor.SetActive(false);
+			GameManager.instance.shotsPlayed++;
+			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
+			TextFeedback.Display("Ball Shot");
 		}
 	}
 
