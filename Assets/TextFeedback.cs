@@ -36,6 +36,7 @@ public class TextFeedback : MonoBehaviour {
 	void Update () {
 		fadeSpeed = fadeSpeed + Time.deltaTime;
 		guiText.color = Color.Lerp(origColor,toColor,fadeSpeed);
+		if (sourceGameObject) transform.position =  new Vector3(0.5f,scrollCam.WorldToViewportPoint(sourceGameObject.transform.position).y,0f);
 		if ( (Time.time - savedTime) > lifeTime) Destroy(gameObject); 
 		
 	}
