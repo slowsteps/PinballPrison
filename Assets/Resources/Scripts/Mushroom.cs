@@ -16,7 +16,7 @@ public class Mushroom : MonoBehaviour {
 		if (!gameObject.GetComponent<iTween>())
 		{
 			iTween.PunchScale(gameObject,iTween.Hash("amount",scaleEffectAmp * Vector3.one,"time",scaleEffectTime));
-			TextFeedback.Display("Mushroom " + bumpScore + " pts");
+			TextFeedback.Display("Mushroom " + bumpScore + " pts",gameObject);
 		}
 	}
 	

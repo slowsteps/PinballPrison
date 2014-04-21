@@ -16,6 +16,11 @@ public class Level : MonoBehaviour {
 			
 	void Start () {
 		
+		if (!GameManager.instance)
+		{
+			Application.LoadLevelAdditive("Main");
+		}
+		
 		if (!Settings.hasPlayerClicked)
 		{
 			GameObject.Destroy(gameObject);

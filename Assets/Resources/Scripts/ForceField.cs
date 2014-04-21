@@ -10,7 +10,7 @@ public class ForceField : MonoBehaviour {
 		if (ball.tag == "ball") 
 		{
 			ball.rigidbody2D.AddForce(bumpForce);
-			TextFeedback.Display("Forcefield");
+			TextFeedback.Display("Forcefield",gameObject);
 		}
 	}
 }

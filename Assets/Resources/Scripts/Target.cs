@@ -81,7 +81,7 @@ public class Target : MonoBehaviour {
 			Destroy(gameObject.collider2D);
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
-		TextFeedback.Display("Target " + scoreValue + " pts");
+		TextFeedback.Display("Target " + scoreValue + " pts",gameObject);
 	}
 
 

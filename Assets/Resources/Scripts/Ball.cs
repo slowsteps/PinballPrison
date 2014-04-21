@@ -176,7 +176,6 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
-			TextFeedback.Display("Ball Shot");
 		}
 	}
 

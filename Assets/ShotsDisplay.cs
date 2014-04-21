@@ -33,7 +33,6 @@ public class ShotsDisplay : MonoBehaviour {
 	
 	
 	public void UpdateShotsDisplay() {
-		print (Level.instance);
 		guiText.text = "Shots " + GameManager.instance.shotsPlayed + "/" + Level.instance.allowedShots;		
 	}
 }
