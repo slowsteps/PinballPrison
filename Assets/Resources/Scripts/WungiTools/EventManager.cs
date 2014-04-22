@@ -22,6 +22,7 @@ public class EventManager {
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
 	public const string EVENT_MESSAGE_OK = "EVENT_MESSAGE_OK";
+	public const string EVENT_QUIT = "EVENT_QUIT";
 	
 
 	public delegate void Callbackmethod(string customevent);

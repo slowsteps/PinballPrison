@@ -4,14 +4,14 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
-	private int startBalls = 3;
+	public int lives = 5;
+	public int startBalls = 3;
 	public int balls;
 	public int score = 0;
-	public int lives = 5;
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
-	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED};
+	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,QUIT};
 	private levelOverReasons levelOverReason;
 
 	void Start () {
@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour {
 			break;
 		case EventManager.EVENT_BALL_EXIT:
 			OnGameOver(levelOverReasons.EXIT_REACHED);
+			break;
+		case EventManager.EVENT_QUIT:
+			OnGameOver(levelOverReasons.QUIT);
 			break;
 		case EventManager.EVENT_BALL_SHOT:
 			BallShot();
@@ -121,6 +124,11 @@ public class GameManager : MonoBehaviour {
 		case levelOverReasons.OUT_OF_TIME:
 			TextFeedback.Display("Out of time");			
 			GUIMessage.instance.SetText("Game over, out of time");
+			UpdateLives(-1);
+			break;
+		case levelOverReasons.QUIT:
+			TextFeedback.Display("Quit level");			
+			GUIMessage.instance.SetText("Quit level");
 			UpdateLives(-1);
 			break;
 		}

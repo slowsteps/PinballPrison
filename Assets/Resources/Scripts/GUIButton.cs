@@ -21,7 +21,7 @@ public class GUIButton : MonoBehaviour {
 			LoadLevel(levelNumber);
 			break;
 		case buttonEnum.MENU:
-			EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
+			EventManager.fireEvent(EventManager.EVENT_QUIT);
 			break;
 		}
 	
