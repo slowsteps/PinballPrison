@@ -7,14 +7,16 @@ public class GameManager : MonoBehaviour {
 	public int lives = 5;
 	public int startBalls = 3;
 	public int balls;
+	public int collectables = 0;
 	public int score = 0;
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
-	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,QUIT};
+	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
 
-	void Start () {
+	void Start () 
+	{
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
@@ -57,6 +59,9 @@ public class GameManager : MonoBehaviour {
 		case EventManager.EVENT_MENU_SHOW:
 			StartLivesRefill();
 			break;	
+		case EventManager.EVENT_COLLECTABLE_FOUND:
+			IncreaseCollectables();
+			break;	
 		}
 	}
 	
@@ -88,7 +93,17 @@ public class GameManager : MonoBehaviour {
 			print ("lives incr " + lives);
 		}
 	}				
-								
+	
+	private void IncreaseCollectables()
+	{
+		collectables++;
+		if (collectables == Level.instance.requiredCollectables) 
+		{
+			EventManager.fireEvent(EventManager.EVENT_ALL_COLLECTABLES_FOUND);
+			OnGameOver(levelOverReasons.COLLECTABLES_FOUND);
+		}
+	}						
+																
 	private void UpdateBalls(int deltaBalls = 0)
 	{
 		balls = balls + deltaBalls;
@@ -130,6 +145,10 @@ public class GameManager : MonoBehaviour {
 			TextFeedback.Display("Quit level");			
 			GUIMessage.instance.SetText("Quit level");
 			UpdateLives(-1);
+			break;
+		case levelOverReasons.COLLECTABLES_FOUND:
+			TextFeedback.Display("Collectables found");			
+			GUIMessage.instance.SetText("All collectables found!");
 			break;
 		}
 		

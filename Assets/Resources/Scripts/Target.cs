@@ -12,6 +12,7 @@ public class Target : MonoBehaviour {
 	public bool isActivated = false;
 	public bool isToggle = false;
 	public bool isLight = false;
+	public bool isCollectable = false;
 	public List<TargetGroupEffect> targetGroupEffects;
 	private Sprite targetUp;
 	public Sprite targetDown;
@@ -82,6 +83,9 @@ public class Target : MonoBehaviour {
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		TextFeedback.Display("Target " + scoreValue + " pts",gameObject);
+		
+		if (isCollectable) EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
+		
 	}
 
 

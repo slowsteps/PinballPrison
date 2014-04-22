@@ -23,6 +23,8 @@ public class EventManager {
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
 	public const string EVENT_MESSAGE_OK = "EVENT_MESSAGE_OK";
 	public const string EVENT_QUIT = "EVENT_QUIT";
+	public const string EVENT_COLLECTABLE_FOUND = "EVENT_COLLECTABLE_FOUND";
+	public const string EVENT_ALL_COLLECTABLES_FOUND = "EVENT_ALL_COLLECTABLES_FOUND";
 	
 
 	public delegate void Callbackmethod(string customevent);
