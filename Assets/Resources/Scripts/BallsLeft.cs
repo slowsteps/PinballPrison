@@ -20,9 +20,6 @@ public class BallsLeft : MonoBehaviour {
 		case EventManager.EVENT_BALLS_UPDATED:
 			UpdateText();
 			break;
-		case EventManager.EVENT_BALL_EXIT:
-			gameObject.SetActive(false);
-			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			gameObject.SetActive(false);
 			break;

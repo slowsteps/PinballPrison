@@ -24,19 +24,13 @@ public class ScoreDisplay : MonoBehaviour {
 			gameObject.SetActive(true);
 			enabled = true;
 			break;
-		case EventManager.EVENT_BALL_EXIT:
-			enabled = false;
-			gameObject.SetActive(false);
-			break;
-		case EventManager.EVENT_OUT_OF_BALLS:
-			gameObject.SetActive(false);
-			break;
-		
 		}
 	}
 	
 	
 	public void UpdateScoreDisplay(int inScore) {
-		guiText.text = inScore + "/" + Level.instance.requiredScore;		
+		
+		if (Level.instance.hasMinScore) guiText.text = inScore + "/" + Level.instance.requiredScore;		
+		else guiText.text = inScore.ToString();
 	}
 }

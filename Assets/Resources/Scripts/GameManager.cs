@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
-
+	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED};
+	private levelOverReasons levelOverReason;
 
 	void Start () {
 		EventManager.Subscribe(OnEvent);
@@ -36,36 +37,30 @@ public class GameManager : MonoBehaviour {
 			UpdateBalls(-1);
 			break;
 		case EventManager.EVENT_BALL_EXIT:
-			InitBalls();
+			OnGameOver(levelOverReasons.EXIT_REACHED);
 			break;
 		case EventManager.EVENT_BALL_SHOT:
 			BallShot();
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
-			UpdateLives(-1);
-			InitBalls();
+			OnGameOver(levelOverReasons.OUT_OF_BALLS);
 			break;
 		case EventManager.EVENT_OUT_OF_SHOTS:
-			UpdateLives(-1);
-			InitBalls();
+			OnGameOver(levelOverReasons.OUT_OF_SHOTS);
 			break;
+		case EventManager.EVENT_OUT_OF_TIME:
+			OnGameOver(levelOverReasons.OUT_OF_TIME);
+			break;	
 		case EventManager.EVENT_MENU_SHOW:
 			StartLivesRefill();
 			break;	
 		}
 	}
 	
-	public void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.B))
-		{
-			Instantiate(Resources.Load("Prefabs/Ball_Prefab"));
-		}
-	}
-	
+		
 	private void BallShot()
 	{
-		if (shotsPlayed == Level.instance.allowedShots)
+		if (Level.instance.hasMaxShots && shotsPlayed == Level.instance.allowedShots)
 		{
 			EventManager.fireEvent(EventManager.EVENT_OUT_OF_SHOTS);
 		}
@@ -105,8 +100,33 @@ public class GameManager : MonoBehaviour {
 		if (lives == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_LIVES);
 	}
 	
+	private void OnGameOver(levelOverReasons reason)
+	{
+		switch (reason)
+		{
+		case levelOverReasons.EXIT_REACHED:
+			TextFeedback.Display("Level completed");
+			GUIMessage.instance.SetText("Awesomeness! \n Level complete");			
+			break;
+		case levelOverReasons.OUT_OF_BALLS:
+			TextFeedback.Display("Out of balls");
+			GUIMessage.instance.SetText("Game over, out of balls");			
+			break;
+		case levelOverReasons.OUT_OF_SHOTS:
+			TextFeedback.Display("Out of  shots");			
+			GUIMessage.instance.SetText("Game over, out of shots");
+			break;
+		case levelOverReasons.OUT_OF_TIME:
+			TextFeedback.Display("Out of time");			
+			GUIMessage.instance.SetText("Game over, out of time");
+			break;
+		}
 		
-				
+		UpdateLives(-1);
+		InitBalls();
+		
+	}
+							
 	private void InitBalls()
 	{
 		balls = startBalls;

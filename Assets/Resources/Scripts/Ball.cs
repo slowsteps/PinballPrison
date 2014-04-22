@@ -39,16 +39,15 @@ public class Ball : MonoBehaviour {
 		case EventManager.EVENT_BALL_DEATH:
 			Init();
 			break;
-		case EventManager.EVENT_BALL_EXIT:
-			print ("level complete");
-			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_OUT_OF_SHOTS:
 			gameObject.SetActive(false);
 			break;
-			
+		case EventManager.EVENT_OUT_OF_TIME:
+			gameObject.SetActive(false);
+			break;
 		}
 	}
 	

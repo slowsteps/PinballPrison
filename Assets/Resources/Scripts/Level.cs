@@ -38,11 +38,8 @@ public class Level : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_OUT_OF_BALLS:
-			GameObject.Destroy(gameObject,0f);
-			break;
-		case EventManager.EVENT_BALL_EXIT:
-			GameObject.Destroy(gameObject,0f);
+		case EventManager.EVENT_MESSAGE_OK:
+			GameObject.Destroy(gameObject,2f);
 			break;
 		}
 	}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ShotsDisplay : MonoBehaviour {
 
-	void Start()
+	void Awake()
 	{
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
@@ -15,19 +15,19 @@ public class ShotsDisplay : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(true);
-			UpdateShotsDisplay();
-			break;
-		case EventManager.EVENT_BALL_EXIT:
-			gameObject.SetActive(false);
-			break;
-		case EventManager.EVENT_OUT_OF_BALLS:
-			gameObject.SetActive(false);
+			if (Level.instance.hasMaxShots)
+			{
+				gameObject.SetActive(true);
+				UpdateShotsDisplay();
+			}
+			else
+			{
+				gameObject.SetActive(false);
+			}
 			break;
 		case EventManager.EVENT_BALL_SHOT:
 			UpdateShotsDisplay();
-			break;
-			
+			break;	
 		}
 	}
 	

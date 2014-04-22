@@ -17,33 +17,40 @@ public class EventManager {
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
 	public const string EVENT_OUT_OF_LIVES = "EVENT_OUT_OF_LIVES";
 	public const string EVENT_OUT_OF_SHOTS = "EVENT_OUT_OF_SHOTS";
+	public const string EVENT_OUT_OF_TIME = "EVENT_OUT_OF_TIME";
 	public const string EVENT_LIVES_UPDATED = "EVENT_LIVES_UPDATED";
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
+	public const string EVENT_MESSAGE_OK = "EVENT_MESSAGE_OK";
 	
 
 	public delegate void Callbackmethod(string customevent);
 	public static EventManager instance = null;
 
 	
-	public EventManager() {
+	public EventManager() 
+	{
 		callbackMethods	= new List<Callbackmethod>();
 		EventManager.instance = this;
 	}
 	
-	public static void Subscribe(Callbackmethod incallback) {
+	public static void Subscribe(Callbackmethod incallback) 
+	{
 		if (EventManager.instance == null) new EventManager();
 		EventManager.instance.callbackMethods.Add(incallback);
 	}
 	
-	public static void UnSubscribe(Callbackmethod incallback) {
+	public static void UnSubscribe(Callbackmethod incallback) 
+	{
 		EventManager.instance.callbackMethods.Remove(incallback);
 	}
 	
 
-	public static void fireEvent(string customevent) {
+	public static void fireEvent(string customevent) 
+	{
 		if (customevent.Equals(EventManager.EVENT_LEVEL_START)) Debug.Log("Eventmanager callbackMethods size: " + EventManager.instance.callbackMethods.Count);		
-		foreach (Callbackmethod method in EventManager.instance.callbackMethods) {
+		foreach (Callbackmethod method in EventManager.instance.callbackMethods) 
+		{
 			method(customevent);	
 		}
 		

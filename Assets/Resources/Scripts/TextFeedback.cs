@@ -8,37 +8,47 @@ public class TextFeedback : MonoBehaviour {
 	private Color origColor;
 	private float savedTime = 0;
 	public float fadeSpeed = 0;
+	private float curFade = 0;
 	private GameObject sourceGameObject;
-	private Camera GUIBackgroundCamera;
 	private Camera scrollCam;
 	
 	
 	
 	
+	//Class manages its own prefab instantiation
 	public static void Display(string inText,GameObject inSource=null)
 	{
-
 		GameObject go =  Instantiate(Resources.Load("Prefabs/Objects/TextFeedback_Prefab")) as GameObject;
-		if (inSource) go.GetComponent<TextFeedback>().sourceGameObject = inSource;
-		go.GetComponent<TextFeedback>().SetText(inText);
-		
+		TextFeedback instance = go.GetComponent<TextFeedback>();
+		instance.Init(inText,inSource);
+	}
+	
+	public void Init(string inText,GameObject inSource=null)
+	{
+		if (inSource) sourceGameObject = inSource;
+		SetText(inText);
 	}
 
 	// Use this for initialization
 	void Awake () {
 		savedTime = Time.time;
 		origColor = guiText.color;
-		GUIBackgroundCamera = GameObject.Find("GUIBackgroundCamera").camera;
 		scrollCam  = GameObject.Find("ScrollCam").camera;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		fadeSpeed = fadeSpeed + Time.deltaTime;
-		guiText.color = Color.Lerp(origColor,toColor,fadeSpeed);
-		if (sourceGameObject) transform.position =  new Vector3(0.5f,scrollCam.WorldToViewportPoint(sourceGameObject.transform.position).y,0f);
-		if ( (Time.time - savedTime) > lifeTime) Destroy(gameObject); 
 		
+		curFade = curFade + fadeSpeed * Time.deltaTime;
+				
+		guiText.color = Color.Lerp(origColor,toColor,curFade);
+		
+		
+		//positioning
+		if (sourceGameObject) transform.position =  new Vector3(0.5f + curFade,scrollCam.WorldToViewportPoint(sourceGameObject.transform.position).y,0f);
+		else transform.position =  new Vector3(0.5f,scrollCam.WorldToViewportPoint(Ball.instance.transform.position).y,0f);
+		
+		if ( (Time.time - savedTime) > lifeTime) Destroy(gameObject); 
 	}
 
 	public void SetText(string inText)
