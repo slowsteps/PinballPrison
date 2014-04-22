@@ -4,7 +4,7 @@ using System.Collections;
 public class BallsLeft : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}

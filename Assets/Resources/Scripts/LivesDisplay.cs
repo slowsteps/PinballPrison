@@ -4,9 +4,8 @@ using System.Collections;
 public class LivesDisplay : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		EventManager.Subscribe(OnEvent);
-		
 	}
 	
 	public void OnEvent(string customEvent)

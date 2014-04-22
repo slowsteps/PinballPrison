@@ -3,10 +3,17 @@ using System.Collections;
 
 public class LivesRefill : MonoBehaviour {
 
-	private int remainingTime = 0 ;
+	private int curTime = 0 ;
+	private int refillTime = 0;
 
-	void Start () {
+	void Awake () 
+	{
 		EventManager.Subscribe(OnEvent);		
+	}
+	
+	void Start()
+	{
+		//if (GameManager.instance.lives < 5)	InvokeRepeating("UpdateText",1f,1f);
 	}
 	
 	public void OnEvent(string customEvent)
@@ -14,27 +21,42 @@ public class LivesRefill : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_GAME_START:
-			remainingTime = GameManager.instance.livesRefillTime;
+			refillTime = GameManager.instance.livesRefillTime;
+			curTime = 0;
+			UpdateText();
 			break;
 		case EventManager.EVENT_MENU_SHOW:
+			print ("menu show");
 			gameObject.SetActive(true);
-			if (GameManager.instance.lives < 5)	StartCoroutine("UpdateText");
+			if (GameManager.instance.lives < 5)	
+			{
+				InvokeRepeating("UpdateText",2f,1f);
+			}
 			break;
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(false);
-			StopCoroutine("UpdateText");
+			CancelInvoke("UpdateText");
 			break;
 		}
 	}
 	
-	private IEnumerator UpdateText()
+	private void UpdateText()
 	{
-		while (GameManager.instance.lives < 5)
+		//print ("updating lives refill");
+		if (GameManager.instance.lives < 5)
 		{
-			remainingTime--;
-			guiText.text = "Extra live in " + (30 + remainingTime) + " secs";
-			if (remainingTime == 0 ) remainingTime = 30;
-			yield return new WaitForSeconds(1);
+			curTime++;
+			guiText.text = "Extra live in " + (refillTime - curTime) + " secs";
+			if (curTime == refillTime) 
+			{ 
+				GameManager.instance.lives++;
+				EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
+				curTime = 0;
+			}
+		}
+		else
+		{
+			guiText.text = "";
 		}
 	}
 }

@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour {
 		enabled = false;
 		instance = this;
 		tag = "ball";
+			
 		cursor.SetActive(false);
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
@@ -120,9 +121,9 @@ public class Ball : MonoBehaviour {
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
 			
 			Vector3 startPos = transform.position;
-			startPos.z=-1;
+			startPos.z=-3;
 			Vector3 endPos = cursor.transform.position;
-			endPos.z=-1;
+			endPos.z=-3;
 			
 			Vector3 radius = endPos - startPos;
 			radius = Vector3.ClampMagnitude(radius,1.5f);

@@ -9,7 +9,7 @@ public class Level : MonoBehaviour {
 	public bool hasMaxTime = false;
 	public bool hasCollectables = false;
 	
-	public int requiredScore = 10;
+	public int requiredScore = 0;
 	public int allowedShots = 0;
 	public float allowedTime = 0;
 	public int requiredCollectables = 0;

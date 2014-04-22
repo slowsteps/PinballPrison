@@ -7,7 +7,7 @@ public class ScoreDisplay : MonoBehaviour {
 	public static ScoreDisplay instance;
 
 
-	void Start()
+	void Awake()
 	{
 		instance = this;
 		enabled = false;
@@ -23,14 +23,15 @@ public class ScoreDisplay : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(true);
 			enabled = true;
+			UpdateScoreDisplay();
 			break;
 		}
 	}
 	
 	
-	public void UpdateScoreDisplay(int inScore) {
-		
-		if (Level.instance.hasMinScore) guiText.text = inScore + "/" + Level.instance.requiredScore;		
-		else guiText.text = inScore.ToString();
+	public void UpdateScoreDisplay() {
+		print ("UpdateScoreDisplay");
+		if (Level.instance.hasMinScore) guiText.text = GameManager.instance.score + "/" + Level.instance.requiredScore;		
+		else guiText.text = GameManager.instance.score.ToString();
 	}
 }

@@ -110,19 +110,22 @@ public class GameManager : MonoBehaviour {
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
 			TextFeedback.Display("Out of balls");
-			GUIMessage.instance.SetText("Game over, out of balls");			
+			GUIMessage.instance.SetText("Game over, out of balls");	
+			UpdateLives(-1);		
 			break;
 		case levelOverReasons.OUT_OF_SHOTS:
 			TextFeedback.Display("Out of  shots");			
 			GUIMessage.instance.SetText("Game over, out of shots");
+			UpdateLives(-1);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
 			TextFeedback.Display("Out of time");			
 			GUIMessage.instance.SetText("Game over, out of time");
+			UpdateLives(-1);
 			break;
 		}
 		
-		UpdateLives(-1);
+		
 		InitBalls();
 		
 	}
@@ -136,7 +139,6 @@ public class GameManager : MonoBehaviour {
 	
 	private void InitLives()
 	{
-		lives = 2;
 		EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
 	}
 	
@@ -149,7 +151,7 @@ public class GameManager : MonoBehaviour {
 			isMinimimScoreReached = true;
 		}
 		score = score + extraScore;
-		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay(score);
+		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
 	}
 					
 }
