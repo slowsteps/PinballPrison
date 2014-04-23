@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
-
 	// Use this for initialization
 	void Awake () {
 		EventManager.Subscribe(OnEvent);

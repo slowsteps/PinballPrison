@@ -18,7 +18,7 @@ public class TimeDisplay : MonoBehaviour {
 		{
 			allowedTime = Level.instance.allowedTime;
 			curTime = allowedTime;
-			InvokeRepeating("UpdateTimeDisplay",0,1f);
+			InvokeRepeating("UpdateTimeDisplay",1f,1f);
 		}
 		else 
 		{
@@ -41,6 +41,10 @@ public class TimeDisplay : MonoBehaviour {
 		case EventManager.EVENT_OUT_OF_BALLS:
 			CancelInvoke("UpdateTimeDisplay");
 			gameObject.SetActive(false);
+			break;
+		case EventManager.EVENT_BALL_DEATH:
+			CancelInvoke("UpdateTimeDisplay");
+			InitTimeDisplay();
 			break;
 		}
 	}

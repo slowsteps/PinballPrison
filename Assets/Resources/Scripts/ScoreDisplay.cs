@@ -30,8 +30,12 @@ public class ScoreDisplay : MonoBehaviour {
 	
 	
 	public void UpdateScoreDisplay() {
-		print ("UpdateScoreDisplay");
 		if (Level.instance.hasMinScore) guiText.text = GameManager.instance.score + "/" + Level.instance.requiredScore;		
 		else guiText.text = GameManager.instance.score.ToString();
 	}
+
+
+
+
+
 }

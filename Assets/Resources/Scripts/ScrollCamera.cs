@@ -51,6 +51,6 @@ public class ScrollCamera : MonoBehaviour {
 		targetPos.y = lookatTarget.transform.position.y + 1;
 		targetPos.z = transform.position.z;
 	
-		transform.position = Vector3.Slerp(transform.position,targetPos,2f*Time.deltaTime);
+		transform.position = Vector3.Slerp(transform.position,targetPos,3f*Time.deltaTime);
 	}
 }
