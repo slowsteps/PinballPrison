@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShotsDisplay : MonoBehaviour {
 
+	private Text ShotsLeftText;
+
 	void Awake()
 	{
+		ShotsLeftText = GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}
@@ -33,6 +37,6 @@ public class ShotsDisplay : MonoBehaviour {
 	
 	
 	public void UpdateShotsDisplay() {
-		guiText.text = "Shots " + GameManager.instance.shotsPlayed + "/" + Level.instance.allowedShots;		
+		ShotsLeftText.text = "Shots " + GameManager.instance.shotsPlayed + "/" + Level.instance.allowedShots;		
 	}
 }

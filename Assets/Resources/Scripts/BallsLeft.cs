@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class BallsLeft : MonoBehaviour {
 
+	private Text BallsLeftText;
+
 	// Use this for initialization
 	void Awake () {
+		BallsLeftText = GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}
@@ -28,7 +32,7 @@ public class BallsLeft : MonoBehaviour {
 	
 	private void UpdateText()
 	{
-		guiText.text = GameManager.instance.balls + " Balls";
+		BallsLeftText.text = GameManager.instance.balls + " Balls";
 	}
 	
 	
