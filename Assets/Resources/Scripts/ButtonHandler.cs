@@ -12,5 +12,11 @@ public class ButtonHandler : MonoBehaviour {
 		EventManager.fireEvent(EventManager.EVENT_QUIT);
 	}
 	
+	public void OnMessageOkButton()
+	{
+		print ("OnMessageOkButton");
+		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);
+	}
+	
 	
 }
