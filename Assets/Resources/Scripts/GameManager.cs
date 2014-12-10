@@ -143,7 +143,11 @@ public class GameManager : MonoBehaviour {
 			break;
 		case levelOverReasons.QUIT:
 			TextFeedback.Display("Quit level");			
-			GUIMessage.instance.SetText("Quit level");
+			if (GUIMessage.instance) 
+			{
+				GUIMessage.instance.SetText("Quit level");
+			}
+			else print ("no GUIMessage");
 			UpdateLives(-1);
 			break;
 		case levelOverReasons.COLLECTABLES_FOUND:

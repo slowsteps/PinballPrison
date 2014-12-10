@@ -20,9 +20,6 @@ public class GUIButton : MonoBehaviour {
 		case buttonEnum.LEVEL:
 			LoadLevel(levelNumber);
 			break;
-		case buttonEnum.MENU:
-			EventManager.fireEvent(EventManager.EVENT_QUIT);
-			break;
 		}
 	
 	}

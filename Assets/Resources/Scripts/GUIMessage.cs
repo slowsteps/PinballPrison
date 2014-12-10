@@ -8,9 +8,9 @@ public class GUIMessage : MonoBehaviour {
 	public Text textField;
 
 	void Start () {
-		textField = GetComponent<Text>();
+		print ("GUIMessage " + this);
 		instance = this;
-		//gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 	
 
@@ -19,14 +19,6 @@ public class GUIMessage : MonoBehaviour {
 		print ("SetText " + inText);
 		gameObject.SetActive(true);
 		textField.text = inText;
-	}
-
-
-	public void ZOnMouseDown()
-	{
-		
-		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);
-		gameObject.SetActive(false);
 	}
 
 

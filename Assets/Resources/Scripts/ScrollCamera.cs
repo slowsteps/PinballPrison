@@ -23,7 +23,7 @@ public class ScrollCamera : MonoBehaviour {
 		camera.orthographicSize = Screen.height/200f;
 		Debug.Log("in iphone");
 		#endif
-		Debug.Log("ortho size: " + camera.orthographicSize);
+		
 	}
 
 
