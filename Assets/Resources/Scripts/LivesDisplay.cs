@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LivesDisplay : MonoBehaviour {
+
+
+	private Text TextLabel;
 
 	// Use this for initialization
 	void Awake () {
 		EventManager.Subscribe(OnEvent);
+		TextLabel = GetComponent<Text>();
 	}
 	
 	public void OnEvent(string customEvent)
@@ -32,6 +37,6 @@ public class LivesDisplay : MonoBehaviour {
 	
 	private void UpdateText()
 	{
-		guiText.text = GameManager.instance.lives + " Lives";
+		TextLabel.text = GameManager.instance.lives + " Lives";
 	}
 }
