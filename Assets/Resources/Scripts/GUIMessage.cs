@@ -8,7 +8,6 @@ public class GUIMessage : MonoBehaviour {
 	public Text textField;
 
 	void Start () {
-		print ("GUIMessage " + this);
 		instance = this;
 		gameObject.SetActive(false);
 	}

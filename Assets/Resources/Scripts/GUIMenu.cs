@@ -25,8 +25,8 @@ public class GUIMenu : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			iTween.MoveTo(gameObject,iTween.Hash("x",-8,"time",1f,"easetype",iTween.EaseType.easeInBack));
-			//gameObject.SetActive(false);
+			gameObject.SetActive(false);
+			//iTween.MoveTo(gameObject,iTween.Hash("x",-16,"time",1f,"easetype",iTween.EaseType.easeInBack));
 			break;
 		case EventManager.EVENT_MESSAGE_OK:
 			Show();
@@ -37,7 +37,7 @@ public class GUIMenu : MonoBehaviour {
 	private void Show()
 	{
 		gameObject.SetActive(true);
-		iTween.MoveTo(gameObject,iTween.Hash("x",origPos.x,"time",1f,"easetype",iTween.EaseType.easeOutCubic));
+		//iTween.MoveTo(gameObject,iTween.Hash("x",origPos.x,"time",1f,"easetype",iTween.EaseType.easeOutCubic));
 		EventManager.fireEvent(EventManager.EVENT_MENU_SHOW);
 	}
 	

@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LivesRefill : MonoBehaviour {
 
 	private int curTime = 0 ;
 	private int refillTime = 0;
+	private Text LivesLabel;
 
 	void Awake () 
 	{
+		LivesLabel = GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);		
 	}
 	
@@ -26,7 +29,6 @@ public class LivesRefill : MonoBehaviour {
 			UpdateText();
 			break;
 		case EventManager.EVENT_MENU_SHOW:
-			print ("menu show");
 			gameObject.SetActive(true);
 			if (GameManager.instance.lives < 5)	
 			{
@@ -46,7 +48,7 @@ public class LivesRefill : MonoBehaviour {
 		if (GameManager.instance.lives < 5)
 		{
 			curTime++;
-			guiText.text = "Extra live in " + (refillTime - curTime) + " secs";
+			LivesLabel.text = "Extra live in " + (refillTime - curTime) + " secs";
 			if (curTime == refillTime) 
 			{ 
 				GameManager.instance.lives++;
@@ -56,7 +58,7 @@ public class LivesRefill : MonoBehaviour {
 		}
 		else
 		{
-			guiText.text = "";
+			LivesLabel.text = "";
 		}
 	}
 }
