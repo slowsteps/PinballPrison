@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TimeDisplay : MonoBehaviour {
 
 	private float allowedTime = 0;
 	private float curTime = 0;
+	private Text TimeLeftLabel;
 
 
 	void Awake()
 	{
+		TimeLeftLabel = gameObject.GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);
 	}
 
@@ -54,11 +57,11 @@ public class TimeDisplay : MonoBehaviour {
 		curTime = curTime - 1;
 		if (curTime > 0)
 		{
-			guiText.text = curTime.ToString("0") +  " secs";
+			TimeLeftLabel.text = curTime.ToString("0") +  " secs";
 		}
 		else
 		{
-			guiText.text = "0 secs";
+			TimeLeftLabel.text = "0 secs";
 			CancelInvoke("UpdateTimeDisplay");
 			EventManager.fireEvent(EventManager.EVENT_OUT_OF_TIME);
 		}
