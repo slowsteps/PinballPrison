@@ -40,7 +40,7 @@ public class Level : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_QUIT:
+		case EventManager.EVENT_MENU_SHOW:
 			GameObject.Destroy(gameObject);
 			break;
 		}
