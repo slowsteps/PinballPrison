@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//this is the main menu with the level buttons, logo etc.
+
 public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
@@ -21,12 +23,14 @@ public class GUIMenu : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
+		case EventManager.EVENT_QUIT:
+			Show();
+			break;
 		case EventManager.EVENT_GAME_START:
 			Show();
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(false);
-			//iTween.MoveTo(gameObject,iTween.Hash("x",-16,"time",1f,"easetype",iTween.EaseType.easeInBack));
+			Hide();
 			break;
 		case EventManager.EVENT_MESSAGE_OK:
 			Show();
@@ -37,8 +41,14 @@ public class GUIMenu : MonoBehaviour {
 	private void Show()
 	{
 		gameObject.SetActive(true);
-		//iTween.MoveTo(gameObject,iTween.Hash("x",origPos.x,"time",1f,"easetype",iTween.EaseType.easeOutCubic));
 		EventManager.fireEvent(EventManager.EVENT_MENU_SHOW);
 	}
+
+	private void Hide()
+	{
+		gameObject.SetActive(false);
+	}
 	
+	
+			
 }

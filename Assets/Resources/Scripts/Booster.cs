@@ -7,7 +7,7 @@ public class Booster : MonoBehaviour {
 	public enum BoosterTypes {NO_GRAVITY,BULLET_TIME,FREEZE};
 	public BoosterTypes boosterType = BoosterTypes.NO_GRAVITY;
 	public float resetTime = 10f;
-	public Vector3 clickDeltaPos;	
+	public float slowMotion = 0.25f;
 	private bool isBoosterActive = false;
 	private Vector3 origPos;
 	
@@ -17,15 +17,15 @@ public class Booster : MonoBehaviour {
 	}
 	
 	
-	void OnMouseDown()
+	public void OnBoosterClick()
 	{
 		switch(boosterType)
 		{
 		case BoosterTypes.NO_GRAVITY:
 			Ball.instance.currentGravityScale = 0f;
 			Ball.instance.rigidbody2D.gravityScale = 0f;
-			Time.timeScale = 0.25f;
-			Invoke("ResetNoGravity",resetTime);
+			Time.timeScale = slowMotion;
+			Invoke("ResetNoGravity",resetTime*slowMotion);
 			break;
 		case BoosterTypes.FREEZE:
 			Ball.instance.rigidbody2D.velocity = Vector2.zero;
@@ -37,7 +37,7 @@ public class Booster : MonoBehaviour {
 		
 		if (!isBoosterActive) 
 		{
-			iTween.MoveTo(gameObject,iTween.Hash("name",name,"position",origPos + clickDeltaPos,"time",0.5f,"easetype",iTween.EaseType.easeInBack,"ignoretimescale",true));
+			//iTween.MoveTo(gameObject,iTween.Hash("name",name,"position",origPos + clickDeltaPos,"time",0.5f,"easetype",iTween.EaseType.easeInBack,"ignoretimescale",true));
 			isBoosterActive = true;
 		}
 		
@@ -47,6 +47,7 @@ public class Booster : MonoBehaviour {
 
 	private void ResetNoGravity()
 	{
+		Debug.Log("ResetNoGravity");
 		Time.timeScale = 1f;
 		Ball.instance.currentGravityScale = 1f;
 		Ball.instance.rigidbody2D.gravityScale = 1f;
@@ -63,7 +64,7 @@ public class Booster : MonoBehaviour {
 	{
 		gameObject.SetActive(true);
 		transform.position = origPos;
-		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
+		//iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
 		isBoosterActive = false;
 	}
 

@@ -8,7 +8,6 @@ public class ButtonHandler : MonoBehaviour {
 	
 	public void OnMenuButton()
 	{
-		print ("OnMenuButton");
 		EventManager.fireEvent(EventManager.EVENT_QUIT);
 	}
 	
@@ -29,5 +28,11 @@ public class ButtonHandler : MonoBehaviour {
 		else print ("out of lives");
 	}
 	
+	
+	public void OnCheatClick()
+	{
+		GameManager.instance.balls++;
+		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
+	}
 	
 }

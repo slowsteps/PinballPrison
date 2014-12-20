@@ -38,7 +38,7 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			iTween.StopByName("magnet");
+			//iTween.StopByName("magnet");
 		}
 	}
 
@@ -52,7 +52,10 @@ public class MagnetSpawnPoint : MonoBehaviour {
 
 	void OnDestroy()
 	{
+		//enabled = false;
+		//iTween.Destroy(gameObject);
 		EventManager.UnSubscribe(OnEvent);
+		
 	}
 
 	public void OnEvent(string customEvent)

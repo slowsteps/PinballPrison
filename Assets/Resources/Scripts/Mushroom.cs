@@ -31,6 +31,8 @@ public class Mushroom : MonoBehaviour {
 			hitEffectSpriteRenderer.sortingOrder = -1;
 			hitEffectSpriteRenderer.enabled = false;
 			enabled = false;
+			print ("level: " + Level.instance.transform);
+			hitEffectGameObject.transform.parent = Level.instance.transform;
 		}
 	}
 	

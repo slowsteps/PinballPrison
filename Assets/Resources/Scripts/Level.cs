@@ -14,21 +14,23 @@ public class Level : MonoBehaviour {
 	public float allowedTime = 0;
 	public int requiredCollectables = 0;
 			
-	void Start () {
+	void Awake () {
 		
+		instance = this;
+		
+		//a level is open in the editor
 		if (!GameManager.instance)
 		{
 			Application.LoadLevelAdditive("Main");
 		}
-		
+		//TODO can't remember why this is needed
 		if (!Settings.hasPlayerClicked)
 		{
 			GameObject.Destroy(gameObject);
 			gameObject.SetActive(false);
-			
 		}
 		
-		instance = this;
+		
 		EventManager.Subscribe(OnEvent);
 		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 		
@@ -38,8 +40,8 @@ public class Level : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_MESSAGE_OK:
-			GameObject.Destroy(gameObject,2f);
+		case EventManager.EVENT_QUIT:
+			GameObject.Destroy(gameObject);
 			break;
 		}
 	}
