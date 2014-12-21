@@ -8,7 +8,7 @@ public class TickerTape : MonoBehaviour {
 	public string ScrollText = "Welcome to Pinball Prision - the best pinball game in the appstore - tap and drag the ball to get going!";
 	public float DelayBeforeStart = 0;
 	public float TickDuration = 0.2f;
-	private string Padding = "*******"; 
+	private string Padding = "***                                                                   ***"; 
 	private Text TickerTapeText;
 	private int TickerPosition = 0;
 	
