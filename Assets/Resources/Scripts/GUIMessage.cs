@@ -10,8 +10,20 @@ public class GUIMessage : MonoBehaviour {
 	void Start () {
 		instance = this;
 		gameObject.SetActive(false);
+		EventManager.Subscribe(OnEvent);
 	}
 	
+	public void OnEvent(string customEvent)
+	{
+		switch(customEvent)
+		{
+		case EventManager.EVENT_MESSAGE_OK:
+			gameObject.SetActive(false);
+			break;
+		}
+	}
+	
+
 
 	public void SetText(string inText)
 	{
