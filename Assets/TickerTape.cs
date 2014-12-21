@@ -35,6 +35,7 @@ public class TickerTape : MonoBehaviour {
 		{
 		case EventManager.EVENT_LEVEL_START:
 			TickerPosition = 0;
+			//TODO destroy invoke at gameover
 			InvokeRepeating("UpdateTickerTape",DelayBeforeStart,TickDuration);
 			break;
 		}
