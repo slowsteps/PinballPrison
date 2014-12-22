@@ -154,9 +154,12 @@ public class Ball : MonoBehaviour {
 			selectedBall = this;
 			ScrollCamera.instance.SetTarget(gameObject);
 			cursor.SetActive(true);
+			Time.timeScale = 0.1f;
 		}
 		
 		DrawCursor();
+		
+		
 		
 	}
 
@@ -176,7 +179,9 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
+			
 		}
+		Time.timeScale = 1f;
 	}
 
 }
