@@ -20,7 +20,7 @@ public class ButtonHandler : MonoBehaviour {
 	public void OnStartLevelButton(int inLevelNum)
 	{
 		Settings.hasPlayerClicked = true;
-		Debug.Log("OnStartLevelButton: " + inLevelNum);
+		//Debug.Log("OnStartLevelButton: " + inLevelNum);
 		if (GameManager.instance.lives > 0)
 		{
 			Application.LoadLevelAdditive("Level"+inLevelNum);

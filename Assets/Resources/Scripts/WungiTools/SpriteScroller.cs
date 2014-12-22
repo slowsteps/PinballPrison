@@ -15,6 +15,7 @@ public class SpriteScroller : MonoBehaviour {
 		savedTime = Time.time;
 		ScrollingRect = gameObject.GetComponent<RectTransform>();
 		OrigRect = ScrollingRect;
+		Debug.Log(gameObject.GetComponent<Text>().flexibleWidth);
 	}
 	
 	
