@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour {
 	public bool isCaptured = false;
 	private bool isFirstClick = true;
 	public float currentGravityScale = 1f;
+	private bool isFreeTap = false;
 	
 
 	void Start () 
@@ -133,11 +134,13 @@ public class Ball : MonoBehaviour {
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
-			AimGuidance.SetActive(true);
-			AimGuidance.transform.position = transform.position;
-			AimGuidance.transform.LookAt(cursor.transform);
-			AimGuidance.transform.Rotate(Vector3.up,180);
-
+			if (isFreeTap)
+			{
+				AimGuidance.SetActive(true);
+				AimGuidance.transform.position = transform.position;
+				AimGuidance.transform.LookAt(cursor.transform);
+				AimGuidance.transform.Rotate(Vector3.up,180);
+			}
 		}
 	}
 	
@@ -190,5 +193,18 @@ public class Ball : MonoBehaviour {
 		Time.timeScale = 1f;
 		AimGuidance.SetActive(false);
 	}
+
+	public void OnActivateFreeTap()
+	{
+		isFreeTap = true;
+	}
+	
+	public void OnActivateBallTap()
+	{
+		isFreeTap = false;
+	}
+	
+
+
 
 }
