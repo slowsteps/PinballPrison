@@ -14,13 +14,14 @@ public class Ball : MonoBehaviour {
 	private Vector3 clickPos = Vector3.zero;
 	private Vector3 OrigClickPos = Vector3.zero;
 	private Vector3 startPos  = Vector3.zero;
+	private Vector3 Shot = Vector3.zero;
 	private int isPullMode = 1;
 	public static Ball selectedBall = null;
 	public static Ball instance = null;
 	public bool isCaptured = false;
 	private bool isFirstClick = true;
 	public float currentGravityScale = 1f;
-	public bool isFreeTap = false;
+	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
 	public bool isTapSpeedConstrained = false;
 	
@@ -87,6 +88,11 @@ public class Ball : MonoBehaviour {
 		
 		clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		
+		if (Input.GetMouseButtonDown(0))
+		{
+			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		}
+		
 	
 		if (Input.GetMouseButton(0))
 		{
@@ -152,16 +158,24 @@ public class Ball : MonoBehaviour {
 			radius = Vector3.ClampMagnitude(radius,1.5f);
 			endPos = startPos + radius;
 			
+			if (isFreeTap)
+			{
+				Shot = endPos - startPos;
+				startPos = transform.position;
+				endPos = startPos + Shot;
+			}
+			
+			
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
-			if (isFreeTap)
-			{
-				AimGuidance.SetActive(true);
-				AimGuidance.transform.position = transform.position;
-				AimGuidance.transform.LookAt(cursor.transform);
-				AimGuidance.transform.Rotate(Vector3.up,180);
-			}
+//			if (isFreeTap)
+//			{
+//				AimGuidance.SetActive(true);
+//				AimGuidance.transform.position = transform.position;
+//				AimGuidance.transform.LookAt(cursor.transform);
+//				AimGuidance.transform.Rotate(Vector3.up,180);
+//			}
 		}
 		else
 		{
@@ -177,7 +191,6 @@ public class Ball : MonoBehaviour {
 		
 		if (isFreeTap) 
 		{
-			//OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
 		}
 		else
@@ -209,6 +222,7 @@ public class Ball : MonoBehaviour {
 
 	
 	
+	//plunger, shot
 	public void OnUp()
 	{
 		
@@ -217,7 +231,15 @@ public class Ball : MonoBehaviour {
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
 			rigidbody2D.gravityScale = currentGravityScale;
-			catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
+			
+			if (isFreeTap) 
+			{
+				catapultForce = 1000f * -Shot;
+			}
+			else
+			{
+				catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
+			}
 			if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
 			rigidbody2D.AddForce(catapultForce);
 			cursor.SetActive(false);
@@ -234,6 +256,7 @@ public class Ball : MonoBehaviour {
 	
 	public void OnActivateFreeTap(bool inEnabled)
 	{
+		Debug.Log("OnActivateFreeTap " + inEnabled);
 		isFreeTap = inEnabled;
 	}
 		
