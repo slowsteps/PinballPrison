@@ -82,7 +82,6 @@ public class Target : MonoBehaviour {
 			Destroy(gameObject.collider2D);
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
-		TextFeedback.Display("Target " + scoreValue + " pts",gameObject);
 		
 		if (isCollectable) EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
 		

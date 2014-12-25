@@ -9,7 +9,6 @@ public class GUIMessage : MonoBehaviour {
 
 	void Start () {
 		instance = this;
-		gameObject.SetActive(false);
 		EventManager.Subscribe(OnEvent);
 	}
 	

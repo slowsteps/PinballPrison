@@ -123,30 +123,25 @@ public class GameManager : MonoBehaviour {
 		switch (reason)
 		{
 		case levelOverReasons.EXIT_REACHED:
-			TextFeedback.Display("Level completed");
-			GUIMessage.instance.SetText("Awesomeness! \n Level complete");			
+			UIManager.instance.SetMessage("Awesomeness! \n Level complete");
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
-			TextFeedback.Display("Out of balls");
-			GUIMessage.instance.SetText("Game over, out of balls");	
+			UIManager.instance.SetMessage("Game over, out of balls");
 			UpdateLives(-1);		
 			break;
 		case levelOverReasons.OUT_OF_SHOTS:
-			TextFeedback.Display("Out of  shots");			
-			GUIMessage.instance.SetText("Game over, out of shots");
+			UIManager.instance.SetMessage("Game over, out of shots");
 			UpdateLives(-1);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
-			TextFeedback.Display("Out of time");			
-			GUIMessage.instance.SetText("Game over, out of time");
+			UIManager.instance.SetMessage("Game over, out of time");
 			UpdateLives(-1);
 			break;
 		case levelOverReasons.QUIT:
 			UpdateLives(-1);
 			break;
 		case levelOverReasons.COLLECTABLES_FOUND:
-			TextFeedback.Display("Collectables found");			
-			GUIMessage.instance.SetText("All collectables found!");
+			UIManager.instance.SetMessage("All collectables found!");
 			break;
 		}
 		

@@ -23,4 +23,10 @@ public class Danger : MonoBehaviour {
 		EventManager.fireEvent(EventManager.EVENT_BALL_DEATH);
 	}
 	
+	public void OnDestroy()
+	{
+		Debug.Log(this + " destroyed");
+		CancelInvoke();
+	}
+	
 }

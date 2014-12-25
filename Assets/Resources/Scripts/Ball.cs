@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour {
 
@@ -10,14 +11,18 @@ public class Ball : MonoBehaviour {
 	public GameObject cursor = null;
 	public GameObject AimGuidance = null;
 	public float clickRadius = 0.5f;
-	public Vector3 clickPos = Vector3.zero;
+	private Vector3 clickPos = Vector3.zero;
+	private Vector3 OrigClickPos = Vector3.zero;
+	private Vector3 startPos  = Vector3.zero;
 	private int isPullMode = 1;
 	public static Ball selectedBall = null;
 	public static Ball instance = null;
 	public bool isCaptured = false;
 	private bool isFirstClick = true;
 	public float currentGravityScale = 1f;
-	private bool isFreeTap = false;
+	public bool isFreeTap = false;
+	public bool isSlowMotionEnabled = false;
+	public bool isTapSpeedConstrained = false;
 	
 
 	void Start () 
@@ -30,6 +35,7 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
+		AimGuidance.SetActive(false);
 	}
 	
 	public void OnEvent(string customEvent)
@@ -74,6 +80,8 @@ public class Ball : MonoBehaviour {
 		if (isFirstClick)
 		{
 			isFirstClick = false;
+			//for free tap
+			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			return;
 		}
 		
@@ -118,19 +126,32 @@ public class Ball : MonoBehaviour {
 	private void DrawCursor()
 	{
 		
+		
+		
 		if (selectedBall == this)
 		{
+			
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
 			
-			Vector3 startPos = transform.position;
+			if (isFreeTap) 
+			{
+				startPos = OrigClickPos;
+			}
+			else
+			{
+				startPos = transform.position;
+			}
+			
 			startPos.z=-3;
+			
+			
 			Vector3 endPos = cursor.transform.position;
 			endPos.z=-3;
 			
 			Vector3 radius = endPos - startPos;
 			radius = Vector3.ClampMagnitude(radius,1.5f);
 			endPos = startPos + radius;
-
+			
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
@@ -142,6 +163,10 @@ public class Ball : MonoBehaviour {
 				AimGuidance.transform.Rotate(Vector3.up,180);
 			}
 		}
+		else
+		{
+			//Debug.Log("Selectball = " + selectedBall);
+		}
 	}
 	
 	
@@ -149,7 +174,16 @@ public class Ball : MonoBehaviour {
 	public void OnDown()
 	{
 		
-		cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
+		
+		if (isFreeTap) 
+		{
+			//OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
+		}
+		else
+		{
+			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
+		}
 		
 		Vector3 startPos = transform.position;
 		startPos.z=-1;
@@ -158,12 +192,13 @@ public class Ball : MonoBehaviour {
 		
 		Vector3 radius = endPos - startPos;
 	
-		if (radius.magnitude < clickRadius)		
+		//if (radius.magnitude < clickRadius)		
+		if (isFreeTap || (radius.magnitude < clickRadius) )			
 		{
 			selectedBall = this;
 			ScrollCamera.instance.SetTarget(gameObject);
 			cursor.SetActive(true);
-			Time.timeScale = 0.1f;
+			if (isSlowMotionEnabled) Time.timeScale = 0.1f;
 		}
 		
 		DrawCursor();
@@ -188,23 +223,32 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
-			
+			if (isSlowMotionEnabled) Time.timeScale = 0.1f;Time.timeScale = 1f;	
+			if (isFreeTap) AimGuidance.SetActive(false);
 		}
-		Time.timeScale = 1f;
-		AimGuidance.SetActive(false);
+		
+		
 	}
 
-	public void OnActivateFreeTap()
+	//Settings screen functions
+	
+	public void OnActivateFreeTap(bool inEnabled)
 	{
-		isFreeTap = true;
+		isFreeTap = inEnabled;
+	}
+		
+	public void OnActivateSlowmotion(bool inEnabled)
+	{
+		isSlowMotionEnabled = inEnabled;
 	}
 	
-	public void OnActivateBallTap()
+	public void OnActivateTapSpeedConstraint(bool inEnabled)
 	{
-		isFreeTap = false;
+		
+		Debug.Log("isTapSpeedConstrained " + inEnabled);
+		isTapSpeedConstrained = inEnabled;
 	}
 	
-
 
 
 }

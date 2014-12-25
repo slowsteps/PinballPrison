@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
-	// Use this for initialization
-	void Awake () {
+	
+	void Awake () 
+	{
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}
 	
-	// Update is called once per frame
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
@@ -18,7 +18,6 @@ public class Exit : MonoBehaviour {
 		particleSystem.Play();
 		iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 		Invoke("DelayedEvent",2f);	
-		TextFeedback.Display("Level complete!",gameObject);				
 	}
 	
 	private void DelayedEvent()
@@ -46,6 +45,7 @@ public class Exit : MonoBehaviour {
 	void OnDestroy()
 	{
 		EventManager.UnSubscribe(OnEvent);
+		CancelInvoke();
 	}
 	
 }

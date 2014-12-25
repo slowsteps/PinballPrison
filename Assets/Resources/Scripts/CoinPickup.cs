@@ -11,7 +11,6 @@ public class CoinPickup : MonoBehaviour {
 		if (ball.tag == "ball") 
 		{
 			GameManager.instance.AddToScore(scoreValue);
-			TextFeedback.Display(feedbackText,gameObject);
 			gameObject.GetComponent<SpriteRenderer>().enabled = false;
 			Destroy(collider2D);
 			if (particleSystem)

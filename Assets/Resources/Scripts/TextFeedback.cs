@@ -15,13 +15,6 @@ public class TextFeedback : MonoBehaviour {
 	
 	
 	
-	//Class manages its own prefab instantiation
-	public static void Display(string inText,GameObject inSource=null)
-	{
-		//GameObject go =  Instantiate(Resources.Load("Prefabs/Objects/TextFeedback_Prefab")) as GameObject;
-		//TextFeedback instance = go.GetComponent<TextFeedback>();
-		//instance.Init(inText,inSource);
-	}
 	
 	public void Init(string inText,GameObject inSource=null)
 	{
