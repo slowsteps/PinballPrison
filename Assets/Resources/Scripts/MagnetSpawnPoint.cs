@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public class MagnetSpawnPoint : MonoBehaviour {
@@ -30,15 +31,16 @@ public class MagnetSpawnPoint : MonoBehaviour {
 			iTween.MoveTo(ball.gameObject,iTween.Hash("name","magnet","position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 			currentMagnet = this;
 			if (isSafePoint) currentSavePoint = this;
-			//TextFeedback.Display("Ball magnetized",gameObject);
+		
 		}
 	}
 	
-	public void Update()
+	public void OnTriggerLeave2D (Collider2D ball)
 	{
-		if (Input.GetMouseButtonDown(0))
+		
+		if (ball.tag == "ball") 
 		{
-			//iTween.StopByName("magnet");
+			currentMagnet = null;
 		}
 	}
 

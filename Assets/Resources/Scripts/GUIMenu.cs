@@ -6,14 +6,13 @@ using System.Collections;
 public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
-	private Vector3 origPos;
+	
 
 
 	void Awake()
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		origPos = transform.position;
 	}
 	
 

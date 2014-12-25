@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Sprites;
 
 public class Ball : MonoBehaviour {
 
@@ -24,6 +25,15 @@ public class Ball : MonoBehaviour {
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
 	public bool isTapSpeedConstrained = false;
+	public float Energy = 0;
+	public float LowEnergyBarrier = 30f;
+	private float EnergyDecay = 0.95f;
+	private bool ShotIsAllowed = true;
+	
+	public Color32 SlowColor = Color.red;
+	public Color32 FastColor = Color.green;
+	public SpriteRenderer BallSpriteRenderer;
+	
 	
 
 	void Start () 
@@ -37,6 +47,7 @@ public class Ball : MonoBehaviour {
 		origPos = transform.position;
 		gameObject.SetActive(false);
 		AimGuidance.SetActive(false);
+		BallSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 	
 	public void OnEvent(string customEvent)
@@ -93,6 +104,9 @@ public class Ball : MonoBehaviour {
 			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
 		
+		//from settings screen
+		if (isTapSpeedConstrained) UpdateEnergy();	
+		if (isTapSpeedConstrained && !ShotIsAllowed )return;
 	
 		if (Input.GetMouseButton(0))
 		{
@@ -113,6 +127,27 @@ public class Ball : MonoBehaviour {
 			if (IsInsideScreen()) OnUp();
 			//swipe off screen
 			else DeselectBall(); 
+		}
+			
+			//from settings screen
+			
+		
+	}
+	
+	private void UpdateEnergy()
+	{
+		
+		Energy = Energy + rigidbody2D.velocity.magnitude;
+		Energy = Energy * EnergyDecay;
+		if (Energy < LowEnergyBarrier) 
+		{
+			BallSpriteRenderer.color = SlowColor;
+			ShotIsAllowed = true;
+		}
+		else 
+		{
+			BallSpriteRenderer.color = FastColor;
+			ShotIsAllowed = false;
 		}
 	}
 
