@@ -204,13 +204,7 @@ public class Ball : MonoBehaviour {
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
 			cursor.GetComponent<LineRenderer>().SetPosition(1,endPos);
 
-//			if (isFreeTap)
-//			{
-//				AimGuidance.SetActive(true);
-//				AimGuidance.transform.position = transform.position;
-//				AimGuidance.transform.LookAt(cursor.transform);
-//				AimGuidance.transform.Rotate(Vector3.up,180);
-//			}
+
 		}
 		else
 		{
