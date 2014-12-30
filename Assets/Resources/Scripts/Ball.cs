@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour {
 	private Vector2 catapultForce = Vector2.zero;
 	public GameObject mainCam = null;
 	public GameObject cursor = null;
-	public GameObject AimGuidance = null;
+	
 	public float clickRadius = 0.5f;
 	private Vector3 clickPos = Vector3.zero;
 	private Vector3 OrigClickPos = Vector3.zero;
@@ -33,6 +33,7 @@ public class Ball : MonoBehaviour {
 	public Color32 SlowColor = Color.red;
 	public Color32 FastColor = Color.green;
 	public SpriteRenderer BallSpriteRenderer;
+	public RectTransform TimeOutBar;
 	
 	
 
@@ -46,8 +47,9 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
-		AimGuidance.SetActive(false);
 		BallSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		
+		
 	}
 	
 	public void OnEvent(string customEvent)
@@ -107,6 +109,8 @@ public class Ball : MonoBehaviour {
 		//from settings screen
 		if (isTapSpeedConstrained) UpdateEnergy();	
 		if (isTapSpeedConstrained && !ShotIsAllowed )return;
+		RechargeTimeOutBar();
+		if (TimeOutBar.localScale.y < 0.9) return;
 	
 		if (Input.GetMouseButton(0))
 		{
@@ -275,10 +279,20 @@ public class Ball : MonoBehaviour {
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
 			if (isSlowMotionEnabled) Time.timeScale = 0.1f;Time.timeScale = 1f;	
-			if (isFreeTap) AimGuidance.SetActive(false);
+			
+			TimeOutBar.localScale = new Vector3(1f,0f,1f);
+			
 		}
 		
 		
+	}
+	
+	private void RechargeTimeOutBar()
+	{
+		if (TimeOutBar.localScale.y < 1)
+		{
+			TimeOutBar.localScale += new Vector3(0,0.02f,0);
+		}	
 	}
 
 	//Settings screen functions
