@@ -23,7 +23,8 @@ public class ButtonHandler : MonoBehaviour {
 		//Debug.Log("OnStartLevelButton: " + inLevelNum);
 		if (GameManager.instance.lives > 0)
 		{
-			Application.LoadLevelAdditive("Level"+inLevelNum);
+			if (Application.CanStreamedLevelBeLoaded("Level"+inLevelNum)) Application.LoadLevelAdditive("Level"+inLevelNum);
+			else print("can't load scene Level"+inLevelNum) ;
 		}
 		else print ("out of lives");
 	}

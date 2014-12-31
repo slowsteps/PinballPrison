@@ -37,7 +37,11 @@ public class Target : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			foreach(TargetGroupEffect tg in targetGroupEffects) tg.AddTarget(this);
+			foreach(TargetGroupEffect tg in targetGroupEffects) 
+			{
+				if (tg) tg.AddTarget(this);
+				else Debug.Log ("WARNING target does not exist in targetGroupEffects in " + this.name);
+			}
 			break;
 		}
 	}
