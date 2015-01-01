@@ -261,6 +261,8 @@ public class Ball : MonoBehaviour {
 		
 		if (selectedBall == this)
 		{
+			//stop magnet ball capture animation, because it prevents the next shot when still running
+			iTween.Stop();
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
 			rigidbody2D.gravityScale = currentGravityScale;

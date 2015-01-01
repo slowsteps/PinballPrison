@@ -23,7 +23,8 @@ public class MagnetSpawnPoint : MonoBehaviour {
 
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		if (!isStartPoint && ball.tag == "ball") 
+//		if (!isStartPoint && ball.tag == "ball") 
+		if (ball.tag == "ball") 
 		{
 			ball.rigidbody2D.gravityScale = 0f;
 			ball.rigidbody2D.velocity = Vector3.zero;
