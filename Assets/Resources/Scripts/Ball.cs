@@ -300,7 +300,7 @@ public class Ball : MonoBehaviour {
 	{
 		if (TimeOutBar.localScale.y < 1)
 		{
-			TimeOutBar.localScale += new Vector3(0,0.001f,0);
+			TimeOutBar.localScale += new Vector3(0,0.002f,0);
 		}	
 	}
 
