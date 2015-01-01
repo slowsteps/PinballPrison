@@ -34,7 +34,8 @@ public class ScoreDisplay : MonoBehaviour {
 	public void UpdateScoreDisplay() {
 		
 		
-		if (Level.instance.hasMinScore) ScoreText.text = GameManager.instance.score + "/" + Level.instance.requiredScore;		
+		//if (Level.instance.hasMinScore) ScoreText.text = GameManager.instance.score + "/" + Level.instance.requiredScore;		
+		if (Level.instance.hasMinScore) ScoreText.text = GameManager.instance.score.ToString();		
 		else ScoreText.text = GameManager.instance.score.ToString();
 	}
 

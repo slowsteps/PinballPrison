@@ -4,6 +4,7 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
 	public static Level instance;
+	public string Description = "just another level";
 	public bool hasMinScore = true;
 	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;

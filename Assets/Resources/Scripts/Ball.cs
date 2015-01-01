@@ -110,7 +110,7 @@ public class Ball : MonoBehaviour {
 		if (isTapSpeedConstrained) UpdateEnergy();	
 		if (isTapSpeedConstrained && !ShotIsAllowed )return;
 		RechargeTimeOutBar();
-		if (TimeOutBar.localScale.y < 0.9) return;
+		if (TimeOutBar.localScale.y < 0.1) return;
 	
 		if (Input.GetMouseButton(0))
 		{
@@ -280,18 +280,27 @@ public class Ball : MonoBehaviour {
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
 			if (isSlowMotionEnabled) Time.timeScale = 0.1f;Time.timeScale = 1f;	
 			
-			TimeOutBar.localScale = new Vector3(1f,0f,1f);
+			DecreaseTimeOutBar();
 			
 		}
 		
 		
 	}
+
+	private void DecreaseTimeOutBar()
+	{
+		if (TimeOutBar.localScale.y > 0)
+		{
+			TimeOutBar.localScale -= new Vector3(0,0.2f,0);
+		}	
+	}
 	
+			
 	private void RechargeTimeOutBar()
 	{
 		if (TimeOutBar.localScale.y < 1)
 		{
-			TimeOutBar.localScale += new Vector3(0,0.02f,0);
+			TimeOutBar.localScale += new Vector3(0,0.001f,0);
 		}	
 	}
 
