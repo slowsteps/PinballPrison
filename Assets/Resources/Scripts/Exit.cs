@@ -23,7 +23,6 @@ public class Exit : MonoBehaviour {
 	private void DelayedEvent()
 	{
 		EventManager.fireEvent(EventManager.EVENT_BALL_EXIT);
-		//gameObject.SetActive(false);
 	}
 	
 	
@@ -39,7 +38,18 @@ public class Exit : MonoBehaviour {
 			gameObject.SetActive(true);
 			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
 			break;
+		case EventManager.EVENT_ALL_COLLECTABLES_FOUND:
+			Show();
+			break;
 		}
+	}
+	
+	private void Show()
+	{
+		print ("exit shown");
+		gameObject.SetActive(true);
+		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
+		EventManager.fireEvent(EventManager.EVENT_EXIT_VISIBLE);
 	}
 	
 	void OnDestroy()

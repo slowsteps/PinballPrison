@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
 		if (collectables == Level.instance.requiredCollectables) 
 		{
 			EventManager.fireEvent(EventManager.EVENT_ALL_COLLECTABLES_FOUND);
-			OnGameOver(levelOverReasons.COLLECTABLES_FOUND);
+			//OnGameOver(levelOverReasons.COLLECTABLES_FOUND);
 		}
 	}						
 																

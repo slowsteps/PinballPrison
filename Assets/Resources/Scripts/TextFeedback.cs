@@ -1,55 +1,51 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TextFeedback : MonoBehaviour {
 
-	public float lifeTime = 0;
-	public Color toColor;
-	private Color origColor;
+	private float lifeTime = 3f;
+	private Text Label;
 	private float savedTime = 0;
-	public float fadeSpeed = 0;
-	private float curFade = 0;
-	private GameObject sourceGameObject;
-	private Camera scrollCam;
-	
-	
-	
-	
-	
-	public void Init(string inText,GameObject inSource=null)
-	{
-		if (inSource) sourceGameObject = inSource;
-		SetText(inText);
-	}
 
-	// Use this for initialization
-	void Awake () {
+	void Awake () 
+	{
 		savedTime = Time.time;
-		origColor = guiText.color;
-		scrollCam  = GameObject.Find("ScrollCam").camera;
+		Label = gameObject.GetComponent<Text>();
+		EventManager.Subscribe(OnEvent);
 	}
+	
+	public void OnEvent(string customEvent)
+	{
+		switch(customEvent)
+		{
+		case EventManager.EVENT_EXIT_VISIBLE:
+			SetText("Exit is now open");
+			break;
+		case EventManager.EVENT_LEVEL_START:
+			SetText("Tap and drag the ball");
+			break;
+		case EventManager.EVENT_MINIMUMSCORE_REACHED:
+			SetText("Target score reached");
+			break;
+		}
+	}
+	
 	
 	// Update is called once per frame
-	void Update () {
-		
-		curFade = curFade + fadeSpeed * Time.deltaTime;
-				
-		guiText.color = Color.Lerp(origColor,toColor,curFade);
-		
-		
-		//positioning
-		if (sourceGameObject) transform.position =  new Vector3(0.5f + curFade,scrollCam.WorldToViewportPoint(sourceGameObject.transform.position).y,0f);
-		else transform.position =  new Vector3(0.5f,scrollCam.WorldToViewportPoint(Ball.instance.transform.position).y,0f);
-		
-		if ( (Time.time - savedTime) > lifeTime) Destroy(gameObject); 
+	void Update () {		
+		if ( (Time.time - savedTime) > lifeTime) 
+		{
+			SetText(""); 
+			enabled = false;
+		}
 	}
 
 	public void SetText(string inText)
 	{
-		guiText.text = inText;
-		
-		if (sourceGameObject) transform.position =  new Vector3(0.5f,scrollCam.WorldToViewportPoint(sourceGameObject.transform.position).y,0f);
-//		if (!gameObject.GetComponent<iTween>()) iTween.MoveTo(gameObject,iTween.Hash("x",-1f,"time",1.5f,"easeType",iTween.EaseType.easeInBack));
+		savedTime = Time.time;
+		Label.text = inText;
+		enabled = true;
 	}
 
 }
