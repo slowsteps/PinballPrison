@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour {
 		origPos = transform.position;
 		gameObject.SetActive(false);
 		BallSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-		
+		TimeOutBar.gameObject.SetActive(false);
 		
 	}
 	
