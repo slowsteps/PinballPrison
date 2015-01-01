@@ -21,24 +21,18 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	
 	
 
-	public void OnTriggerEnter2D (Collider2D ball)
+	public void OnTriggerEnter2D (Collider2D col)
 	{
-//		if (!isStartPoint && ball.tag == "ball") 
-		if (ball.tag == "ball") 
+		if (col.tag == "ball") 
 		{
-			ball.rigidbody2D.gravityScale = 0f;
-			ball.rigidbody2D.velocity = Vector3.zero;
-			ball.rigidbody2D.angularVelocity = 0f;
-			iTween.MoveTo(ball.gameObject,iTween.Hash("name","magnet","position",transform.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 			currentMagnet = this;
 			if (isSafePoint) currentSavePoint = this;
-		
+			Ball.instance.OnMagnet();
 		}
 	}
 	
 	public void OnTriggerLeave2D (Collider2D ball)
 	{
-		
 		if (ball.tag == "ball") 
 		{
 			currentMagnet = null;

@@ -24,11 +24,9 @@ public class Ball : MonoBehaviour {
 	public float currentGravityScale = 1f;
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
-	public bool isTapSpeedConstrained = false;
-	public float Energy = 0;
-	public float LowEnergyBarrier = 30f;
-	private float EnergyDecay = 0.95f;
-	private bool ShotIsAllowed = true;
+	public bool isEnergyChargeEnabled = true;
+	
+	
 	
 	public Color32 SlowColor = Color.red;
 	public Color32 FastColor = Color.green;
@@ -82,15 +80,27 @@ public class Ball : MonoBehaviour {
 		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
 		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);
-		rigidbody2D.isKinematic = true;
+//		rigidbody2D.isKinematic = true;
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
 		if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 		enabled = true;
 	}
 	
+	public void OnMagnet()
+	{
+		rigidbody2D.gravityScale = 0f;
+		rigidbody2D.velocity = Vector3.zero;
+		rigidbody2D.angularVelocity = 0f;
+		//rigidbody2D.isKinematic = true;
+		Transform target = MagnetSpawnPoint.currentMagnet.transform;
+		iTween.MoveTo(this.gameObject,iTween.Hash("name","magnet","position",target.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
+	}
+	
+	
 	void Update () 
 	{
+		//FirstClick is a click in the menu
 		if (isFirstClick)
 		{
 			isFirstClick = false;
@@ -107,10 +117,10 @@ public class Ball : MonoBehaviour {
 		}
 		
 		//from settings screen
-		if (isTapSpeedConstrained) UpdateEnergy();	
-		if (isTapSpeedConstrained && !ShotIsAllowed )return;
-		RechargeTimeOutBar();
-		if (TimeOutBar.localScale.y < 0.1) return;
+		
+		
+		if (isEnergyChargeEnabled) RechargeTimeOutBar();
+		if (TimeOutBar.localScale.y < 0.01) return;
 	
 		if (Input.GetMouseButton(0))
 		{
@@ -138,23 +148,7 @@ public class Ball : MonoBehaviour {
 		
 	}
 	
-	private void UpdateEnergy()
-	{
-		
-		Energy = Energy + rigidbody2D.velocity.magnitude;
-		Energy = Energy * EnergyDecay;
-		if (Energy < LowEnergyBarrier) 
-		{
-			BallSpriteRenderer.color = SlowColor;
-			ShotIsAllowed = true;
-		}
-		else 
-		{
-			BallSpriteRenderer.color = FastColor;
-			ShotIsAllowed = false;
-		}
-	}
-
+	
 	private bool IsInsideScreen()
 	{
 		if (Input.mousePosition.x > 0 && Input.mousePosition.x < Screen.width - 1 && Input.mousePosition.y > 17 && Input.mousePosition.y < Screen.height - 1) return true;
@@ -261,7 +255,7 @@ public class Ball : MonoBehaviour {
 		
 		if (selectedBall == this)
 		{
-			//stop magnet ball capture animation, because it prevents the next shot when still running
+			//stop magnet ball capture animation, because it prevents 
 			iTween.Stop();
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
@@ -275,14 +269,16 @@ public class Ball : MonoBehaviour {
 			{
 				catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
 			}
-			if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
+			//if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
+			catapultForce = 1000f*catapultForce.normalized;
+			
 			rigidbody2D.AddForce(catapultForce);
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
 			if (isSlowMotionEnabled) Time.timeScale = 0.1f;Time.timeScale = 1f;	
 			
-			DecreaseTimeOutBar();
+			if (isEnergyChargeEnabled) DecreaseTimeOutBar();
 			
 		}
 		
@@ -310,7 +306,6 @@ public class Ball : MonoBehaviour {
 	
 	public void OnActivateFreeTap(bool inEnabled)
 	{
-		Debug.Log("OnActivateFreeTap " + inEnabled);
 		isFreeTap = inEnabled;
 	}
 		
@@ -319,13 +314,12 @@ public class Ball : MonoBehaviour {
 		isSlowMotionEnabled = inEnabled;
 	}
 	
-	public void OnActivateTapSpeedConstraint(bool inEnabled)
-	{
-		
-		Debug.Log("isTapSpeedConstrained " + inEnabled);
-		isTapSpeedConstrained = inEnabled;
-	}
 	
+	public void OnActivateEnergyCharge(bool inEnabled)
+	{
+		isEnergyChargeEnabled = inEnabled;
+		TimeOutBar.gameObject.SetActive(inEnabled);
+	}
 
 
 }
