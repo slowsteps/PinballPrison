@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class TextureScroller : MonoBehaviour {
 
 	public float speed;
+	public float directionX;
+	public float directionY;
+	private float scrollDistance;
 	private float savedTime = 0;
-	private float scrollDistance = 0;
 	private Material DetectedMaterial = null;
 	private Material ScrollMaterial = null;
 
 
-
 	// Use this for initialization
 	void Start () {
-
 
 		ScrollMaterial = Resources.Load("Materials/Scroll_Material", typeof(Material)) as Material;
 		
@@ -43,8 +43,7 @@ public class TextureScroller : MonoBehaviour {
 		scrollDistance = speed*(Time.time - savedTime);
 		if (Mathf.Abs(scrollDistance) > 1) savedTime = Time.time;
 		//gameObject.renderer.material.mainTextureOffset = new Vector2(scrollDistance,0);
-		DetectedMaterial.SetTextureOffset("_MainTex", new Vector2(scrollDistance, 0));
-		
+		DetectedMaterial.SetTextureOffset("_MainTex", new Vector2(scrollDistance*directionX, -scrollDistance*directionY));
 	}
 	
 	
