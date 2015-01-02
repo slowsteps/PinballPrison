@@ -25,14 +25,9 @@ public class Ball : MonoBehaviour {
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
 	public bool isEnergyChargeEnabled = true;
-	
-	
-	
-	public Color32 SlowColor = Color.red;
-	public Color32 FastColor = Color.green;
-	public SpriteRenderer BallSpriteRenderer;
 	public RectTransform TimeOutBar;
-	
+	private Sprite SquareBall = null;
+	private Sprite RoundBall = null;
 	
 
 	void Start () 
@@ -45,9 +40,9 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
-		BallSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 		TimeOutBar.gameObject.SetActive(false);
-		
+		SquareBall = Resources.Load <Sprite> ("2D/Square");
+		RoundBall = gameObject.GetComponent<SpriteRenderer>().sprite;
 	}
 	
 	public void OnEvent(string customEvent)
@@ -319,6 +314,12 @@ public class Ball : MonoBehaviour {
 	{
 		isEnergyChargeEnabled = inEnabled;
 		TimeOutBar.gameObject.SetActive(inEnabled);
+	}
+
+	public void OnActivateSquareBall(bool inEnabled)
+	{
+		if (inEnabled) gameObject.GetComponent<SpriteRenderer>().sprite = SquareBall;
+		else gameObject.GetComponent<SpriteRenderer>().sprite = RoundBall;
 	}
 
 
