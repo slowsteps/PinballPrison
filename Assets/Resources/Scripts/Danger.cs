@@ -16,6 +16,7 @@ public class Danger : MonoBehaviour {
 		particleSystem.Play();
 		ball.gameObject.SetActive(false);
 		Invoke("DelayedEvent",2f);
+		SoundManager.instance.PlaySound("SwordWhoosh1_SFX");
 	}
 	
 	private void DelayedEvent()

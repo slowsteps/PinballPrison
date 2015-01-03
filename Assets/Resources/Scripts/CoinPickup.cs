@@ -18,6 +18,7 @@ public class CoinPickup : MonoBehaviour {
 				particleSystem.time = 0f;
 				particleSystem.Play();
 			}
+			SoundManager.instance.PlaySound("PickUpCoin_SFX");
 		}
 	}
 

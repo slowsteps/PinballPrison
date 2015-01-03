@@ -18,6 +18,7 @@ public class Exit : MonoBehaviour {
 		particleSystem.Play();
 		iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 		Invoke("DelayedEvent",2f);	
+		SoundManager.instance.PlaySound("CollectCrystal_SFX");
 	}
 	
 	private void DelayedEvent()
@@ -56,6 +57,7 @@ public class Exit : MonoBehaviour {
 	{
 		EventManager.UnSubscribe(OnEvent);
 		CancelInvoke();
+		iTween.Stop();
 	}
 	
 }

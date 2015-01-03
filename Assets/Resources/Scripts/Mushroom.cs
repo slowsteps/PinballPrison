@@ -45,6 +45,7 @@ public class Mushroom : MonoBehaviour {
 			iTween.PunchScale(gameObject,iTween.Hash("amount",scaleEffectAmp * Vector3.one,"time",scaleEffectTime));
 			if (hitEffectSprite) Play();
 		}
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 	
 	public void Play()

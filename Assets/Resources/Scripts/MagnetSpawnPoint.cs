@@ -28,6 +28,7 @@ public class MagnetSpawnPoint : MonoBehaviour {
 			currentMagnet = this;
 			if (isSafePoint) currentSavePoint = this;
 			Ball.instance.OnMagnet();
+			SoundManager.instance.PlaySound("Rollover_SFX");
 		}
 	}
 	
