@@ -25,8 +25,7 @@ public class Ball : MonoBehaviour {
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
 	public bool isEnergyChargeEnabled = true;
-	public float ChargeRate = 0.01f;
-	public RectTransform TimeOutBar;
+	public ChargeBar TimeOutBar;
 	private Sprite SquareBall = null;
 	private Sprite RoundBall = null;
 	
@@ -116,9 +115,9 @@ public class Ball : MonoBehaviour {
 		
 		
 		
-		if (TimeOutBar.localScale.y < 0.01) return;
+		
 	
-		if (Input.GetMouseButton(0))
+		if (Input.GetMouseButton(0) )
 		{
 			//check for touch sliding off the screen
 			if (IsInsideScreen()) 
@@ -138,10 +137,10 @@ public class Ball : MonoBehaviour {
 			//swipe off screen
 			else DeselectBall(); 
 			
-			if (isEnergyChargeEnabled) RechargeTimeOutBar();
+			if (isEnergyChargeEnabled) TimeOutBar.RechargeTimeOutBar();
 		}
 			
-			//from settings screen
+			
 			
 		
 	}
@@ -217,7 +216,7 @@ public class Ball : MonoBehaviour {
 		if (isFreeTap) 
 		{
 			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
-			DecreaseTimeOutBar();
+			TimeOutBar.DecreaseTimeOutBar();
 		}
 		else
 		{
@@ -285,22 +284,7 @@ public class Ball : MonoBehaviour {
 		
 	}
 
-	private void DecreaseTimeOutBar()
-	{
-		if (TimeOutBar.localScale.y > 0)
-		{
-			TimeOutBar.localScale -= new Vector3(0,ChargeRate,0);
-		}	
-	}
 	
-			
-	private void RechargeTimeOutBar()
-	{
-		if (TimeOutBar.localScale.y < 1)
-		{
-			TimeOutBar.localScale += new Vector3(0,ChargeRate,0);
-		}	
-	}
 
 	//Settings screen functions
 	
@@ -319,9 +303,5 @@ public class Ball : MonoBehaviour {
 		else gameObject.GetComponent<SpriteRenderer>().sprite = RoundBall;
 	}
 
-	public void OnSetChargeRate(float inChargeRate)
-	{
-		ChargeRate = inChargeRate;
-	}
 
 }

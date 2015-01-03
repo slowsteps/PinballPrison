@@ -46,7 +46,7 @@ public class TickerTapeScroller : MonoBehaviour {
 	public void Update() 
 	{
 		scrollDistance = speed*(Time.time - savedTime) - 1f;
-		if (Mathf.Abs(scrollDistance) > 5) savedTime = Time.time;
+		if (Mathf.Abs(scrollDistance) > 2) savedTime = Time.time;
 		ScrollingRect.pivot = new Vector2(scrollDistance,OrigRect.pivot.y);
 	}
 	
