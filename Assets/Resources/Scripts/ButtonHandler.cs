@@ -36,13 +36,5 @@ public class ButtonHandler : MonoBehaviour {
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 	}
 	
-	public void OnActivateFreeTap()
-	{
-	}
-
-	public void OnActivateTapBall()
-	{
-	}
-	
-			
+						
 }

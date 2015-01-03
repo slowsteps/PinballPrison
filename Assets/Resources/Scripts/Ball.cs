@@ -25,6 +25,7 @@ public class Ball : MonoBehaviour {
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
 	public bool isEnergyChargeEnabled = true;
+	public float ChargeRate = 0.01f;
 	public RectTransform TimeOutBar;
 	private Sprite SquareBall = null;
 	private Sprite RoundBall = null;
@@ -114,7 +115,7 @@ public class Ball : MonoBehaviour {
 		//from settings screen
 		
 		
-		if (isEnergyChargeEnabled) RechargeTimeOutBar();
+		
 		if (TimeOutBar.localScale.y < 0.01) return;
 	
 		if (Input.GetMouseButton(0))
@@ -136,6 +137,8 @@ public class Ball : MonoBehaviour {
 			if (IsInsideScreen()) OnUp();
 			//swipe off screen
 			else DeselectBall(); 
+			
+			if (isEnergyChargeEnabled) RechargeTimeOutBar();
 		}
 			
 			//from settings screen
@@ -214,6 +217,7 @@ public class Ball : MonoBehaviour {
 		if (isFreeTap) 
 		{
 			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
+			DecreaseTimeOutBar();
 		}
 		else
 		{
@@ -271,9 +275,10 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
-			if (isSlowMotionEnabled) Time.timeScale = 0.1f;Time.timeScale = 1f;	
+			//if (isSlowMotionEnabled) Time.timeScale = 0.1f;
+			Time.timeScale = 1f;	
 			
-			if (isEnergyChargeEnabled) DecreaseTimeOutBar();
+			
 			
 		}
 		
@@ -284,7 +289,7 @@ public class Ball : MonoBehaviour {
 	{
 		if (TimeOutBar.localScale.y > 0)
 		{
-			TimeOutBar.localScale -= new Vector3(0,0.2f,0);
+			TimeOutBar.localScale -= new Vector3(0,ChargeRate,0);
 		}	
 	}
 	
@@ -293,7 +298,7 @@ public class Ball : MonoBehaviour {
 	{
 		if (TimeOutBar.localScale.y < 1)
 		{
-			TimeOutBar.localScale += new Vector3(0,0.002f,0);
+			TimeOutBar.localScale += new Vector3(0,ChargeRate,0);
 		}	
 	}
 
@@ -302,19 +307,11 @@ public class Ball : MonoBehaviour {
 	public void OnActivateFreeTap(bool inEnabled)
 	{
 		isFreeTap = inEnabled;
-	}
-		
-	public void OnActivateSlowmotion(bool inEnabled)
-	{
 		isSlowMotionEnabled = inEnabled;
-	}
-	
-	
-	public void OnActivateEnergyCharge(bool inEnabled)
-	{
 		isEnergyChargeEnabled = inEnabled;
 		TimeOutBar.gameObject.SetActive(inEnabled);
 	}
+		
 
 	public void OnActivateSquareBall(bool inEnabled)
 	{
@@ -322,5 +319,9 @@ public class Ball : MonoBehaviour {
 		else gameObject.GetComponent<SpriteRenderer>().sprite = RoundBall;
 	}
 
+	public void OnSetChargeRate(float inChargeRate)
+	{
+		ChargeRate = inChargeRate;
+	}
 
 }
