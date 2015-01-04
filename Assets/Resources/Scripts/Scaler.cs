@@ -11,12 +11,15 @@ public class Scaler : MonoBehaviour {
 	public float MinScale = 0f; // mult for bigger or smaller end scale
 	public bool IsInverted = false; // scale up or shrink
 	private Vector3 OrigScale;
+	
 
 	void Start()
 	{
+		enabled = false;
 		OrigScale = transform.localScale;
 		transform.localScale = OrigScale * MaxScale;
 		Invoke("StartScaleAnimation",TimeOffset);
+		//Invoke("StartSyncedScale",TimeOffset);
 	}
 	
 	private void StartScaleAnimation()
@@ -30,6 +33,17 @@ public class Scaler : MonoBehaviour {
 		{
 			iTween.ScaleTo(gameObject,iTween.Hash("scale",OrigScale*MinScale,"time",ScaleTime,"delay",LoopDelay,"looptype","loop","easetype",iTween.EaseType.linear));	
 		}
+	}
+	
+	private void StartSyncedScale()
+	{
+		enabled=true;
+	}
+	
+	void Update()
+	{
+		transform.localScale = Vector3.Lerp(OrigScale * MaxScale,OrigScale*MinScale,Time.time);
+		
 	}
 	
 }

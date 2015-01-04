@@ -257,7 +257,8 @@ public class Ball : MonoBehaviour {
 		if (selectedBall == this)
 		{
 			//stop magnet ball capture animation, because it prevents 
-			iTween.Stop();
+			//iTween.Stop();
+			iTween.StopByName("magnet");
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
 			rigidbody2D.gravityScale = currentGravityScale;
