@@ -106,7 +106,8 @@ public class Target : MonoBehaviour {
 	//TargetDown is a sprite image
 	public void Reset()
 	{
-		if (!isToggle)
+		//if (!isToggle)
+		if (true)
 		{
 			isActivated = false;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
