@@ -5,6 +5,7 @@ TextureImporter:
     21300000: Debug_Texts_0
     21300002: Debug_Texts_1
     21300004: Debug_Texts_2
+    21300006: Debug_Texts_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -70,9 +71,19 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 358
+        y: 352
         width: 511
-        height: 52
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Debug_Texts_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 281
+        width: 512
+        height: 70
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
