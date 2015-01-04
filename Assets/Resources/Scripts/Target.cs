@@ -83,7 +83,11 @@ public class Target : MonoBehaviour {
 			isActivated = true;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
+			print ("Attempting to destroy collider");
+			
+			//gameObject.collider2D.isTrigger = true;
 			Destroy(gameObject.collider2D);
+			//gameObject.SetActive(false);
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		
