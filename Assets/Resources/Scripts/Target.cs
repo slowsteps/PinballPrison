@@ -20,6 +20,7 @@ public class Target : MonoBehaviour {
 	void Awake()
 	{
 		EventManager.Subscribe(OnEvent);
+		print ("subscribed to eventmanager: " + name);
 		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
 		if (isLight) collider2D.isTrigger = true;
 		//targetGroupEffects = new List<TargetGroupEffect>();
@@ -37,9 +38,15 @@ public class Target : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
+			print (this.name + " -----" );
 			foreach(TargetGroupEffect tg in targetGroupEffects) 
 			{
-				if (tg) tg.AddTarget(this);
+				//print (this.name + "-tg: " + tg);
+				if (tg) 
+				{
+					tg.AddTarget(this);
+					//print ("adding target to gate " + this.name);
+				}
 				else Debug.Log ("WARNING target does not exist in targetGroupEffects in " + this.name);
 			}
 			break;
@@ -83,7 +90,7 @@ public class Target : MonoBehaviour {
 			isActivated = true;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
-			print ("Attempting to destroy collider");
+
 			
 			//gameObject.collider2D.isTrigger = true;
 			Destroy(gameObject.collider2D);
@@ -96,6 +103,7 @@ public class Target : MonoBehaviour {
 	}
 
 
+	//TargetDown is a sprite image
 	public void Reset()
 	{
 		if (!isToggle)
@@ -103,7 +111,10 @@ public class Target : MonoBehaviour {
 			isActivated = false;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
-			gameObject.AddComponent<BoxCollider2D>();
+			//make sure other gates have not already added a collider
+			//TODO maybe use trigger instead of destroying and adding colliders?
+			if (!gameObject.collider2D) gameObject.AddComponent<BoxCollider2D>();
+			//print ("target reset=" + this.name);
 		}
 	}
 

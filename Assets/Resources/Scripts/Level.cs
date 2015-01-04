@@ -33,8 +33,13 @@ public class Level : MonoBehaviour {
 		
 		
 		EventManager.Subscribe(OnEvent);
-		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
+	
 		
+	}
+	
+	void Start()
+	{
+		EventManager.fireEvent(EventManager.EVENT_LEVEL_START);
 	}
 	
 	public void OnEvent(string customEvent)
