@@ -24,10 +24,10 @@ public class Ball : MonoBehaviour {
 	public float currentGravityScale = 1f;
 	public bool isFreeTap = true;
 	public bool isSlowMotionEnabled = false;
-	public bool isEnergyChargeEnabled = true;
-	public ChargeBar TimeOutBar;
+	public ChargeBar LeftChargeBar;
 	private Sprite SquareBall = null;
 	private Sprite RoundBall = null;
+	public bool isDetectingTaps = true;
 	
 
 	void Start () 
@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
-		TimeOutBar.gameObject.SetActive(false);
+		//LeftChargeBar.gameObject.SetActive(false);
 		SquareBall = Resources.Load <Sprite> ("2D/Square");
 		RoundBall = gameObject.GetComponent<SpriteRenderer>().sprite;
 	}
@@ -63,6 +63,9 @@ public class Ball : MonoBehaviour {
 			break;
 		case EventManager.EVENT_OUT_OF_TIME:
 			gameObject.SetActive(false);
+			break;
+		case EventManager.EVENT_CHARGE_DEPLETED:
+			isDetectingTaps = false;
 			break;
 		}
 	}
@@ -117,7 +120,7 @@ public class Ball : MonoBehaviour {
 		
 		
 	
-		if (Input.GetMouseButton(0) )
+		if (LeftChargeBar.isDetectingTap && Input.GetMouseButton(0) )
 		{
 			//check for touch sliding off the screen
 			if (IsInsideScreen()) 
@@ -137,7 +140,7 @@ public class Ball : MonoBehaviour {
 			//swipe off screen
 			else DeselectBall(); 
 			
-			if (isEnergyChargeEnabled) TimeOutBar.RechargeTimeOutBar();
+			//if (isEnergyChargeEnabled) LeftChargeBar.RechargeLeftChargeBar();
 		}
 			
 			
@@ -216,7 +219,7 @@ public class Ball : MonoBehaviour {
 		if (isFreeTap) 
 		{
 			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
-			TimeOutBar.DecreaseTimeOutBar();
+//			LeftChargeBar.DecreaseLeftChargeBar();
 		}
 		else
 		{
@@ -274,7 +277,7 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
-			//if (isSlowMotionEnabled) Time.timeScale = 0.1f;
+			
 			Time.timeScale = 1f;	
 			
 			
@@ -290,10 +293,9 @@ public class Ball : MonoBehaviour {
 	
 	public void OnActivateFreeTap(bool inEnabled)
 	{
+		LeftChargeBar.gameObject.SetActive(inEnabled);
 		isFreeTap = inEnabled;
 		isSlowMotionEnabled = inEnabled;
-		isEnergyChargeEnabled = inEnabled;
-		TimeOutBar.gameObject.SetActive(inEnabled);
 	}
 		
 

@@ -26,7 +26,7 @@ public class EventManager {
 	public const string EVENT_COLLECTABLE_FOUND = "EVENT_COLLECTABLE_FOUND";
 	public const string EVENT_ALL_COLLECTABLES_FOUND = "EVENT_ALL_COLLECTABLES_FOUND";
 	public const string EVENT_EXIT_VISIBLE = "EVENT_EXIT_VISIBLE";
-	
+	public const string EVENT_CHARGE_DEPLETED = "EVENT_CHARGE_DEPLETED";
 	
 
 	public delegate void Callbackmethod(string customevent);
