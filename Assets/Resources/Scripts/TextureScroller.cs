@@ -22,7 +22,7 @@ public class TextureScroller : MonoBehaviour {
 		if (gameObject.GetComponent<Image>()) 
 		{
 			gameObject.GetComponent<Image>().material = ScrollMaterial;
-			DetectedMaterial = gameObject.GetComponent<Image>().material;
+			DetectedMaterial = gameObject.GetComponent<Image>().materialForRendering;
 		}
 		else if (gameObject.GetComponent<SpriteRenderer>()) 
 		{

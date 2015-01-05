@@ -13,12 +13,10 @@ public class Gate : TargetGroupEffect {
 	{
 		gameObject.SetActive(isBarrierActive);
 		targets = new List<Target>();
-		print ("made target list: " + targets);
 	}
 
 	public override void AddTarget(Target inTarget)
 	{
-		//print (this.name + " -- " + inTarget.name);
 		targets.Add(inTarget);
 	}
 
@@ -41,35 +39,34 @@ public class Gate : TargetGroupEffect {
 			
 	private void Switch()
 	{
-		if (gameObject.activeSelf && isAllActivated) 
+		//this is a barrier you want to dissappear
+		if (isBarrierActive)
 		{
-			if (hasResetTime) Invoke("ResetGate",resetTime);
-			gameObject.SetActive(false);
+			if (gameObject.activeSelf && isAllActivated) 
+			{
+				gameObject.SetActive(false);
+				if (hasResetTime) Invoke("ResetGate",resetTime);
+			}
 		}
-
-		else if (!gameObject.activeSelf && !isAllActivated) 
-		{
-			gameObject.SetActive(true);
-		}
-						
-		else if (!gameObject.activeSelf && isAllActivated) 
-		{
-			if (hasResetTime) Invoke("ResetGate",resetTime);
-			gameObject.SetActive(true);
-			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		//this is a barrier you want to appear
+		else
+		{						
+			if (!gameObject.activeSelf && isAllActivated) 
+			{
+				gameObject.SetActive(true);
+				if (hasResetTime) Invoke("ResetGate",resetTime);
+			}
 		}
 		
 	}
 
 	private void ResetGate()
 	{
-		if (gameObject.activeSelf) gameObject.SetActive(false);
-		else {
-			gameObject.SetActive(true);
-			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
-		}
+		print ("resetgate " + name + "isBarrierActive="+ isBarrierActive);
+		
+		if (isBarrierActive) gameObject.SetActive(true);
+		else gameObject.SetActive(false);
 		isAllActivated = false;
-		//print ("targets.Count=" + targets.Count);
 		foreach (Target aTarget in targets) aTarget.Reset();
 	}					
 																		

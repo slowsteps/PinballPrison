@@ -20,7 +20,7 @@ public class Target : MonoBehaviour {
 	void Awake()
 	{
 		EventManager.Subscribe(OnEvent);
-		print ("subscribed to eventmanager: " + name);
+		//print ("subscribed to eventmanager: " + name);
 		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
 		if (isLight) collider2D.isTrigger = true;
 		//targetGroupEffects = new List<TargetGroupEffect>();
@@ -38,7 +38,6 @@ public class Target : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			print (this.name + " -----" );
 			foreach(TargetGroupEffect tg in targetGroupEffects) 
 			{
 				//print (this.name + "-tg: " + tg);
@@ -115,6 +114,7 @@ public class Target : MonoBehaviour {
 			//make sure other gates have not already added a collider
 			//TODO maybe use trigger instead of destroying and adding colliders?
 			if (!gameObject.collider2D) gameObject.AddComponent<BoxCollider2D>();
+			if (isLight) collider2D.isTrigger = true;
 			//print ("target reset=" + this.name);
 		}
 	}
