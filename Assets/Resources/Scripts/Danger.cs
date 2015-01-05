@@ -6,14 +6,17 @@ public class Danger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		particleSystem.renderer.sortingLayerName = "Effects";
+		if (particleSystem) particleSystem.renderer.sortingLayerName = "Effects";
 	}
 	
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		particleSystem.time = 0f;
-		particleSystem.Play();
+		if (particleSystem)
+		{
+			particleSystem.time = 0f;
+			particleSystem.Play();
+		}
 		ball.gameObject.SetActive(false);
 		Invoke("DelayedEvent",2f);
 		SoundManager.instance.PlaySound("SwordWhoosh1_SFX");
