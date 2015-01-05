@@ -13,10 +13,12 @@ public class Gate : TargetGroupEffect {
 	{
 		gameObject.SetActive(isBarrierActive);
 		targets = new List<Target>();
+		print ("made target list: " + targets);
 	}
 
 	public override void AddTarget(Target inTarget)
 	{
+		//print (this.name + " -- " + inTarget.name);
 		targets.Add(inTarget);
 	}
 
@@ -67,6 +69,7 @@ public class Gate : TargetGroupEffect {
 			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 		}
 		isAllActivated = false;
+		//print ("targets.Count=" + targets.Count);
 		foreach (Target aTarget in targets) aTarget.Reset();
 	}					
 																		

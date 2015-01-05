@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class TargetGroupEffect : MonoBehaviour
 {
 
-[HideInInspector]
+//[HideInInspector]
 public List<Target> targets;
 
 abstract public void AddTarget(Target inTarget);
