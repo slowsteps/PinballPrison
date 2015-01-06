@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour {
 			break;	
 		case EventManager.EVENT_COLLECTABLE_FOUND:
 			IncreaseCollectables();
-			break;	
+			break;				
 		}
 	}
 	

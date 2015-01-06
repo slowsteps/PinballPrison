@@ -42,6 +42,7 @@ public class ScoreMultiplier : TargetGroupEffect {
 	void OnDestroy()
 	{
 		CancelInvoke("ResetMultiplier");
+		GameManager.instance.ScoreMultiplier = 1;
 	}
 	
 	private void Switch()
