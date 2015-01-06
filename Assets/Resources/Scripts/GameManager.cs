@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 	public int balls;
 	public int collectables = 0;
 	public int score = 0;
+	public int ScoreMultiplier = 1;
 	public int livesRefillTime = 10;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
@@ -170,7 +171,7 @@ public class GameManager : MonoBehaviour {
 			EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
 			isMinimimScoreReached = true;
 		}
-		score = score + extraScore;
+		score = score + (ScoreMultiplier * extraScore);
 		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
 	}
 					
