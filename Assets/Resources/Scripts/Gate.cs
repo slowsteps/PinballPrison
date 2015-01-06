@@ -46,6 +46,7 @@ public class Gate : TargetGroupEffect {
 			{
 				gameObject.SetActive(false);
 				if (hasResetTime) Invoke("ResetGate",resetTime);
+				foreach (Target aTarget in targets) aTarget.StopDetecting();
 			}
 		}
 		//this is a barrier you want to appear
@@ -55,6 +56,7 @@ public class Gate : TargetGroupEffect {
 			{
 				gameObject.SetActive(true);
 				if (hasResetTime) Invoke("ResetGate",resetTime);
+				foreach (Target aTarget in targets) aTarget.StopDetecting();
 			}
 		}
 		

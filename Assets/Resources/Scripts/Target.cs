@@ -16,6 +16,7 @@ public class Target : MonoBehaviour {
 	public List<TargetGroupEffect> targetGroupEffects;
 	private Sprite targetUp;
 	public Sprite targetDown;
+	public bool isDetecting = true;
 	
 	void Awake()
 	{
@@ -54,7 +55,7 @@ public class Target : MonoBehaviour {
 	
 	public void OnTriggerEnter2D (Collider2D ball) 
 	{
-		HandleBallContact();
+		if (isDetecting) HandleBallContact();
 	}
 	
 	
@@ -102,12 +103,18 @@ public class Target : MonoBehaviour {
 	}
 
 
+	public void StopDetecting()
+	{
+		isDetecting = false;
+	}
+
 	//TargetDown is a sprite image
 	public void Reset()
 	{
 		//if (!isToggle)
 		if (true)
 		{
+			isDetecting = true;
 			isActivated = false;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;

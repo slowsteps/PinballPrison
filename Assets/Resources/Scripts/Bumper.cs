@@ -16,7 +16,8 @@ public class Bumper : MonoBehaviour {
 		if (!gameObject.GetComponent<iTween>())
 		{
 			Vector3 targetPos = (Vector3)inColl.contacts[0].normal;
-			iTween.PunchPosition(gameObject,iTween.Hash("amount",-scaleEffectAmp * targetPos,"time",scaleEffectTime));
+			iTween.PunchPosition(gameObject,iTween.Hash("amount",-scaleEffectAmp * targetPos,"time",scaleEffectTime,"space",Space.World));
+			
 		}
 	}
 	

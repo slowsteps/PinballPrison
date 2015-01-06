@@ -37,6 +37,7 @@ public class ScoreMultiplier : TargetGroupEffect {
 	private void ResetMultiplier()
 	{
 		EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER);
+		foreach (Target aTarget in targets) aTarget.Reset();
 	}
 	
 	void OnDestroy()
@@ -52,6 +53,7 @@ public class ScoreMultiplier : TargetGroupEffect {
 			GameManager.instance.ScoreMultiplier = Multiplier;
 			EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER);
 			Invoke("ResetMultiplier",ResetTime);
+			foreach (Target aTarget in targets) aTarget.StopDetecting();
 		}
 	}
 }
