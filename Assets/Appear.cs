@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScoreMultiplier : TargetGroupEffect {
+public class Appear : TargetGroupEffect {
 
 	private bool isAllActivated = false;
 	public int Multiplier = 1;
 	public float ResetTime = 10f;
-	
 
 	// Use this for initialization
 	void Start () {
-	
+		gameObject.SetActive(false);
 	}
 	
 	public override void AddTarget(Target inTarget)
@@ -34,9 +33,9 @@ public class ScoreMultiplier : TargetGroupEffect {
 		
 	}
 	
-	private void ResetMultiplier()
+	private void Hide()
 	{
-		EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER);
+		gameObject.SetActive(false);
 	}
 	
 	void OnDestroy()
@@ -48,9 +47,8 @@ public class ScoreMultiplier : TargetGroupEffect {
 	{
 		if (isAllActivated)
 		{
-			GameManager.instance.ScoreMultiplier = Multiplier;
-			EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER);
-			Invoke("ResetMultiplier",ResetTime);
+			gameObject.SetActive(true);
+			Invoke("Hide",ResetTime);
 		}
 	}
 }
