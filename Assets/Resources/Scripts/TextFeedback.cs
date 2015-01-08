@@ -34,7 +34,7 @@ public class TextFeedback : MonoBehaviour {
 		case EventManager.EVENT_SCORE_MULTIPLIER_END:
 			SetText("Score Multiplier END");
 			break;
-			
+		
 		}
 	}
 	

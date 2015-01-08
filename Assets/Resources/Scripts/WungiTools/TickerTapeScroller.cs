@@ -11,6 +11,7 @@ public class TickerTapeScroller : MonoBehaviour {
 	private float savedTime = 0;
 	private float scrollDistance;
 	private Text ScrollText = null;
+
 	
 	public void Start() 
 	{
@@ -19,14 +20,19 @@ public class TickerTapeScroller : MonoBehaviour {
 		OrigRect = ScrollingRect;
 		EventManager.Subscribe(OnEvent);
 		ScrollText = gameObject.GetComponent<Text>();
+		
+		
+		
 	}
+	
+	
 	
 	public void OnEvent(string customEvent)
 	{
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			ScrollText.text = Level.instance.Description;
+			ScrollText.text = Level.instance.LongDescription;	
 			break;
 		case EventManager.EVENT_BALL_DEATH:
 			
@@ -46,7 +52,7 @@ public class TickerTapeScroller : MonoBehaviour {
 	public void Update() 
 	{
 		scrollDistance = speed*(Time.time - savedTime) - 1f;
-		if (Mathf.Abs(scrollDistance) > 2) savedTime = Time.time;
+		if (Mathf.Abs(scrollDistance) > 4) savedTime = Time.time;
 		ScrollingRect.pivot = new Vector2(scrollDistance,OrigRect.pivot.y);
 	}
 	

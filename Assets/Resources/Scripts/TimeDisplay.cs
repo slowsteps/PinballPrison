@@ -57,7 +57,7 @@ public class TimeDisplay : MonoBehaviour {
 		curTime = curTime - 1;
 		if (curTime > 0)
 		{
-			TimeLeftLabel.text = curTime.ToString("0") +  " secs";
+			TimeLeftLabel.text = "Time left: " + curTime.ToString("0");
 		}
 		else
 		{

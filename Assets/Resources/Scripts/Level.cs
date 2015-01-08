@@ -5,6 +5,7 @@ public class Level : MonoBehaviour {
 
 	public static Level instance;
 	public string Description = "just another level";
+	public string LongDescription = "";
 	public bool hasMinScore = true;
 	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;
@@ -31,6 +32,10 @@ public class Level : MonoBehaviour {
 			gameObject.SetActive(false);
 		}
 		
+		LongDescription = Description;
+		if (hasMinScore) LongDescription += " - Goal: " + requiredScore + " Points";
+		if (hasMaxShots) LongDescription += " - Max Shots: " + allowedShots;
+		if (hasMaxTime) LongDescription += " - Max Time: " + allowedTime;
 		
 		EventManager.Subscribe(OnEvent);
 	

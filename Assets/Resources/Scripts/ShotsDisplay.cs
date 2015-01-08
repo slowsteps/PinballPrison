@@ -37,6 +37,6 @@ public class ShotsDisplay : MonoBehaviour {
 	
 	
 	public void UpdateShotsDisplay() {
-		ShotsLeftText.text = "Shots " + GameManager.instance.shotsPlayed + "/" + Level.instance.allowedShots;		
+		ShotsLeftText.text = "Shots: " + GameManager.instance.shotsPlayed + "/" + Level.instance.allowedShots;		
 	}
 }

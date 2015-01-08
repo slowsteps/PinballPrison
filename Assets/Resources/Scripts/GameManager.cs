@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -11,10 +12,13 @@ public class GameManager : MonoBehaviour {
 	public int score = 0;
 	public int ScoreMultiplier = 1;
 	public int livesRefillTime = 10;
+	public ScoreIncreaseDisplay ScoreUpdateLabel;
+	
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
+	
 
 	void Start () 
 	{
@@ -173,6 +177,7 @@ public class GameManager : MonoBehaviour {
 		}
 		score = score + (ScoreMultiplier * extraScore);
 		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
+		if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" + extraScore);
 	}
 					
 }

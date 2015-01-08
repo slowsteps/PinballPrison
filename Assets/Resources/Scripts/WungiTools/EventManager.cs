@@ -29,7 +29,7 @@ public class EventManager {
 	public const string EVENT_CHARGE_DEPLETED = "EVENT_CHARGE_DEPLETED";
 	public const string EVENT_SCORE_MULTIPLIER = "EVENT_SCORE_MULTIPLIER";
 	public const string EVENT_SCORE_MULTIPLIER_END = "EVENT_SCORE_MULTIPLIER_END";
-	
+	public const string EVENT_SCORE_INCREASE = "EVENT_SCORE_INCREASE";
 
 	public delegate void Callbackmethod(string customevent);
 	public static EventManager instance = null;
