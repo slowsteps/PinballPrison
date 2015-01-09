@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour {
 		}
 		score = score + (ScoreMultiplier * extraScore);
 		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
-		if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" + extraScore);
+		if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
 	}
 					
 }

@@ -2,8 +2,8 @@ fileFormatVersion: 2
 guid: 3ef2ff918ed0b2d40a7939ef96191f0e
 TrueTypeFontImporter:
   serializedVersion: 2
-  fontSize: 16
-  forceTextureCase: -2
+  fontSize: 32
+  forceTextureCase: 0
   characterSpacing: 1
   characterPadding: 0
   includeFontData: 1
