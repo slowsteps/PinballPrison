@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class TimeDisplay : MonoBehaviour {
 
@@ -57,7 +58,8 @@ public class TimeDisplay : MonoBehaviour {
 		curTime = curTime - 1;
 		if (curTime > 0)
 		{
-			TimeLeftLabel.text = "Time left: " + curTime.ToString("0");
+			TimeSpan ts = TimeSpan.FromSeconds(curTime);
+			TimeLeftLabel.text = "Time left: " + ts.Minutes + ":" + ts.Seconds;
 		}
 		else
 		{

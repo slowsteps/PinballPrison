@@ -31,10 +31,10 @@ public class ScoreDisplay : MonoBehaviour {
 	}
 	
 	
-	public void UpdateScoreDisplay() {
+	public void UpdateScoreDisplay() 
+	{
 		
-		if (Level.instance.hasMinScore) ScoreText.text = GameManager.instance.score.ToString();		
-		else ScoreText.text = GameManager.instance.score.ToString();
+		ScoreText.text = string.Format("{0:#,###0}", GameManager.instance.score); //GameManager.instance.score.ToString();
 	}
 
 
