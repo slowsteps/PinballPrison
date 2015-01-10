@@ -58,6 +58,7 @@ public class TimeDisplay : MonoBehaviour {
 		curTime = curTime - 1;
 		if (curTime > 0)
 		{
+			//TODO move declaration 
 			TimeSpan ts = TimeSpan.FromSeconds(curTime);
 			TimeLeftLabel.text = "Time left: " + ts.Minutes + ":" + ts.Seconds;
 		}

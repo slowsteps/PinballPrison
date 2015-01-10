@@ -21,6 +21,7 @@ public class TickerTapeScroller : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		ScrollText = gameObject.GetComponent<Text>();
 		OrigAnchorPos = ScrollingRect.anchoredPosition;
+		enabled = false;
 	}
 	
 	
@@ -32,18 +33,14 @@ public class TickerTapeScroller : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			ScrollText.text = Level.instance.LongDescription;	
 			break;
-		case EventManager.EVENT_BALL_DEATH:
-			
+		case EventManager.GOALS_OK_BUTTON_CLICKED:
+			enabled = true;
 			break;
-		case EventManager.EVENT_OUT_OF_BALLS:
-			
+		case EventManager.EVENT_MENU_SHOW:
+			ScrollText.text = "";
+			enabled = false;
 			break;
-		case EventManager.EVENT_OUT_OF_SHOTS:
 			
-			break;
-		case EventManager.EVENT_OUT_OF_TIME:
-			
-			break;
 		}
 	}
 	

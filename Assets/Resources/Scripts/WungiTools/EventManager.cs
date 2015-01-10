@@ -10,6 +10,8 @@ public class EventManager {
 
 	public const string EVENT_GAME_START = "EVENT_GAME_START";
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
+	public const string GOALS_OK_BUTTON_CLICKED = "GOALS_OK_BUTTON_CLICKED";
+	public const string LEVEL_BUTTON_CLICKED = "LEVEL_BUTTON_CLICKED";
 	public const string EVENT_BALL_SHOT = "EVENT_BALL_SHOT";
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";

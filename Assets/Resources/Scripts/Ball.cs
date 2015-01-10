@@ -51,7 +51,7 @@ public class Ball : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_LEVEL_START:
+		case EventManager.GOALS_OK_BUTTON_CLICKED:
 			Init();
 			break;
 		case EventManager.EVENT_BALL_DEATH:

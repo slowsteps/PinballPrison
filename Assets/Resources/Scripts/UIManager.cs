@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject Message;
 	public GameObject Menu;
 	public GameObject Settings;
+	public GameObject Goals;
 	public static UIManager instance;
 
 	
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour {
 		Message.SetActive(false);
 		Menu.SetActive(true);
 		Settings.SetActive(false);
+		Goals.SetActive(false);
 	}
 	
 	public void SetMessage(string inString)
