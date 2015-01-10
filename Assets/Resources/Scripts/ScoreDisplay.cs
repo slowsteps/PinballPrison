@@ -33,8 +33,9 @@ public class ScoreDisplay : MonoBehaviour {
 	
 	public void UpdateScoreDisplay() 
 	{
-		
-		ScoreText.text = string.Format("{0:#,###0}", GameManager.instance.score); //GameManager.instance.score.ToString();
+		//ScoreText.text = string.Format("{0:#,###0}",GameManager.instance.score);
+		ScoreText.text = string.Format("{0:#,###0}",GameManager.instance.score);
+		ScoreText.text = GameManager.instance.score.ToString("000,000,000,000");
 	}
 
 

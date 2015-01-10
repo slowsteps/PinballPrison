@@ -7,10 +7,9 @@ public class TickerTapeScroller : MonoBehaviour {
 		
 	public float speed;
 	private RectTransform ScrollingRect;
-	private RectTransform OrigRect;
 	private Vector2 OrigAnchorPos;
 	private float savedTime = 0;
-	public float scrollDistance;
+	private float scrollDistance;
 	private Text ScrollText = null;
 	
 
@@ -19,7 +18,6 @@ public class TickerTapeScroller : MonoBehaviour {
 	{
 		savedTime = Time.time;
 		ScrollingRect = gameObject.GetComponent<RectTransform>();
-		OrigRect = ScrollingRect;
 		EventManager.Subscribe(OnEvent);
 		ScrollText = gameObject.GetComponent<Text>();
 		OrigAnchorPos = ScrollingRect.anchoredPosition;

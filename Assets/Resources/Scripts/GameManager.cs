@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	public int startBalls = 3;
 	public int balls;
 	public int collectables = 0;
-	public int score = 0;
+	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public int livesRefillTime = 10;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
