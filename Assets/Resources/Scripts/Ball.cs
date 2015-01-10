@@ -8,6 +8,8 @@ public class Ball : MonoBehaviour {
 
 	private Vector3 origPos = Vector3.zero;
 	private Vector2 catapultForce = Vector2.zero;
+	public float MinForce = 200f;
+	public float MaxForce = 1000f;
 	public GameObject mainCam = null;
 	public GameObject cursor = null;
 	
@@ -271,11 +273,8 @@ public class Ball : MonoBehaviour {
 			{
 				catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
 			}
-			//if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
-			
 			//don't allow really small or very big shots
-			catapultForce = Mathf.Clamp(catapultForce.magnitude,200f,1000f)*catapultForce.normalized;
-			//catapultForce = 1000f*catapultForce.normalized;
+			catapultForce = Mathf.Clamp(catapultForce.magnitude,MinForce,MaxForce)*catapultForce.normalized;
 			
 			rigidbody2D.AddForce(catapultForce);
 			cursor.SetActive(false);
