@@ -27,14 +27,7 @@ public class TextFeedback : MonoBehaviour {
 			break;
 		case EventManager.EVENT_MINIMUMSCORE_REACHED:
 			SetText("Target score reached");
-			break;
-		case EventManager.EVENT_SCORE_MULTIPLIER:
-			SetText("Score Multiplier " + GameManager.instance.ScoreMultiplier);
-			break;
-		case EventManager.EVENT_SCORE_MULTIPLIER_END:
-			SetText("Score Multiplier END");
-			break;
-		
+			break;		
 		}
 	}
 	

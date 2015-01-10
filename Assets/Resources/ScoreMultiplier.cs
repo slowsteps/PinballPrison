@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ScoreMultiplier : TargetGroupEffect {
 
 	private bool isAllActivated = false;
 	public int Multiplier = 1;
 	public float ResetTime = 10f;
-	
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +36,7 @@ public class ScoreMultiplier : TargetGroupEffect {
 	
 	private void ResetMultiplier()
 	{
-		EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER);
+		EventManager.fireEvent(EventManager.EVENT_SCORE_MULTIPLIER_END);
 		foreach (Target aTarget in targets) aTarget.Reset();
 	}
 	

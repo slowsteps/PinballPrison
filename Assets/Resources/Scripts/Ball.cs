@@ -272,7 +272,10 @@ public class Ball : MonoBehaviour {
 				catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
 			}
 			//if (catapultForce.magnitude > 1000f) catapultForce = 1000f*catapultForce.normalized;
-			catapultForce = 1000f*catapultForce.normalized;
+			
+			//don't allow really small or very big shots
+			catapultForce = Mathf.Clamp(catapultForce.magnitude,200f,1000f)*catapultForce.normalized;
+			//catapultForce = 1000f*catapultForce.normalized;
 			
 			rigidbody2D.AddForce(catapultForce);
 			cursor.SetActive(false);
