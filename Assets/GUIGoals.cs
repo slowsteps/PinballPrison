@@ -9,9 +9,10 @@ public class GUIGoals : MonoBehaviour {
 	public Text ShotsLabel;
 	public Text Timelabel;
 	
-	void Start () 
+	void Awake () 
 	{
 		EventManager.Subscribe(OnEvent);
+		//gameObject.SetActive(true);
 	}
 	
 	public void OnEvent(string customEvent)

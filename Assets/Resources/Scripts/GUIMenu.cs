@@ -35,7 +35,7 @@ public class GUIMenu : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.LEVEL_BUTTON_CLICKED:
-			Hide();
+			//Hide();
 			break;			
 		}
 	}
