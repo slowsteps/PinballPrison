@@ -63,7 +63,7 @@ public class Target : MonoBehaviour {
 	public void OnCollisionEnter2D (Collision2D inColl)
 	{
 		inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
-		HandleBallContact();
+		if (isDetecting) HandleBallContact();
 	}
 
 	private void HandleBallContact()
@@ -92,9 +92,9 @@ public class Target : MonoBehaviour {
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
 
 			
-			//gameObject.collider2D.isTrigger = true;
-			Destroy(gameObject.collider2D);
-			//gameObject.SetActive(false);
+			gameObject.collider2D.isTrigger = true;
+			//ZZ Destroy(gameObject.collider2D);
+			
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		
@@ -120,8 +120,11 @@ public class Target : MonoBehaviour {
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
 			//make sure other gates have not already added a collider
 			//TODO maybe use trigger instead of destroying and adding colliders?
-			if (!gameObject.collider2D) gameObject.AddComponent<BoxCollider2D>();
+			//if (!gameObject.collider2D) gameObject.AddComponent<BoxCollider2D>();
+			
 			if (isLight) collider2D.isTrigger = true;
+			else collider2D.isTrigger = false;
+			
 			//print ("target reset=" + this.name);
 		}
 	}
