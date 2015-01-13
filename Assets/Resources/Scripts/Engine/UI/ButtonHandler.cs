@@ -6,11 +6,22 @@ public class ButtonHandler : MonoBehaviour {
 	
 	
 	
+	public void OnPauseButton()
+	{
+		EventManager.fireEvent(EventManager.PAUSE_BUTTON_CLICKED);
+	}
+
 	public void OnMenuButton()
 	{
 		EventManager.fireEvent(EventManager.EVENT_QUIT);
 	}
+
+	public void OnResumeButton()
+	{
+		EventManager.fireEvent(EventManager.RESUME_BUTTON_CLICKED);
+	}
 	
+			
 	public void OnMessageOkButton()
 	{
 		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);

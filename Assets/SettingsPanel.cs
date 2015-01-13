@@ -7,6 +7,7 @@ public class SettingsPanel : MonoBehaviour {
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);	
+		gameObject.SetActive(false);
 	}
 	
 	public void OnEvent(string customEvent)

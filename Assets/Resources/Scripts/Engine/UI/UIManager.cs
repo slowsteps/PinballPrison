@@ -9,17 +9,19 @@ public class UIManager : MonoBehaviour {
 	public GameObject Message;
 	public GameObject Menu;
 	public GameObject Settings;
+	public GameObject Pause;
 	public GameObject Goals;
 	public static UIManager instance;
 
 	
-	void Start () {
+	void Awake () {
 		instance = this;
 		TopBar.SetActive(true);
 		BottomBar.SetActive(true);
 		Message.SetActive(false);
 		Menu.SetActive(true);
-		Settings.SetActive(false);
+		Settings.SetActive(true);
+		Pause.SetActive(true);
 		Goals.SetActive(false);
 	}
 	

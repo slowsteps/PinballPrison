@@ -13,10 +13,16 @@ public class PausePanel : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_QUIT:
+		case EventManager.PAUSE_BUTTON_CLICKED:
 			gameObject.SetActive(true);
 			break;
 		case EventManager.SETTINGS_BUTTON_CLICKED:
+			gameObject.SetActive(false);
+			break;
+		case EventManager.EVENT_QUIT:
+			gameObject.SetActive(false);
+			break;
+		case EventManager.RESUME_BUTTON_CLICKED:
 			gameObject.SetActive(false);
 			break;
 			
