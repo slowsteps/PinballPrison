@@ -10,7 +10,7 @@ public class BallsLeft : MonoBehaviour {
 	void Awake () {
 		BallsLeftText = GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 	}
 	
 	public void OnEvent(string customEvent)

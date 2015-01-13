@@ -5,13 +5,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
-	public int lives = 5;
+	
 	public int startBalls = 3;
 	public int balls;
 	public int collectables = 0;
 	public long score = 0;
 	public int ScoreMultiplier = 1;
-	public int livesRefillTime = 10;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
 	
 	private bool isMinimimScoreReached = false;
@@ -25,7 +24,6 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
-		InitLives();
 		EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 
@@ -37,7 +35,6 @@ public class GameManager : MonoBehaviour {
 		{
 		case EventManager.EVENT_LEVEL_START:
 			isMinimimScoreReached = false;
-			StopLivesRefill();
 			shotsPlayed = 0;
 			break;
 		case EventManager.EVENT_BALL_DEATH:
@@ -61,9 +58,6 @@ public class GameManager : MonoBehaviour {
 		case EventManager.EVENT_OUT_OF_TIME:
 			OnGameOver(levelOverReasons.OUT_OF_TIME);
 			break;	
-		case EventManager.EVENT_MENU_SHOW:
-			StartLivesRefill();
-			break;	
 		case EventManager.EVENT_COLLECTABLE_FOUND:
 			IncreaseCollectables();
 			break;				
@@ -79,25 +73,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-	private void StartLivesRefill()
-	{
-		InvokeRepeating("IncreaseLives",livesRefillTime,livesRefillTime);
-	}
-
-	private void StopLivesRefill()
-	{
-		CancelInvoke("IncreaseLives");
-	}
 	
-	private void IncreaseLives()
-	{
-		if (lives<5) 
-		{
-			lives++;
-			EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
-			print ("lives incr " + lives);
-		}
-	}				
 	
 	private void IncreaseCollectables()
 	{
@@ -115,13 +91,6 @@ public class GameManager : MonoBehaviour {
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
 	}
-
-	private void UpdateLives(int deltaLives = 0)
-	{
-		lives = lives + deltaLives;
-		EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
-		if (lives == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_LIVES);
-	}
 	
 	private void OnGameOver(levelOverReasons reason)
 	{
@@ -132,18 +101,14 @@ public class GameManager : MonoBehaviour {
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
 			UIManager.instance.SetMessage("Game over, out of balls");
-			UpdateLives(-1);		
 			break;
 		case levelOverReasons.OUT_OF_SHOTS:
 			UIManager.instance.SetMessage("Game over, out of shots");
-			UpdateLives(-1);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
 			UIManager.instance.SetMessage("Game over, out of time");
-			UpdateLives(-1);
 			break;
 		case levelOverReasons.QUIT:
-			UpdateLives(-1);
 			break;
 		case levelOverReasons.COLLECTABLES_FOUND:
 			UIManager.instance.SetMessage("All collectables found!");
@@ -162,10 +127,6 @@ public class GameManager : MonoBehaviour {
 		score = 0;
 	}
 	
-	private void InitLives()
-	{
-		EventManager.fireEvent(EventManager.EVENT_LIVES_UPDATED);
-	}
 	
 	public void AddToScore(int extraScore)
 	{

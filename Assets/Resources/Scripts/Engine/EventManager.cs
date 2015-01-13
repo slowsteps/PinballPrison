@@ -12,15 +12,14 @@ public class EventManager {
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
 	public const string GOALS_OK_BUTTON_CLICKED = "GOALS_OK_BUTTON_CLICKED";
 	public const string LEVEL_BUTTON_CLICKED = "LEVEL_BUTTON_CLICKED";
+	public const string SETTINGS_BUTTON_CLICKED = "SETTINGS_BUTTON_CLICKED";
 	public const string EVENT_BALL_SHOT = "EVENT_BALL_SHOT";
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
-	public const string EVENT_OUT_OF_LIVES = "EVENT_OUT_OF_LIVES";
 	public const string EVENT_OUT_OF_SHOTS = "EVENT_OUT_OF_SHOTS";
 	public const string EVENT_OUT_OF_TIME = "EVENT_OUT_OF_TIME";
-	public const string EVENT_LIVES_UPDATED = "EVENT_LIVES_UPDATED";
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
 	public const string EVENT_MESSAGE_OK = "EVENT_MESSAGE_OK";

@@ -10,7 +10,7 @@ public class ShotsDisplay : MonoBehaviour {
 	{
 		ShotsLeftText = GetComponent<Text>();
 		EventManager.Subscribe(OnEvent);
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 	}
 	
 	

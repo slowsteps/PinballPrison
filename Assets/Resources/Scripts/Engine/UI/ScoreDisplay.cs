@@ -14,7 +14,7 @@ public class ScoreDisplay : MonoBehaviour {
 		enabled = false;
 		EventManager.Subscribe(OnEvent);
 		ScoreText = GetComponent<Text>();
-		gameObject.SetActive(false);
+		//gameObject.SetActive(false);
 	}
 
 
