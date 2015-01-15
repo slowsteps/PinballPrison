@@ -98,7 +98,12 @@ public class Target : MonoBehaviour {
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		
-		if (isCollectable) EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
+		if (isCollectable) 
+		{
+			StopDetecting();
+			print ("collectable found " + this.name);
+			EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
+		}
 		
 	}
 

@@ -34,6 +34,7 @@ public class Level : MonoBehaviour {
 		
 		LongDescription = Description;
 		if (hasMinScore) LongDescription += " - Goal: " + requiredScore + " Points";
+		if (hasCollectables) LongDescription += " - Goal: " + requiredCollectables + " Keys";
 		if (hasMaxShots) LongDescription += " - Max Shots: " + allowedShots;
 		if (hasMaxTime) LongDescription += " - Max Time: " + allowedTime;
 		

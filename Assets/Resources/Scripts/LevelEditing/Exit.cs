@@ -32,7 +32,7 @@ public class Exit : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			if (Level.instance.hasMinScore) gameObject.SetActive(false);
+			if (Level.instance.hasMinScore || Level.instance.hasCollectables) gameObject.SetActive(false);
 			else gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_MINIMUMSCORE_REACHED:

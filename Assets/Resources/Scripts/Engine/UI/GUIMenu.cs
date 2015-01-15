@@ -9,7 +9,7 @@ public class GUIMenu : MonoBehaviour {
 	
 
 
-	void Awake()
+	void Start()
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
