@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour {
 	
 	public int startBalls = 3;
 	public int balls;
-	public int collectables = 0;
 	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
@@ -57,10 +56,7 @@ public class GameManager : MonoBehaviour {
 			break;
 		case EventManager.EVENT_OUT_OF_TIME:
 			OnGameOver(levelOverReasons.OUT_OF_TIME);
-			break;	
-		case EventManager.EVENT_COLLECTABLE_FOUND:
-			IncreaseCollectables();
-			break;				
+			break;					
 		}
 	}
 	
@@ -75,15 +71,7 @@ public class GameManager : MonoBehaviour {
 	
 	
 	
-	private void IncreaseCollectables()
-	{
-		collectables++;
-		if (collectables == Level.instance.requiredCollectables) 
-		{
-			EventManager.fireEvent(EventManager.EVENT_ALL_COLLECTABLES_FOUND);
-			//OnGameOver(levelOverReasons.COLLECTABLES_FOUND);
-		}
-	}						
+					
 																
 	private void UpdateBalls(int deltaBalls = 0)
 	{

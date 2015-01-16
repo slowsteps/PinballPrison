@@ -10,11 +10,11 @@ public class Level : MonoBehaviour {
 	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;
 	public bool hasCollectables = false;
-	
 	public int requiredScore = 0;
 	public int allowedShots = 0;
 	public float allowedTime = 0;
 	public int requiredCollectables = 0;
+	public int collectables = 0;
 			
 	void Awake () {
 		
@@ -56,8 +56,21 @@ public class Level : MonoBehaviour {
 			iTween.Stop(); // kill all mushroom anims etc.
 			GameObject.Destroy(gameObject);
 			break;
+		case EventManager.EVENT_COLLECTABLE_FOUND:
+			IncreaseCollectables();
+			break;
 		}
 	}
+	
+	private void IncreaseCollectables()
+	{
+		collectables++;
+		if (collectables == Level.instance.requiredCollectables) 
+		{
+			EventManager.fireEvent(EventManager.EVENT_ALL_COLLECTABLES_FOUND);
+			
+		}
+	}		
 	
 	void OnDestroy()
 	{
