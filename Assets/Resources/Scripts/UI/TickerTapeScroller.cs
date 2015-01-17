@@ -16,7 +16,7 @@ public class TickerTapeScroller : MonoBehaviour {
 	
 	public void Start() 
 	{
-		savedTime = Time.time;
+		
 		ScrollingRect = gameObject.GetComponent<RectTransform>();
 		EventManager.Subscribe(OnEvent);
 		ScrollText = gameObject.GetComponent<Text>();
@@ -34,9 +34,10 @@ public class TickerTapeScroller : MonoBehaviour {
 			ScrollText.text = Level.instance.LongDescription;	
 			break;
 		case EventManager.GOALS_OK_BUTTON_CLICKED:
+			savedTime = Time.time;
 			enabled = true;
 			break;
-		case EventManager.EVENT_MENU_SHOW:
+		case EventManager.EVENT_BALL_EXIT:
 			ScrollText.text = "";
 			enabled = false;
 			break;

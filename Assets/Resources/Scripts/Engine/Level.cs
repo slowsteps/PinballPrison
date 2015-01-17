@@ -4,9 +4,14 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
 	public static Level instance;
-	public string Description = "just another level";
+	public string Description = "The best level description ever";
+	public string FailMessage = "Find the exit and progress you will";
+	public string SuccesMessage = "That's it! ";
+	
+	[HideInInspector]
 	public string LongDescription = "";
-	public bool hasMinScore = true;
+	
+	public bool hasMinScore = false;
 	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;
 	public bool hasCollectables = false;

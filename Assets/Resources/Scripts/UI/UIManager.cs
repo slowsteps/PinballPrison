@@ -11,25 +11,27 @@ public class UIManager : MonoBehaviour {
 	public GameObject Settings;
 	public GameObject Pause;
 	public GameObject Goals;
+	public GameObject ScoreIncrease;
 	public static UIManager instance;
 
 	
 	void Awake () {
 		instance = this;
 		TopBar.SetActive(true);
-		BottomBar.SetActive(true);
-		Message.SetActive(false);
+//		BottomBar.SetActive(true);
+		Message.SetActive(true);
 		Menu.SetActive(true);
-		Settings.SetActive(true);
+//		Settings.SetActive(true);
 		Pause.SetActive(true);
-		Goals.SetActive(false);
+		Goals.SetActive(true);
+		ScoreIncrease.SetActive(true);
 	}
 	
-	public void SetMessage(string inString)
-	{
-		Message.SetActive(true);
-		Message.GetComponent<GUIMessage>().SetText(inString);
-	}
+//	public void SetMessage(string inString)
+//	{
+//		Message.SetActive(true);
+//		Message.GetComponent<GUIMessage>().SetText(inString);
+//	}
 	
 			
 }

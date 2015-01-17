@@ -8,17 +8,12 @@ public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
 	
+	
 
-
-	void Awake()
+	void Start()
 	{
 		instance = this;
-		print("Awake Menu");
 		EventManager.Subscribe(OnEvent);
-		gameObject.SetActive(true);
-		GridLayoutGroup grid = gameObject.GetComponentInChildren <GridLayoutGroup>();
-		grid.enabled = false;
-		grid.enabled = true;
 	}
 	
 	

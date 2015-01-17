@@ -9,10 +9,18 @@ public class GUIGoals : MonoBehaviour {
 	public Text ShotsLabel;
 	public Text Timelabel;
 	
-	void Awake () 
+	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
-		//gameObject.SetActive(true);
+		Clear();
+		gameObject.SetActive(false);
+	}
+	
+	private void Clear()
+	{
+		ScoreLabel.text = "";
+		ShotsLabel.text = "";
+		Timelabel.text = "";
 	}
 	
 	public void OnEvent(string customEvent)
@@ -20,10 +28,11 @@ public class GUIGoals : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.LEVEL_BUTTON_CLICKED:
-			//gameObject.SetActive(true);
+			gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(true);
+			Clear();
 			if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
 			if (Level.instance.hasMaxShots) ShotsLabel.text = "Allowed shots: " + Level.instance.allowedShots;
 			if (Level.instance.hasMaxTime) 

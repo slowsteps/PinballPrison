@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
-		print("Start GameManager");
 		EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 
@@ -86,21 +85,21 @@ public class GameManager : MonoBehaviour {
 		switch (reason)
 		{
 		case levelOverReasons.EXIT_REACHED:
-			UIManager.instance.SetMessage("Awesomeness! \n Level complete");
+			GUIEndOfLevel.instance.SetMessage(Level.instance.SuccesMessage);
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
-			UIManager.instance.SetMessage("Game over, out of balls");
+			GUIEndOfLevel.instance.SetMessage("Out of balls\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_SHOTS:
-			UIManager.instance.SetMessage("Game over, out of shots");
+			GUIEndOfLevel.instance.SetMessage("Out of shots\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
-			UIManager.instance.SetMessage("Game over, out of time");
+			GUIEndOfLevel.instance.SetMessage("Out of time\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.QUIT:
 			break;
 		case levelOverReasons.COLLECTABLES_FOUND:
-			UIManager.instance.SetMessage("All collectables found!");
+			GUIEndOfLevel.instance.SetMessage("All collectables found! ");
 			break;
 		}
 		
@@ -120,7 +119,7 @@ public class GameManager : MonoBehaviour {
 	public void AddToScore(int extraScore)
 	{
 		//check if updated score breaks thru threshold
-		if ( !isMinimimScoreReached && (score + extraScore) > Level.instance.requiredScore )
+		if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
 		{
 			EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
 			isMinimimScoreReached = true;

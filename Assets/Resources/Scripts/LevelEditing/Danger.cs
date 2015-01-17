@@ -4,8 +4,9 @@ using System.Collections;
 public class Danger : MonoBehaviour {
 
 
-	// Use this for initialization
-	void Start () {
+	
+	void Start () 
+	{
 		if (particleSystem) particleSystem.renderer.sortingLayerName = "Effects";
 	}
 	
