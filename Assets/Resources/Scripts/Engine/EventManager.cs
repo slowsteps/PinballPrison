@@ -18,6 +18,7 @@ public class EventManager {
 	public const string EVENT_BALL_SHOT = "EVENT_BALL_SHOT";
 	public const string EVENT_BALL_DEATH = "EVENT_BALL_DEATH";
 	public const string EVENT_BALL_EXIT = "EVENT_BALL_EXIT";
+	public const string EVENT_LEVEL_FAILED = "EVENT_LEVEL_FAILED";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
 	public const string EVENT_OUT_OF_SHOTS = "EVENT_OUT_OF_SHOTS";

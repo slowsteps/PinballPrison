@@ -29,7 +29,13 @@ public class GUIEndOfLevel : MonoBehaviour {
 			SuccessHeader.SetActive(true);
 			FailedHeader.SetActive(false);
 			break;
+		case EventManager.EVENT_LEVEL_FAILED:
+			gameObject.SetActive(true);
+			SuccessHeader.SetActive(false);
+			FailedHeader.SetActive(true);
+			break;
 			
+						
 		}
 	}
 	

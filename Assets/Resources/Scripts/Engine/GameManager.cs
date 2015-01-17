@@ -88,12 +88,15 @@ public class GameManager : MonoBehaviour {
 			GUIEndOfLevel.instance.SetMessage(Level.instance.SuccesMessage);
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
+			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
 			GUIEndOfLevel.instance.SetMessage("Out of balls\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_SHOTS:
+			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
 			GUIEndOfLevel.instance.SetMessage("Out of shots\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
+			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
 			GUIEndOfLevel.instance.SetMessage("Out of time\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.QUIT:
