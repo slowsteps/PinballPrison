@@ -21,10 +21,8 @@ public class Target : MonoBehaviour {
 	void Awake()
 	{
 		EventManager.Subscribe(OnEvent);
-		//print ("subscribed to eventmanager: " + name);
 		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
 		if (isLight) collider2D.isTrigger = true;
-		//targetGroupEffects = new List<TargetGroupEffect>();
 	}
 	
 	void Start()
@@ -41,11 +39,9 @@ public class Target : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			foreach(TargetGroupEffect tg in targetGroupEffects) 
 			{
-				//print (this.name + "-tg: " + tg);
 				if (tg) 
 				{
 					tg.AddTarget(this);
-					//print ("adding target to gate " + this.name);
 				}
 				else Debug.Log ("WARNING target does not exist in targetGroupEffects in " + this.name);
 			}
@@ -89,12 +85,8 @@ public class Target : MonoBehaviour {
 		{
 			isActivated = true;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
-			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
-
-			
+			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;		
 			gameObject.collider2D.isTrigger = true;
-			//ZZ Destroy(gameObject.collider2D);
-			
 		}
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		
@@ -116,22 +108,13 @@ public class Target : MonoBehaviour {
 	//TargetDown is a sprite image
 	public void Reset()
 	{
-		//if (!isToggle)
-		if (true)
-		{
-			isDetecting = true;
-			isActivated = false;
-			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
-			else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
-			//make sure other gates have not already added a collider
-			//TODO maybe use trigger instead of destroying and adding colliders?
-			//if (!gameObject.collider2D) gameObject.AddComponent<BoxCollider2D>();
-			
-			if (isLight) collider2D.isTrigger = true;
-			else collider2D.isTrigger = false;
-			
-			//print ("target reset=" + this.name);
-		}
+		isDetecting = true;
+		isActivated = false;
+		if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
+		else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
+		
+		if (isLight) collider2D.isTrigger = true;
+		else collider2D.isTrigger = false;
 	}
 
 	public void OnDestroy()

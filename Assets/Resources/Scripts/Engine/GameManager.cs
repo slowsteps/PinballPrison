@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
+		print("Start GameManager");
 		EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 
