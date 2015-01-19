@@ -87,7 +87,9 @@ public class Target : MonoBehaviour {
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;		
 			gameObject.collider2D.isTrigger = true;
+			StopDetecting();
 		}
+		
 		foreach(TargetGroupEffect tg in targetGroupEffects) tg.ReportTargetHit(this);
 		
 		if (isCollectable) 
