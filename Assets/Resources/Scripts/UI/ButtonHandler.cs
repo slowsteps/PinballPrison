@@ -9,22 +9,26 @@ public class ButtonHandler : MonoBehaviour {
 	public void OnPauseButton()
 	{
 		EventManager.fireEvent(EventManager.PAUSE_BUTTON_CLICKED);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 
 	public void OnMenuButton()
 	{
 		EventManager.fireEvent(EventManager.EVENT_QUIT);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 
 	public void OnResumeButton()
 	{
 		EventManager.fireEvent(EventManager.RESUME_BUTTON_CLICKED);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 	
 			
 	public void OnMessageOkButton()
 	{
 		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 	
 	public void OnStartLevelButton(int inLevelNum)
@@ -34,6 +38,7 @@ public class ButtonHandler : MonoBehaviour {
 			{
 				Application.LoadLevelAdditive("Level"+inLevelNum);
 				EventManager.fireEvent(EventManager.LEVEL_BUTTON_CLICKED);
+				SoundManager.instance.PlaySound("Select_SFX");
 			}
 			else print("can't load scene Level"+inLevelNum) ;
 	}
@@ -41,6 +46,7 @@ public class ButtonHandler : MonoBehaviour {
 	public void OnSettingsButton()
 	{
 		EventManager.fireEvent(EventManager.SETTINGS_BUTTON_CLICKED);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 	
 	

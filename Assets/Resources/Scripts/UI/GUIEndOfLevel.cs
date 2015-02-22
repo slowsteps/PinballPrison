@@ -43,7 +43,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 	
 	public void SetMessage(string inText)
 	{
-		print ("SetText " + inText);
+		//print ("SetText " + inText);
 		gameObject.SetActive(true);
 		textField.text = inText;
 	}

@@ -18,12 +18,13 @@ public class Exit : MonoBehaviour {
 		particleSystem.Play();
 		iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 		Invoke("DelayedEvent",2f);	
-		SoundManager.instance.PlaySound("CollectCrystal_SFX");
+		SoundManager.instance.PlaySound("ExitEnter_SFX");
 	}
 	
 	private void DelayedEvent()
 	{
 		EventManager.fireEvent(EventManager.EVENT_BALL_EXIT);
+		SoundManager.instance.PlaySound("LevelSucces_SFX");
 	}
 	
 	
@@ -36,8 +37,7 @@ public class Exit : MonoBehaviour {
 			else gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_MINIMUMSCORE_REACHED:
-			gameObject.SetActive(true);
-			iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
+			Show();
 			break;
 		case EventManager.EVENT_ALL_COLLECTABLES_FOUND:
 			Show();
@@ -47,9 +47,9 @@ public class Exit : MonoBehaviour {
 	
 	private void Show()
 	{
-		print ("exit shown");
 		gameObject.SetActive(true);
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
+		SoundManager.instance.PlaySound("ExitAppear_SFX");
 		EventManager.fireEvent(EventManager.EVENT_EXIT_VISIBLE);
 	}
 	

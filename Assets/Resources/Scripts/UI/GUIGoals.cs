@@ -48,6 +48,7 @@ public class GUIGoals : MonoBehaviour {
 	{
 		EventManager.fireEvent(EventManager.GOALS_OK_BUTTON_CLICKED);
 		gameObject.SetActive(false);
+		SoundManager.instance.PlaySound("LevelStart_SFX");
 	}
 	
 	
