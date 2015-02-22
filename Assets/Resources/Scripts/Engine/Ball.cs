@@ -80,7 +80,6 @@ public class Ball : MonoBehaviour {
 		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
 		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);
-//		rigidbody2D.isKinematic = true;
 		rigidbody2D.velocity = Vector2.zero;
 		rigidbody2D.angularVelocity = 0f;
 		if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
@@ -92,7 +91,6 @@ public class Ball : MonoBehaviour {
 		rigidbody2D.gravityScale = 0f;
 		rigidbody2D.velocity = Vector3.zero;
 		rigidbody2D.angularVelocity = 0f;
-		//rigidbody2D.isKinematic = true;
 		Transform target = MagnetSpawnPoint.currentMagnet.transform;
 		iTween.MoveTo(this.gameObject,iTween.Hash("name","magnet","position",target.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 	}
@@ -114,11 +112,8 @@ public class Ball : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0))
 		{
 			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			SoundManager.instance.PlaySound("BallSelect_SFX");
 		}
-		
-		//from settings screen
-		
-		
 		
 		
 	
@@ -259,7 +254,7 @@ public class Ball : MonoBehaviour {
 		if (selectedBall == this)
 		{
 			//stop magnet ball capture animation, because it prevents 
-			//iTween.Stop();
+			
 			iTween.StopByName("magnet");
 			rigidbody2D.isKinematic = false;
 			selectedBall = null;
@@ -280,7 +275,7 @@ public class Ball : MonoBehaviour {
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
-			
+			SoundManager.instance.PlaySound("BallRelease_SFX");
 			Time.timeScale = 1f;	
 			
 			

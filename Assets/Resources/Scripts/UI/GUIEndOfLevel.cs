@@ -33,6 +33,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 			gameObject.SetActive(true);
 			SuccessHeader.SetActive(false);
 			FailedHeader.SetActive(true);
+			SoundManager.instance.PlaySound("LevelFail_SFX");
 			break;
 			
 						

@@ -20,7 +20,7 @@ public class Danger : MonoBehaviour {
 		}
 		ball.gameObject.SetActive(false);
 		Invoke("DelayedEvent",2f);
-		SoundManager.instance.PlaySound("Swoosh_SFX");
+		SoundManager.instance.PlaySound("Danger_SFX");
 	}
 	
 	private void DelayedEvent()
