@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour {
 			OnGameOver(levelOverReasons.QUIT);
 			break;
 		case EventManager.EVENT_BALL_SHOT:
-			BallShot();
+			//BallShot();
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			OnGameOver(levelOverReasons.OUT_OF_BALLS);
@@ -78,6 +78,13 @@ public class GameManager : MonoBehaviour {
 		balls = balls + deltaBalls;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
+		
+		if (Level.instance.hasMaxShots && shotsPlayed == Level.instance.allowedShots)
+		{
+			EventManager.fireEvent(EventManager.EVENT_OUT_OF_SHOTS);
+		}
+		
+		
 	}
 	
 	private void OnGameOver(levelOverReasons reason)
@@ -124,7 +131,7 @@ public class GameManager : MonoBehaviour {
 		//check if updated score breaks thru threshold
 		if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
 		{
-			EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
+			if (Level.instance.hasMinScore) EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
 			isMinimimScoreReached = true;
 		}
 		score = score + (ScoreMultiplier * extraScore);
