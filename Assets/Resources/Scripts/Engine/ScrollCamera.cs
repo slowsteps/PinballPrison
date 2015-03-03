@@ -15,9 +15,9 @@ public class ScrollCamera : MonoBehaviour {
 		instance = this;
 		EventManager.Subscribe(OnEvent);
 		enabled = false;
-		camera.enabled = false;
+		GetComponent<Camera>().enabled = false;
 		#if UNITY_EDITOR
-		camera.orthographicSize = 5.68f;
+		GetComponent<Camera>().orthographicSize = 5.68f;
 		#endif
 		#if UNITY_IPHONE && !UNITY_EDITOR
 		camera.orthographicSize = Screen.height/200f;
@@ -39,7 +39,7 @@ public class ScrollCamera : MonoBehaviour {
 		{
 		case EventManager.EVENT_LEVEL_START:
 			enabled = true;
-			camera.enabled = true;
+			GetComponent<Camera>().enabled = true;
 			break;
 		}
 	}

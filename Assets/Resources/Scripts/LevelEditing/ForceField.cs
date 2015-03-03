@@ -10,8 +10,8 @@ public class ForceField : MonoBehaviour {
 	{
 		if (ball.tag == "ball") 
 		{
-			if(isLocal) ball.rigidbody2D.AddForce(transform.rotation * bumpForce);
-			else ball.rigidbody2D.AddForce(bumpForce);
+			if(isLocal) ball.GetComponent<Rigidbody2D>().AddForce(transform.rotation * bumpForce);
+			else ball.GetComponent<Rigidbody2D>().AddForce(bumpForce);
 		}
 	}
 }

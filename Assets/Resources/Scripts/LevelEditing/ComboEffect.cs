@@ -39,10 +39,10 @@ public class ComboEffect : TargetGroupEffect {
 		if (isAllActivated) 
 		{
 			GameManager.instance.AddToScore(scoreValue);
-			if (particleSystem) 
+			if (GetComponent<ParticleSystem>()) 
 			{
-				particleSystem.time = 0f;
-				particleSystem.Play();
+				GetComponent<ParticleSystem>().time = 0f;
+				GetComponent<ParticleSystem>().Play();
 			}
 			gameObject.SetActive(true);
 		}

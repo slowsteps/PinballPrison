@@ -21,10 +21,10 @@ public class Portal : MonoBehaviour {
 		
 			Invoke("EmergeAtExit",TravelTime);
 		
-			if (particleSystem)
+			if (GetComponent<ParticleSystem>())
 			{
-				particleSystem.time = 0f;
-				particleSystem.Play();
+				GetComponent<ParticleSystem>().time = 0f;
+				GetComponent<ParticleSystem>().Play();
 			}
 		}
 	}

@@ -6,7 +6,7 @@ public class LevelCamera : MonoBehaviour {
 	
 	void Start () {
 		EventManager.Subscribe(OnEvent);
-		camera.enabled = false;
+		GetComponent<Camera>().enabled = false;
 	}
 	
 	public void OnEvent(string customEvent)
@@ -14,10 +14,10 @@ public class LevelCamera : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_LEVEL_START:
-			camera.enabled = true;
+			GetComponent<Camera>().enabled = true;
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
-			camera.enabled = false;
+			GetComponent<Camera>().enabled = false;
 			break;
 			
 		}

@@ -7,16 +7,16 @@ public class Danger : MonoBehaviour {
 	
 	void Start () 
 	{
-		if (particleSystem) particleSystem.renderer.sortingLayerName = "Effects";
+		if (GetComponent<ParticleSystem>()) GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "Effects";
 	}
 	
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		if (particleSystem)
+		if (GetComponent<ParticleSystem>())
 		{
-			particleSystem.time = 0f;
-			particleSystem.Play();
+			GetComponent<ParticleSystem>().time = 0f;
+			GetComponent<ParticleSystem>().Play();
 		}
 		ball.gameObject.SetActive(false);
 		Invoke("DelayedEvent",2f);

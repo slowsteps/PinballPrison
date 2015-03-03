@@ -23,14 +23,14 @@ public class Booster : MonoBehaviour {
 		{
 		case BoosterTypes.NO_GRAVITY:
 			Ball.instance.currentGravityScale = 0f;
-			Ball.instance.rigidbody2D.gravityScale = 0f;
+			Ball.instance.GetComponent<Rigidbody2D>().gravityScale = 0f;
 			Time.timeScale = slowMotion;
 			Invoke("ResetNoGravity",resetTime*slowMotion);
 			break;
 		case BoosterTypes.FREEZE:
-			Ball.instance.rigidbody2D.velocity = Vector2.zero;
-			Ball.instance.rigidbody2D.angularVelocity = 0f;
-			Ball.instance.rigidbody2D.gravityScale = 0f;
+			Ball.instance.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			Ball.instance.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+			Ball.instance.GetComponent<Rigidbody2D>().gravityScale = 0f;
 			Invoke("ResetFreeze",resetTime);
 			break;
 		}
@@ -50,13 +50,13 @@ public class Booster : MonoBehaviour {
 		Debug.Log("ResetNoGravity");
 		Time.timeScale = 1f;
 		Ball.instance.currentGravityScale = 1f;
-		Ball.instance.rigidbody2D.gravityScale = 1f;
+		Ball.instance.GetComponent<Rigidbody2D>().gravityScale = 1f;
 		ResetBooster();
 	}
 
 	private void ResetFreeze()
 	{
-		Ball.instance.rigidbody2D.gravityScale = Ball.instance.currentGravityScale;
+		Ball.instance.GetComponent<Rigidbody2D>().gravityScale = Ball.instance.currentGravityScale;
 		ResetBooster();
 	}
 	

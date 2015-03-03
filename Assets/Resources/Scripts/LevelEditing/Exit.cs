@@ -14,8 +14,8 @@ public class Exit : MonoBehaviour {
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
 		ball.gameObject.SetActive(false);
-		particleSystem.time = 0f;
-		particleSystem.Play();
+		GetComponent<ParticleSystem>().time = 0f;
+		GetComponent<ParticleSystem>().Play();
 		iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 		Invoke("DelayedEvent",2f);	
 		SoundManager.instance.PlaySound("ExitEnter_SFX");

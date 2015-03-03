@@ -22,7 +22,7 @@ public class Target : MonoBehaviour {
 	{
 		EventManager.Subscribe(OnEvent);
 		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
-		if (isLight) collider2D.isTrigger = true;
+		if (isLight) GetComponent<Collider2D>().isTrigger = true;
 	}
 	
 	void Start()
@@ -86,7 +86,7 @@ public class Target : MonoBehaviour {
 			isActivated = true;
 			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
 			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;		
-			gameObject.collider2D.isTrigger = true;
+			gameObject.GetComponent<Collider2D>().isTrigger = true;
 			StopDetecting();
 		}
 		
@@ -115,8 +115,8 @@ public class Target : MonoBehaviour {
 		if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
 		else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
 		
-		if (isLight) collider2D.isTrigger = true;
-		else collider2D.isTrigger = false;
+		if (isLight) GetComponent<Collider2D>().isTrigger = true;
+		else GetComponent<Collider2D>().isTrigger = false;
 	}
 
 	public void OnDestroy()

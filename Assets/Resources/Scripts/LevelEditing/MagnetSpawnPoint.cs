@@ -44,7 +44,7 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	{
 		if (currentMagnet == this && Ball.instance) 
 		{
-			if (Ball.instance.rigidbody2D.gravityScale == 0f) Ball.instance.rigidbody2D.gravityScale = Ball.instance.currentGravityScale;
+			if (Ball.instance.GetComponent<Rigidbody2D>().gravityScale == 0f) Ball.instance.GetComponent<Rigidbody2D>().gravityScale = Ball.instance.currentGravityScale;
 		}
 	}
 

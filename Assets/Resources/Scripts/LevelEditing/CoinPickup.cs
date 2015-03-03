@@ -12,11 +12,11 @@ public class CoinPickup : MonoBehaviour {
 		{
 			GameManager.instance.AddToScore(scoreValue);
 			gameObject.GetComponent<SpriteRenderer>().enabled = false;
-			Destroy(collider2D);
-			if (particleSystem)
+			Destroy(GetComponent<Collider2D>());
+			if (GetComponent<ParticleSystem>())
 			{
-				particleSystem.time = 0f;
-				particleSystem.Play();
+				GetComponent<ParticleSystem>().time = 0f;
+				GetComponent<ParticleSystem>().Play();
 			}
 			SoundManager.instance.PlaySound("PickUpCoin_SFX");
 		}

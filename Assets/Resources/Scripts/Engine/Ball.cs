@@ -80,17 +80,17 @@ public class Ball : MonoBehaviour {
 		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
 		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);
-		rigidbody2D.velocity = Vector2.zero;
-		rigidbody2D.angularVelocity = 0f;
+		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		GetComponent<Rigidbody2D>().angularVelocity = 0f;
 		if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
 		enabled = true;
 	}
 	
 	public void OnMagnet()
 	{
-		rigidbody2D.gravityScale = 0f;
-		rigidbody2D.velocity = Vector3.zero;
-		rigidbody2D.angularVelocity = 0f;
+		GetComponent<Rigidbody2D>().gravityScale = 0f;
+		GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+		GetComponent<Rigidbody2D>().angularVelocity = 0f;
 		Transform target = MagnetSpawnPoint.currentMagnet.transform;
 		iTween.MoveTo(this.gameObject,iTween.Hash("name","magnet","position",target.position,"time",1f,"easetype",iTween.EaseType.easeOutElastic));
 	}
@@ -256,9 +256,9 @@ public class Ball : MonoBehaviour {
 			//stop magnet ball capture animation, because it prevents 
 			
 			iTween.StopByName("magnet");
-			rigidbody2D.isKinematic = false;
+			GetComponent<Rigidbody2D>().isKinematic = false;
 			selectedBall = null;
-			rigidbody2D.gravityScale = currentGravityScale;
+			GetComponent<Rigidbody2D>().gravityScale = currentGravityScale;
 			
 			if (isFreeTap) 
 			{
@@ -271,7 +271,7 @@ public class Ball : MonoBehaviour {
 			//don't allow really small or very big shots
 			catapultForce = Mathf.Clamp(catapultForce.magnitude,MinForce,MaxForce)*catapultForce.normalized;
 			
-			rigidbody2D.AddForce(catapultForce);
+			GetComponent<Rigidbody2D>().AddForce(catapultForce);
 			cursor.SetActive(false);
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
