@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
+	public GameObject logo;
 	
 	
 
@@ -35,6 +36,15 @@ public class GUIMenu : MonoBehaviour {
 		case EventManager.LEVEL_BUTTON_CLICKED:
 			//Hide();
 			break;			
+		}
+	}
+	
+	
+	public void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			logo.GetComponent<Animator>().Play("Logo2",-1,0f);
 		}
 	}
 	

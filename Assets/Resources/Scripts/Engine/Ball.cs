@@ -250,6 +250,7 @@ public class Ball : MonoBehaviour {
 	//plunger, shot
 	public void OnUp()
 	{
+	
 		
 		if (selectedBall == this)
 		{
