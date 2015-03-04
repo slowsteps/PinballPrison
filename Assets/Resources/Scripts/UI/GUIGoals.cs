@@ -50,11 +50,19 @@ public class GUIGoals : MonoBehaviour {
 	public void OnOkButton()
 	{
 		EventManager.fireEvent(EventManager.GOALS_OK_BUTTON_CLICKED);
-		gameObject.SetActive(false);
+		gameObject.GetComponent<Animator>().Play("LevelGoalsHide",-1,0f);
+		
 		SoundManager.instance.PlaySound("LevelStart_SFX");
 	}
 	
+	public void OnAppearComplete()
+	{
+		print ("LevelGoals anim complete");
+	}
 	
-	
-	
+	public void OnHideAnimComplete()
+	{
+		 gameObject.SetActive(false);
+		print ("LevelGoals HideAnim complete");
+	}
 }
