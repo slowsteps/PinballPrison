@@ -25,11 +25,7 @@ public class ButtonHandler : MonoBehaviour {
 	}
 	
 			
-	public void OnMessageOkButton()
-	{
-		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);
-		SoundManager.instance.PlaySound("Select_SFX");
-	}
+	
 	
 	public void OnStartLevelButton(int inLevelNum)
 	{

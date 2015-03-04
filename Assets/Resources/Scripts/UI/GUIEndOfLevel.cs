@@ -22,7 +22,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 		switch(customEvent)
 		{
 		case EventManager.EVENT_MESSAGE_OK:
-			gameObject.SetActive(false);
+			
 			break;
 		case EventManager.EVENT_BALL_EXIT:
 			gameObject.SetActive(true);
@@ -40,8 +40,29 @@ public class GUIEndOfLevel : MonoBehaviour {
 		}
 	}
 	
+	public void OnOkButton()
+	{
+		SoundManager.instance.PlaySound("Select_SFX");
+		gameObject.GetComponent<Animator>().SetTrigger("isHide");	
+	}
 	
+	public void OnHideAnimComplete()
+	{
+		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);
+		gameObject.SetActive(false);
+	}
 	
+	public void OnAppearAnimComplete()
+	{
+		EventManager.fireEvent(EventManager.EVENT_ENDOFLEVEL_APPEARED);
+	}
+	
+	public void OnDisappearAnimComplete()
+	{
+		EventManager.fireEvent(EventManager.EVENT_ENDOFLEVEL_DISAPPEARED);
+	}
+	
+			
 	public void SetMessage(string inText)
 	{
 		//print ("SetText " + inText);

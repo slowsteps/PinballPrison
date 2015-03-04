@@ -30,7 +30,7 @@ public class GUIMenu : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			Hide();
 			break;
-		case EventManager.EVENT_MESSAGE_OK:
+		case EventManager.EVENT_ENDOFLEVEL_DISAPPEARED:
 			Show();
 			break;
 		case EventManager.LEVEL_BUTTON_CLICKED:

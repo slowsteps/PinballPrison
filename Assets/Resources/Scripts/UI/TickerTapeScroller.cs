@@ -28,12 +28,11 @@ public class TickerTapeScroller : MonoBehaviour {
 	
 	public void OnEvent(string customEvent)
 	{
+		Debug.Log("EVENT: " + customEvent);
 		switch(customEvent)
 		{
-		case EventManager.EVENT_LEVEL_START:
-			ScrollText.text = Level.instance.LongDescription;	
-			break;
 		case EventManager.GOALS_OK_BUTTON_CLICKED:
+			ScrollText.text = Level.instance.LongDescription;	
 			savedTime = Time.time;
 			enabled = true;
 			break;
