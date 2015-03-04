@@ -28,7 +28,7 @@ public class TickerTapeScroller : MonoBehaviour {
 	
 	public void OnEvent(string customEvent)
 	{
-		Debug.Log("EVENT: " + customEvent);
+		
 		switch(customEvent)
 		{
 		case EventManager.GOALS_OK_BUTTON_CLICKED:
