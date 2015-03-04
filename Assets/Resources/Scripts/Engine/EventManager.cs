@@ -59,6 +59,8 @@ public class EventManager {
 
 	public static void fireEvent(string customevent) 
 	{
+		Debug.Log("EVENT: " + customevent);
+		
 		//if (customevent.Equals(EventManager.EVENT_LEVEL_START)) Debug.Log("Eventmanager callbackMethods size: " + EventManager.instance.callbackMethods.Count);		
 		foreach (Callbackmethod method in EventManager.instance.callbackMethods) 
 		{
