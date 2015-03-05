@@ -28,6 +28,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 			gameObject.SetActive(true);
 			SuccessHeader.SetActive(true);
 			FailedHeader.SetActive(false);
+			gameObject.GetComponent<Animator>().SetTrigger("isShow");
 			break;
 		case EventManager.EVENT_LEVEL_FAILED:
 			gameObject.SetActive(true);

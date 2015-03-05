@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
 	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
+	public int currentLevel = 1;
 	
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
@@ -93,6 +94,8 @@ public class GameManager : MonoBehaviour {
 		{
 		case levelOverReasons.EXIT_REACHED:
 			GUIEndOfLevel.instance.SetMessage(Level.instance.SuccesMessage);
+			currentLevel++;
+			EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);

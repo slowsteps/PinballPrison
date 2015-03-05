@@ -4,25 +4,50 @@ using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour {
 
-	public LevelThemes CurLevelTheme;
-	public levelStates CurLevelState;
-	public Image ThemeImage;
-	public Text LevelNumberLabel;
-	public int LevelNumber=1;
-	//public 
 	
-	public enum LevelThemes {Square,Diamond,Hexagon,Circle};
-	public enum levelStates {Locked,Playable,MinimalOneChallengeDone,AllChallengesDone};
+	public GameObject iconSlot;
+	public Sprite lockedIcon;
+	public Sprite openIcon;
+	public Sprite completedIcon;
+	
+	
+	public int LevelNumber;
+	
 
-	// Use this for initialization
 	void Start () 
 	{
-		//LevelNumberLabel.text = LevelNumber;
+		EventManager.Subscribe(OnEvent);
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	public void OnEvent(string customEvent)
 	{
-	
+		switch(customEvent)
+		{
+		case EventManager.EVENT_GAME_START:
+			UpdateIcon();
+			break;
+		case EventManager.EVENT_LEVEL_INCREASE:
+			UpdateIcon();	
+			break;
+		}
 	}
+	
+	
+	private void UpdateIcon()
+	{
+		if (LevelNumber == GameManager.instance.currentLevel) 
+		{
+			iconSlot.GetComponent<Image>().sprite = openIcon;
+		}
+		else if (LevelNumber < GameManager.instance.currentLevel) 
+		{
+			iconSlot.GetComponent<Image>().sprite = completedIcon;
+		}
+		else 
+		{
+			iconSlot.GetComponent<Image>().sprite = lockedIcon;
+		}
+	}
+	
+	
 }

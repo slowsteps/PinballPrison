@@ -27,11 +27,7 @@ public class UIManager : MonoBehaviour {
 		ScoreIncrease.SetActive(true);
 	}
 	
-//	public void SetMessage(string inString)
-//	{
-//		Message.SetActive(true);
-//		Message.GetComponent<GUIMessage>().SetText(inString);
-//	}
+
 	
 			
 }
