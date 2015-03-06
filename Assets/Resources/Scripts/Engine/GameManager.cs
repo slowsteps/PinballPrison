@@ -141,5 +141,11 @@ public class GameManager : MonoBehaviour {
 		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
 		if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
 	}
+				
 					
+	public void OpenAllLevels()
+	{
+		currentLevel = 20;
+		EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
+	}						
 }

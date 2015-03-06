@@ -38,14 +38,17 @@ public class LevelButton : MonoBehaviour {
 		if (LevelNumber == GameManager.instance.currentLevel) 
 		{
 			iconSlot.GetComponent<Image>().sprite = openIcon;
+			gameObject.GetComponent<Button>().enabled = true;
 		}
 		else if (LevelNumber < GameManager.instance.currentLevel) 
 		{
 			iconSlot.GetComponent<Image>().sprite = completedIcon;
+			gameObject.GetComponent<Button>().enabled = true;
 		}
 		else 
 		{
 			iconSlot.GetComponent<Image>().sprite = lockedIcon;
+			gameObject.GetComponent<Button>().enabled = false;
 		}
 	}
 	
