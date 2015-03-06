@@ -8,6 +8,9 @@ public class GUIMenu : MonoBehaviour {
 
 	public static GUIMenu instance;
 	public GameObject logo;
+	public GameObject levelButton;
+	public GameObject gridLayout;
+	public int numLevels=20;
 	
 	
 
@@ -15,6 +18,7 @@ public class GUIMenu : MonoBehaviour {
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
+		MakeLevelButtons();
 	}
 	
 	
@@ -59,6 +63,15 @@ public class GUIMenu : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 	
-	
+	private void MakeLevelButtons()
+	{
+		for (int i=1;i<=numLevels;i++)
+		{
+			GameObject lb = GameObject.Instantiate(levelButton);
+			lb.transform.parent = gridLayout.transform;
+			lb.transform.localScale = new Vector3(1f,1f,1f);
+			lb.GetComponent<LevelButton>().LevelNumber = i;
+		}
+	}
 			
 }
