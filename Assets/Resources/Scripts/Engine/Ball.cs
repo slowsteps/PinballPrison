@@ -12,23 +12,15 @@ public class Ball : MonoBehaviour {
 	public float MaxForce = 1000f;
 	public GameObject mainCam = null;
 	public GameObject cursor = null;
-	
 	public float clickRadius = 0.5f;
 	private Vector3 clickPos = Vector3.zero;
-	private Vector3 OrigClickPos = Vector3.zero;
 	private Vector3 startPos  = Vector3.zero;
-	private Vector3 Shot = Vector3.zero;
 	private int isPullMode = 1;
 	public static Ball selectedBall = null;
 	public static Ball instance = null;
 	public bool isCaptured = false;
 	private bool isFirstClick = true;
 	public float currentGravityScale = 1f;
-	public bool isFreeTap = true;
-	public bool isSlowMotionEnabled = false;
-	public ChargeBar LeftChargeBar;
-	private Sprite SquareBall = null;
-	private Sprite RoundBall = null;
 	public bool isDetectingTaps = true;
 	
 
@@ -42,9 +34,7 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
-		//LeftChargeBar.gameObject.SetActive(false);
-		SquareBall = Resources.Load <Sprite> ("2D/Square");
-		RoundBall = gameObject.GetComponent<SpriteRenderer>().sprite;
+
 	}
 	
 	public void OnEvent(string customEvent)
@@ -102,8 +92,6 @@ public class Ball : MonoBehaviour {
 		if (isFirstClick)
 		{
 			isFirstClick = false;
-			//for free tap
-			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			return;
 		}
 		
@@ -111,13 +99,12 @@ public class Ball : MonoBehaviour {
 		
 		if (Input.GetMouseButtonDown(0))
 		{
-			OrigClickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			SoundManager.instance.PlaySound("BallSelect_SFX");
 		}
 		
 		
 	
-		if (LeftChargeBar.isDetectingTap && Input.GetMouseButton(0) )
+		if (Input.GetMouseButton(0) )
 		{
 			//check for touch sliding off the screen
 			if (IsInsideScreen()) 
@@ -169,15 +156,8 @@ public class Ball : MonoBehaviour {
 			
 			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
 			
-			if (isFreeTap) 
-			{
-				startPos = OrigClickPos;
-			}
-			else
-			{
-				startPos = transform.position;
-			}
 			
+			startPos = transform.position;
 			startPos.z=-3;
 			
 			
@@ -187,13 +167,6 @@ public class Ball : MonoBehaviour {
 			Vector3 radius = endPos - startPos;
 			radius = Vector3.ClampMagnitude(radius,1.5f);
 			endPos = startPos + radius;
-			
-			if (isFreeTap)
-			{
-				Shot = endPos - startPos;
-				startPos = transform.position;
-				endPos = startPos + Shot;
-			}
 			
 			
 			cursor.GetComponent<LineRenderer>().SetPosition(0,startPos);
@@ -213,15 +186,7 @@ public class Ball : MonoBehaviour {
 	{
 		
 		
-		if (isFreeTap) 
-		{
-			cursor.transform.position = new Vector3(OrigClickPos.x,OrigClickPos.y,0);
-//			LeftChargeBar.DecreaseLeftChargeBar();
-		}
-		else
-		{
-			cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
-		}
+		cursor.transform.position = new Vector3(clickPos.x,clickPos.y,0);
 		
 		Vector3 startPos = transform.position;
 		startPos.z=-1;
@@ -230,13 +195,12 @@ public class Ball : MonoBehaviour {
 		
 		Vector3 radius = endPos - startPos;
 	
-		//if (radius.magnitude < clickRadius)		
-		if (isFreeTap || (radius.magnitude < clickRadius) )			
+			
+		if (radius.magnitude < clickRadius)			
 		{
 			selectedBall = this;
 			ScrollCamera.instance.SetTarget(gameObject);
 			cursor.SetActive(true);
-			if (isSlowMotionEnabled) Time.timeScale = 0.1f;
 		}
 		
 		DrawCursor();
@@ -261,14 +225,9 @@ public class Ball : MonoBehaviour {
 			selectedBall = null;
 			GetComponent<Rigidbody2D>().gravityScale = currentGravityScale;
 			
-			if (isFreeTap) 
-			{
-				catapultForce = 1000f * -Shot;
-			}
-			else
-			{
-				catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
-			}
+			
+			catapultForce = 1000f*(transform.position - cursor.transform.position)*isPullMode;
+			
 			//don't allow really small or very big shots
 			catapultForce = Mathf.Clamp(catapultForce.magnitude,MinForce,MaxForce)*catapultForce.normalized;
 			
@@ -288,21 +247,7 @@ public class Ball : MonoBehaviour {
 
 	
 
-	//Settings screen functions
-	
-	public void OnActivateFreeTap(bool inEnabled)
-	{
-		LeftChargeBar.gameObject.SetActive(inEnabled);
-		isFreeTap = inEnabled;
-		isSlowMotionEnabled = inEnabled;
-	}
-		
 
-	public void OnActivateSquareBall(bool inEnabled)
-	{
-		if (inEnabled) gameObject.GetComponent<SpriteRenderer>().sprite = SquareBall;
-		else gameObject.GetComponent<SpriteRenderer>().sprite = RoundBall;
-	}
 
 
 }
