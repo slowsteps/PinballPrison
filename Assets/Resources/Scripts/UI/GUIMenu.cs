@@ -10,7 +10,9 @@ public class GUIMenu : MonoBehaviour {
 	public GameObject logo;
 	public GameObject levelButton;
 	public GameObject gridLayout;
-	public int numLevels=20;
+	public int numLevels=40;
+	public int pageSize=20;
+	public int page=0;
 	
 	
 
@@ -18,7 +20,7 @@ public class GUIMenu : MonoBehaviour {
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		MakeLevelButtons();
+		
 	}
 	
 	
@@ -30,6 +32,7 @@ public class GUIMenu : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.EVENT_GAME_START:
+			MakeLevelButtons();
 			break;
 		case EventManager.EVENT_LEVEL_START:
 			Hide();
@@ -48,7 +51,7 @@ public class GUIMenu : MonoBehaviour {
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			logo.GetComponent<Animator>().Play("Logo2",-1,0f);
+			//logo.GetComponent<Animator>().Play("Logo2",-1,0f);
 		}
 	}
 	
@@ -65,13 +68,37 @@ public class GUIMenu : MonoBehaviour {
 	
 	private void MakeLevelButtons()
 	{
-		for (int i=1;i<=numLevels;i++)
+
+		page = Mathf.FloorToInt(GameManager.instance.currentLevel / pageSize);
+		int topleftNumber = pageSize*page;
+		int sequenceNumber = 1;
+		
+		for (int i=topleftNumber;i<topleftNumber+pageSize;i++)
 		{
 			GameObject lb = GameObject.Instantiate(levelButton);
-			lb.transform.parent = gridLayout.transform;
+			//lb.transform.parent = gridLayout.transform;
+			lb.transform.SetParent(gridLayout.transform,false);
 			lb.transform.localScale = new Vector3(1f,1f,1f);
 			lb.GetComponent<LevelButton>().LevelNumber = i;
+			lb.GetComponent<LevelButton>().sequenceNumber = sequenceNumber;
+			sequenceNumber++;
 		}
+	}
+	
+	public void PageUp()
+	{
+		//TODO check upperbounds
+		page++;
+		EventManager.fireEvent(EventManager.EVENT_LEVELMAP_PAGE_CHANGE);
+	}
+	
+	public void PageDown()
+	{
+		if (page > 0) 
+		{
+			page--;
+		}
+		EventManager.fireEvent(EventManager.EVENT_LEVELMAP_PAGE_CHANGE);
 	}
 			
 }

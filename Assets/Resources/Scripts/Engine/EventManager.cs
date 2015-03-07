@@ -37,6 +37,7 @@ public class EventManager {
 	public const string EVENT_SCORE_MULTIPLIER_END = "EVENT_SCORE_MULTIPLIER_END";
 	public const string EVENT_SCORE_INCREASE = "EVENT_SCORE_INCREASE";
 	public const string EVENT_LEVEL_INCREASE = "EVENT_LEVEL_INCREASE";
+	public const string EVENT_LEVELMAP_PAGE_CHANGE = "EVENT_LEVELMAP_PAGE_CHANGE";
 	
 
 	public delegate void Callbackmethod(string customevent);
@@ -63,7 +64,7 @@ public class EventManager {
 
 	public static void fireEvent(string customevent) 
 	{
-		Debug.Log("EVENT: " + customevent);
+		//Debug.Log("EVENT: " + customevent);
 		
 		//if (customevent.Equals(EventManager.EVENT_LEVEL_START)) Debug.Log("Eventmanager callbackMethods size: " + EventManager.instance.callbackMethods.Count);		
 		foreach (Callbackmethod method in EventManager.instance.callbackMethods) 

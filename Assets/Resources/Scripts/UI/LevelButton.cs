@@ -10,12 +10,15 @@ public class LevelButton : MonoBehaviour {
 	public Sprite openIcon;
 	public Sprite completedIcon;
 	public int LevelNumber;
+	public int sequenceNumber;
+	private Text levelLabel;
+	
 	
 
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
-		gameObject.GetComponentInChildren<Text>().text = LevelNumber.ToString("00");
+		levelLabel = gameObject.GetComponentInChildren<Text>();
 		UpdateIcon();
 	}
 	
@@ -27,14 +30,29 @@ public class LevelButton : MonoBehaviour {
 			UpdateIcon();
 			break;
 		case EventManager.EVENT_LEVEL_INCREASE:
+			
 			UpdateIcon();	
 			break;
+		case EventManager.EVENT_LEVELMAP_PAGE_CHANGE:
+			UpdateIcon();	
+			break;
+			
 		}
 	}
 	
 	
 	private void UpdateIcon()
 	{
+	
+		
+		
+		//recalc the levelnumber based on pagination
+		LevelNumber =  (GUIMenu.instance.pageSize * GUIMenu.instance.page) + sequenceNumber;
+		
+		//gameObject.GetComponentInChildren<Text>().text = LevelNumber.ToString("00");
+		levelLabel.text = LevelNumber.ToString("00");
+		
+		//decide if locked etc.
 		if (LevelNumber == GameManager.instance.currentLevel) 
 		{
 			iconSlot.GetComponent<Image>().sprite = openIcon;
@@ -50,6 +68,13 @@ public class LevelButton : MonoBehaviour {
 			iconSlot.GetComponent<Image>().sprite = lockedIcon;
 			gameObject.GetComponent<Button>().enabled = false;
 		}
+		
+		
+	}
+	
+	public void Show()
+	{
+	
 	}
 	
 	public void OnClick()

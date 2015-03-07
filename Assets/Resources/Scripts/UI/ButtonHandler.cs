@@ -26,18 +26,6 @@ public class ButtonHandler : MonoBehaviour {
 	
 			
 	
-	
-	public void OnStartLevelButton(int inLevelNum)
-	{
-		Settings.hasPlayerClicked = true;
-			if (Application.CanStreamedLevelBeLoaded("Level"+inLevelNum)) 
-			{
-				Application.LoadLevelAdditive("Level"+inLevelNum);
-				EventManager.fireEvent(EventManager.LEVEL_BUTTON_CLICKED);
-				SoundManager.instance.PlaySound("Select_SFX");
-			}
-			else print("can't load scene Level"+inLevelNum) ;
-	}
 
 	public void OnSettingsButton()
 	{
