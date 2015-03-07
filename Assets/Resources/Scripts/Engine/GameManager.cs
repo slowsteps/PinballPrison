@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour {
 					
 	public void OpenAllLevels()
 	{
-		currentLevel = 20;
+		currentLevel = 99;
 		EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
 	}						
 }
