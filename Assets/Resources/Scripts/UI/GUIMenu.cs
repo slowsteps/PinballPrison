@@ -20,7 +20,9 @@ public class GUIMenu : MonoBehaviour {
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		
+		print ("subscribed to gamestart");
+		EventManager.fireEvent(EventManager.EVENT_GAME_START);
+		print("fired game start");
 	}
 	
 	
@@ -32,6 +34,7 @@ public class GUIMenu : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.EVENT_GAME_START:
+			print ("receiving game start");
 			MakeLevelButtons();
 			break;
 		case EventManager.EVENT_LEVEL_START:
@@ -68,7 +71,7 @@ public class GUIMenu : MonoBehaviour {
 	
 	private void MakeLevelButtons()
 	{
-
+		print ("Making levelbuttons");
 		page = Mathf.FloorToInt(GameManager.instance.currentLevel / pageSize);
 		int topleftNumber = pageSize*page;
 		int sequenceNumber = 1;

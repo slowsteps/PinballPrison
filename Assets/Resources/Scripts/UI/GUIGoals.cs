@@ -61,8 +61,8 @@ public class GUIGoals : MonoBehaviour {
 	
 	public void OnHideAnimComplete()
 	{
-		gameObject.GetComponent<Animator>().playbackTime = 0f;;
+		
 		gameObject.SetActive(false);
-		print ("LevelGoals HideAnim complete");
+		
 	}
 }

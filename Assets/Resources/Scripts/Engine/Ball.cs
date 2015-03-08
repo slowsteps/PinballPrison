@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Sprites;
 
@@ -8,6 +9,7 @@ public class Ball : MonoBehaviour {
 
 	private Vector3 origPos = Vector3.zero;
 	private Vector2 catapultForce = Vector2.zero;
+	public float tiltToleranceTime = 2f;
 	public float MinForce = 200f;
 	public float MaxForce = 1000f;
 	public GameObject mainCam = null;
@@ -22,6 +24,10 @@ public class Ball : MonoBehaviour {
 	private bool isFirstClick = true;
 	public float currentGravityScale = 1f;
 	public bool isDetectingTaps = true;
+	public List<float> tiltClicks;
+	private bool isTilt = false;
+	
+	
 	
 
 	void Start () 
@@ -34,7 +40,10 @@ public class Ball : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		origPos = transform.position;
 		gameObject.SetActive(false);
-
+		tiltClicks = new List<float>();
+		tiltClicks.Add(Time.timeSinceLevelLoad);
+		tiltClicks.Add(Time.timeSinceLevelLoad);
+		tiltClicks.Add(Time.timeSinceLevelLoad);
 	}
 	
 	public void OnEvent(string customEvent)
@@ -58,6 +67,12 @@ public class Ball : MonoBehaviour {
 			break;
 		case EventManager.EVENT_CHARGE_DEPLETED:
 			isDetectingTaps = false;
+			break;
+		case EventManager.EVENT_TILT_START:
+			isTilt = true;
+			break;
+		case EventManager.EVENT_TILT_END:
+			isTilt = false;
 			break;
 		}
 	}
@@ -104,7 +119,7 @@ public class Ball : MonoBehaviour {
 		
 		
 	
-		if (Input.GetMouseButton(0) )
+		if (!isTilt && Input.GetMouseButton(0) )
 		{
 			//check for touch sliding off the screen
 			if (IsInsideScreen()) 
@@ -238,6 +253,13 @@ public class Ball : MonoBehaviour {
 			SoundManager.instance.PlaySound("BallRelease_SFX");
 			Time.timeScale = 1f;	
 			
+			//Title when clicking too fast
+			
+			tiltClicks[2] = tiltClicks[1];
+			tiltClicks[1] = tiltClicks[0];
+			tiltClicks[0] = Time.timeSinceLevelLoad;
+			
+			if ( (tiltClicks[0] - tiltClicks[2]) < tiltToleranceTime ) EventManager.fireEvent(EventManager.EVENT_TILT_START);
 			
 			
 		}

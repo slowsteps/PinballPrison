@@ -38,6 +38,11 @@ public class EventManager {
 	public const string EVENT_SCORE_INCREASE = "EVENT_SCORE_INCREASE";
 	public const string EVENT_LEVEL_INCREASE = "EVENT_LEVEL_INCREASE";
 	public const string EVENT_LEVELMAP_PAGE_CHANGE = "EVENT_LEVELMAP_PAGE_CHANGE";
+	public const string EVENT_TILT_START = "EVENT_TILT_START";
+	public const string EVENT_TILT_END = "EVENT_TILT_END";
+	
+
+	
 	
 
 	public delegate void Callbackmethod(string customevent);

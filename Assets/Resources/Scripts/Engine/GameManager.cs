@@ -7,12 +7,12 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	
 	public int startBalls = 3;
+	public float tiltTime = 3f;
 	public int balls;
 	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
 	public int currentLevel = 1;
-	
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
-		EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 
 	
@@ -57,7 +56,11 @@ public class GameManager : MonoBehaviour {
 			break;
 		case EventManager.EVENT_OUT_OF_TIME:
 			OnGameOver(levelOverReasons.OUT_OF_TIME);
-			break;					
+			break;		
+		case EventManager.EVENT_TILT_START:
+			StartTilt();
+			break;
+		
 		}
 	}
 	
@@ -70,7 +73,15 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
+	private void StartTilt()
+	{
+		Invoke("EndTilt",tiltTime);
+	}
 	
+	private void EndTilt()
+	{
+		EventManager.fireEvent(EventManager.EVENT_TILT_END);
+	}
 	
 					
 																

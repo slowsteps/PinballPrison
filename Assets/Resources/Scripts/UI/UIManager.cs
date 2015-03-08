@@ -12,10 +12,12 @@ public class UIManager : MonoBehaviour {
 	public GameObject Pause;
 	public GameObject Goals;
 	public GameObject ScoreIncrease;
+	public GameObject Tilt;
 	public static UIManager instance;
 
 	
-	void Awake () {
+	void Start () 
+	{
 		instance = this;
 		TopBar.SetActive(true);
 //		BottomBar.SetActive(true);
@@ -25,6 +27,7 @@ public class UIManager : MonoBehaviour {
 		Pause.SetActive(true);
 		Goals.SetActive(true);
 		ScoreIncrease.SetActive(true);
+		Tilt.SetActive(true);	
 	}
 	
 
