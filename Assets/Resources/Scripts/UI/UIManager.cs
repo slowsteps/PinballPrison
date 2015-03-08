@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject Goals;
 	public GameObject ScoreIncrease;
 	public GameObject Tilt;
+	public GameObject EndOfLevel;
 	public static UIManager instance;
 
 	

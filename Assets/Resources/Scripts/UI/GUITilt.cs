@@ -7,6 +7,7 @@ public class GUITilt : MonoBehaviour {
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
+		gameObject.SetActive(false);
 	}
 	
 	public void OnEvent(string customEvent)
@@ -21,10 +22,19 @@ public class GUITilt : MonoBehaviour {
 			break;
 		case EventManager.EVENT_TILT_END:
 			gameObject.SetActive(false);
-			break;		
+			break;	
+		case EventManager.EVENT_BALL_EXIT:
+			gameObject.SetActive(false);
+			break;
+		case EventManager.EVENT_LEVEL_FAILED:
+			gameObject.SetActive(false);
+			break;			
+					
 		}
 	}
 		
+
+
 
 		
 }

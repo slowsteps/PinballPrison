@@ -7,12 +7,13 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance;
 	
 	public int startBalls = 3;
-	public float tiltTime = 3f;
+	public float tiltCooldownTime = 3f;
 	public int balls;
 	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
-	public int currentLevel = 1;
+	public int currentLevel = 1; // player progression
+	public int loadedLevel = 0;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour {
 	
 	private void StartTilt()
 	{
-		Invoke("EndTilt",tiltTime);
+		Invoke("EndTilt",tiltCooldownTime);
 	}
 	
 	private void EndTilt()
@@ -158,5 +159,18 @@ public class GameManager : MonoBehaviour {
 	{
 		currentLevel = 99;
 		EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
-	}						
+	}	
+	
+	
+	public void LoadGameLevel(int levelNumber) 
+	{
+		Settings.hasPlayerClicked = true;
+		if (Application.CanStreamedLevelBeLoaded("Level"+levelNumber)) 
+		{
+			Application.LoadLevelAdditive("Level"+levelNumber);
+			SoundManager.instance.PlaySound("Select_SFX");
+			loadedLevel = levelNumber;
+		}
+		else print("can't load scene Level"+levelNumber) ;						
+	}															
 }

@@ -35,7 +35,7 @@ public class TimeDisplay : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_LEVEL_START:
+		case EventManager.GOALS_OK_BUTTON_CLICKED:
 			InitTimeDisplay();
 			break;
 		case EventManager.EVENT_BALL_EXIT:

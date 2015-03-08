@@ -57,6 +57,10 @@ public class Level : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
+		case EventManager.EVENT_QUIT:
+			iTween.Stop(); // kill all mushroom anims etc.
+			GameObject.Destroy(gameObject);
+			break;
 		case EventManager.EVENT_ENDOFLEVEL_APPEARED:
 			iTween.Stop(); // kill all mushroom anims etc.
 			GameObject.Destroy(gameObject);

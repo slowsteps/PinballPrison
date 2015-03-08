@@ -79,14 +79,9 @@ public class LevelButton : MonoBehaviour {
 	
 	public void OnClick()
 	{
-		Settings.hasPlayerClicked = true;
-		if (Application.CanStreamedLevelBeLoaded("Level"+LevelNumber)) 
-		{
-			Application.LoadLevelAdditive("Level"+LevelNumber);
-			EventManager.fireEvent(EventManager.LEVEL_BUTTON_CLICKED);
-			SoundManager.instance.PlaySound("Select_SFX");
-		}
-		else print("can't load scene Level"+LevelNumber) ;
+		GameManager.instance.LoadGameLevel(LevelNumber);
+		EventManager.fireEvent(EventManager.LEVEL_BUTTON_CLICKED);
+		SoundManager.instance.PlaySound("Select_SFX");
 	}
 	
 	

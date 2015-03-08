@@ -7,6 +7,7 @@ public class ScrollCamera : MonoBehaviour {
 	public GameObject lookatTarget = null;
 	private Vector3 targetPos = Vector3.zero;
 	public Vector3 origPos;
+	private Vector2 shakeOffset;
 	
 	
 	void Start () 
@@ -23,6 +24,7 @@ public class ScrollCamera : MonoBehaviour {
 		camera.orthographicSize = Screen.height/200f;
 		Debug.Log("in iphone");
 		#endif
+		shakeOffset = new Vector2();
 		
 	}
 
@@ -41,14 +43,31 @@ public class ScrollCamera : MonoBehaviour {
 			enabled = true;
 			GetComponent<Camera>().enabled = true;
 			break;
+		case EventManager.EVENT_TILT_START:
+			//InvokeRepeating("Shake",0,0.2f);
+			StartCoroutine("Shake");
+			break;
+		case EventManager.EVENT_TILT_END:
+			//CancelInvoke("Shake");
+			StopCoroutine("Shake");
+			shakeOffset = Vector2.zero;
+			break;
 		}
 	}
 
+	IEnumerator Shake()
+	{
+		for (;;)
+		{
+			shakeOffset = 2f*Random.insideUnitCircle;
+			yield return new WaitForSeconds(Random.Range(0.03f,0.2f));
+		}
+	}
 
 	void Update () 
 	{	
-		targetPos.x = transform.position.x;
-		targetPos.y = lookatTarget.transform.position.y + 1;
+		targetPos.x = origPos.x + shakeOffset.x;
+		targetPos.y = lookatTarget.transform.position.y + 1 + shakeOffset.y;
 		targetPos.z = transform.position.z;
 	
 		transform.position = Vector3.Slerp(transform.position,targetPos,3f*Time.deltaTime);
