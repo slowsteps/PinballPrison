@@ -12,13 +12,16 @@ public class Level : MonoBehaviour {
 	public string LongDescription = "";
 	
 	public bool hasMinScore = false;
+	[HideInInspector]
 	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;
 	public bool hasCollectables = false;
 	public int requiredScore = 0;
+	[HideInInspector]
 	public int allowedShots = 0;
 	public float allowedTime = 0;
 	public int requiredCollectables = 0;
+	[HideInInspector]
 	public int collectables = 0;
 			
 	void Awake () {
@@ -61,7 +64,7 @@ public class Level : MonoBehaviour {
 			iTween.Stop(); // kill all mushroom anims etc.
 			GameObject.Destroy(gameObject);
 			break;
-		case EventManager.EVENT_ENDOFLEVEL_APPEARED:
+		case EventManager.EVENT_LEVEL_FAILED:
 			iTween.Stop(); // kill all mushroom anims etc.
 			GameObject.Destroy(gameObject);
 			break;

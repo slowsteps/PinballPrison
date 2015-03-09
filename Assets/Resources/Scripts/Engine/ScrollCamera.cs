@@ -44,23 +44,23 @@ public class ScrollCamera : MonoBehaviour {
 			GetComponent<Camera>().enabled = true;
 			break;
 		case EventManager.EVENT_TILT_START:
-			//InvokeRepeating("Shake",0,0.2f);
 			StartCoroutine("Shake");
 			break;
 		case EventManager.EVENT_TILT_END:
-			//CancelInvoke("Shake");
 			StopCoroutine("Shake");
 			shakeOffset = Vector2.zero;
 			break;
 		}
 	}
+	
+	
 
 	IEnumerator Shake()
 	{
 		for (;;)
 		{
-			shakeOffset = 2f*Random.insideUnitCircle;
-			yield return new WaitForSeconds(Random.Range(0.03f,0.2f));
+			shakeOffset = 1f*Random.insideUnitCircle;
+			yield return new WaitForSeconds(Random.Range(0.03f,0.1f));
 		}
 	}
 

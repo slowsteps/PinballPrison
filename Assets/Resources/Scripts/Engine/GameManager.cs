@@ -157,7 +157,9 @@ public class GameManager : MonoBehaviour {
 					
 	public void OpenAllLevels()
 	{
-		currentLevel = 99;
+	
+		if (currentLevel == 99) currentLevel = 1;
+		else currentLevel = 99;
 		EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
 	}	
 	
