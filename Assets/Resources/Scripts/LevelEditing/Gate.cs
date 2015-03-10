@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Gate : TargetGroupEffect {
+public class Gate : TargetGroupEffect,IControlledByOther {
 
 	public bool isBarrierActive = true;
 	private bool isAllActivated = false;
@@ -18,6 +18,13 @@ public class Gate : TargetGroupEffect {
 	public override void AddTarget(Target inTarget)
 	{
 		targets.Add(inTarget);
+	}
+
+	//called from iControlledByOther
+	public void Activate()
+	{
+		isAllActivated = true;
+		Switch();
 	}
 
 	public override void ReportTargetHit(Target inTarget)
@@ -42,11 +49,13 @@ public class Gate : TargetGroupEffect {
 		//this is a barrier you want to dissappear
 		if (isBarrierActive)
 		{
+			
 			if (gameObject.activeSelf && isAllActivated) 
 			{
 				gameObject.SetActive(false);
 				if (hasResetTime) Invoke("ResetGate",resetTime);
 				foreach (Target aTarget in targets) aTarget.StopDetecting();
+				
 			}
 		}
 		//this is a barrier you want to appear

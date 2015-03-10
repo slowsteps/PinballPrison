@@ -6,6 +6,8 @@ public class Target : MonoBehaviour {
 
 	public float bumpForce = 0f;
 	public int scoreValue = 1;
+	private Sprite targetUp;
+	public Sprite targetDown;
 	public Color notActivatedColor = Color.white;
 	public Color activatedColor = Color.red;
 	[HideInInspector]
@@ -14,8 +16,7 @@ public class Target : MonoBehaviour {
 	public bool isLight = false;
 	public bool isCollectable = false;
 	public List<TargetGroupEffect> targetGroupEffects;
-	private Sprite targetUp;
-	public Sprite targetDown;
+	[HideInInspector]
 	public bool isDetecting = true;
 	
 	void Awake()
