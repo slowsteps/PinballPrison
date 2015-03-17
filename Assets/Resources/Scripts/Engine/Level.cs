@@ -3,9 +3,27 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 
+
+	
+	
 	public static Level instance;
+	
+	
+	
+	
+	[Header("Level settings for each individual level")]
+	[Space(5)]
+	
+	[Tooltip("shown in tickertape")]
+	[TextArea(0,5)]
 	public string Description = "The best level description ever";
+	
+	[Tooltip("shown in end of level")]
+	[TextArea(0,5)]
 	public string FailMessage = "Find the exit and progress you will";
+	
+	[Tooltip("shown in end of level")]
+	[TextArea(0,5)]
 	public string SuccesMessage = "That's it! ";
 	
 	[HideInInspector]
@@ -87,6 +105,12 @@ public class Level : MonoBehaviour {
 	void OnDestroy()
 	{
 		EventManager.UnSubscribe(OnEvent);
+	}
+	
+	[ContextMenu("Test")]
+	public void Test() 
+	{
+		Debug.Log("arataert");
 	}
 	
 }
