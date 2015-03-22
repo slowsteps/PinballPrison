@@ -21,8 +21,8 @@ public class ScrollCamera : MonoBehaviour {
 		GetComponent<Camera>().orthographicSize = 5.68f;
 		#endif
 		#if UNITY_IPHONE && !UNITY_EDITOR
-		camera.orthographicSize = Screen.height/200f;
-		Debug.Log("in iphone");
+		//camera.orthographicSize = Screen.height/200f;
+		//Debug.Log("in iphone");
 		#endif
 		shakeOffset = new Vector2();
 		
