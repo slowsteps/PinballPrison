@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class MagnetSpawnPoint : MonoBehaviour {
 
@@ -12,6 +13,8 @@ public class MagnetSpawnPoint : MonoBehaviour {
 
 	public void Awake()
 	{
+		if (startPointMagnet)  EditorUtility.DisplayDialog("Error","duplicate isStartPoint Magnet : " + name,"ok");
+		//if (startPointMagnet && isStartPoint) EditorUtility.DisplayDialog("Error","Multiple startpoints: "+ name,"ok");
 		enabled = false;
 		if (isStartPoint) {
 			startPointMagnet = this;
