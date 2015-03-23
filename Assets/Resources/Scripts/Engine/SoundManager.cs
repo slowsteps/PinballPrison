@@ -17,8 +17,12 @@ public class SoundManager : MonoBehaviour {
 
 	public void PlaySound(string inClipName)
 	{
-		//print ("playing " + inClipName);
 		Speaker.PlayOneShot(FindClipByName(inClipName));
+	}
+	
+	public void StopAllSounds()
+	{
+		Speaker.Stop();
 	}
 	
 	//TODO make hash or dict on Start
