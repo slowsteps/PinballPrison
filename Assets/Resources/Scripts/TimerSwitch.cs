@@ -6,26 +6,42 @@ public class TimerSwitch : MonoBehaviour {
 
 
 
-	public float delay;
-	public float duration = 1f;
-	public bool willStartInvisible = false;
+	public float startDelay = 0f;
+	public float onTime = 3f;
+	public float offTime = 3f;
+	private Vector2 origPos;
+	private bool isFirstrun = true;
+	
 
-	// Use this for initialization
 	void Start () 
 	{
-		InvokeRepeating("Toggle",delay,duration);
-		if(willStartInvisible) gameObject.SetActive(false);
+		origPos = transform.position;
+		StartCoroutine(Animate());								
 	}
 	
-	// Update is called once per frame
+	
 	void Destroy () 
 	{
-		CancelInvoke("Toggle");
+		StopCoroutine(Animate());
+	}
+
+	
+	IEnumerator Animate()
+	{
+		for(;;)
+		{
+			if (isFirstrun)
+			{
+				yield return new WaitForSeconds(startDelay);
+				isFirstrun = false;
+			}
+			transform.Translate(100f,0,0);
+			yield return new WaitForSeconds(offTime);
+			transform.position = origPos;
+			yield return new WaitForSeconds(onTime);
+		}
 	}
 	
-	private void Toggle()
-	{
-		gameObject.SetActive(!gameObject.activeSelf);
-	}
+	
 	
 }
