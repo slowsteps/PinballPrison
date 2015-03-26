@@ -9,6 +9,7 @@ public class TimerSwitch : MonoBehaviour {
 	public float startDelay = 0f;
 	public float onTime = 3f;
 	public float offTime = 3f;
+	public bool hasScaleTween = true;
 	private Vector2 origPos;
 	private bool isFirstrun = true;
 	
@@ -23,6 +24,7 @@ public class TimerSwitch : MonoBehaviour {
 	void Destroy () 
 	{
 		StopCoroutine(Animate());
+		iTween.Stop();
 	}
 
 	
@@ -38,6 +40,7 @@ public class TimerSwitch : MonoBehaviour {
 			transform.Translate(100f,0,0);
 			yield return new WaitForSeconds(offTime);
 			transform.position = origPos;
+			if (hasScaleTween) iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 			yield return new WaitForSeconds(onTime);
 		}
 	}
