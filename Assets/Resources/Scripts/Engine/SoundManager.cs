@@ -12,6 +12,7 @@ public class SoundManager : MonoBehaviour {
 	{
 		instance = this;
 		Speaker = gameObject.GetComponent<AudioSource>();
+		Speaker.bypassListenerEffects = true;
 	}
 
 
@@ -22,6 +23,7 @@ public class SoundManager : MonoBehaviour {
 	
 	public void StopAllSounds()
 	{
+		print("stopAllSounds");
 		Speaker.Stop();
 	}
 	

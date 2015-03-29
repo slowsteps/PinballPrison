@@ -74,6 +74,10 @@ public class Ball : MonoBehaviour {
 		case EventManager.EVENT_TILT_END:
 			isTilt = false;
 			break;
+		case EventManager.EVENT_MENU_SHOW:
+			gameObject.SetActive(false);
+			break;
+			
 		}
 	}
 	
