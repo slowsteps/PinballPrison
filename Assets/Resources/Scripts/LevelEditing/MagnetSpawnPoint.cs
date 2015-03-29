@@ -14,7 +14,7 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	public void Awake()
 	{
 		if (startPointMagnet)  print("duplicate isStartPoint Magnet : " + name);
-		//if (startPointMagnet && isStartPoint) EditorUtility.DisplayDialog("Error","Multiple startpoints: "+ name,"ok");
+		
 		enabled = false;
 		if (isStartPoint) {
 			startPointMagnet = this;
@@ -51,12 +51,10 @@ public class MagnetSpawnPoint : MonoBehaviour {
 		}
 	}
 
+	//TODO do this everywere!
 	void OnDestroy()
 	{
-		//enabled = false;
-		//iTween.Destroy(gameObject);
-		EventManager.UnSubscribe(OnEvent);
-		
+		EventManager.UnSubscribe(OnEvent);		
 	}
 
 	public void OnEvent(string customEvent)

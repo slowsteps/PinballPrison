@@ -33,11 +33,10 @@ public class GUIMenu : MonoBehaviour {
 			break;
 		case EventManager.EVENT_GAME_START:
 			MakeLevelButtons();
-			//SoundManager.instance.PlaySound("MenuSong");
+			SoundManager.instance.PlaySound("MenuSong",true);
 			break;
 		case EventManager.EVENT_LEVEL_START:
 			Hide();
-			SoundManager.instance.StopAllSounds();
 			break;
 		case EventManager.LEVEL_BUTTON_CLICKED:
 			//Hide();
@@ -59,7 +58,7 @@ public class GUIMenu : MonoBehaviour {
 		gameObject.SetActive(true);
 		EventManager.fireEvent(EventManager.EVENT_MENU_SHOW);
 		print ("Menu Show");
-		SoundManager.instance.PlaySound("MenuSong");
+		SoundManager.instance.PlaySound("MenuSong",true);
 	}
 
 	private void Hide()

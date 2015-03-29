@@ -16,9 +16,11 @@ public class SoundManager : MonoBehaviour {
 	}
 
 
-	public void PlaySound(string inClipName)
+	public void PlaySound(string inClipName,bool isLoop = false)
 	{
+		Speaker.loop = isLoop;
 		Speaker.PlayOneShot(FindClipByName(inClipName));
+		//Speaker.PlayOneShot(FindClipByName(inClipName));
 	}
 	
 	public void StopAllSounds()
