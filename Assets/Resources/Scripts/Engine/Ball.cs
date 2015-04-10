@@ -65,9 +65,6 @@ public class Ball : MonoBehaviour {
 		case EventManager.EVENT_OUT_OF_TIME:
 			gameObject.SetActive(false);
 			break;
-		case EventManager.EVENT_CHARGE_DEPLETED:
-			isDetectingTaps = false;
-			break;
 		case EventManager.EVENT_TILT_START:
 			isTilt = true;
 			break;
@@ -85,7 +82,7 @@ public class Ball : MonoBehaviour {
 	
 	private void Init() 
 	{
-		transform.position = origPos;
+		//transform.position = origPos;
 		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
 		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);

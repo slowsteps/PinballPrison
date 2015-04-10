@@ -45,19 +45,12 @@ public class GUIMenu : MonoBehaviour {
 	}
 	
 	
-	public void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			//logo.GetComponent<Animator>().Play("Logo2",-1,0f);
-		}
-	}
+	
 	
 	public void Show()
 	{
 		gameObject.SetActive(true);
 		EventManager.fireEvent(EventManager.EVENT_MENU_SHOW);
-		print ("Menu Show");
 		SoundManager.instance.PlaySound("MenuSong",true);
 	}
 

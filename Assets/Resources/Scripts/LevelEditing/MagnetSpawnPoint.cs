@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
+
 
 public class MagnetSpawnPoint : MonoBehaviour {
 
@@ -54,7 +54,10 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	//TODO do this everywere!
 	void OnDestroy()
 	{
-		EventManager.UnSubscribe(OnEvent);		
+		EventManager.UnSubscribe(OnEvent);	
+		//make sure currentSavePoint does not persist when switching to another level
+		currentSavePoint = null;
+			
 	}
 
 	public void OnEvent(string customEvent)
