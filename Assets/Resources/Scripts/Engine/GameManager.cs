@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
 	private bool isScoreAdditionAllowed = true;
+	public ParticleSystem scoreParticles;
 	
 
 	void Start () 
@@ -146,7 +147,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	
-	public void AddToScore(int extraScore)
+	public void AddToScore(int extraScore,GameObject sender)
 	{
 		if (isScoreAdditionAllowed)
 		{
@@ -159,6 +160,11 @@ public class GameManager : MonoBehaviour {
 			score = score + (ScoreMultiplier * extraScore);
 			if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
 			if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
+			
+			scoreParticles.gameObject.transform.position = sender.transform.position;
+			//scoreParticles.startSize = 100/extraScore;
+			scoreParticles.Emit(1);
+			
 		}
 	}
 				

@@ -14,7 +14,7 @@ public class Portal : MonoBehaviour {
 	{
 		if (ball.tag == "ball") 
 		{
-			GameManager.instance.AddToScore(scoreValue);
+			GameManager.instance.AddToScore(scoreValue,gameObject);
 	
 			iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 			if (PortalExit) Ball.instance.gameObject.SetActive(false);

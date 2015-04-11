@@ -65,7 +65,7 @@ public class Target : MonoBehaviour {
 
 	private void HandleBallContact()
 	{
-		GameManager.instance.AddToScore(scoreValue);
+		GameManager.instance.AddToScore(scoreValue,gameObject);
 		
 		if (isToggle) 
 		{

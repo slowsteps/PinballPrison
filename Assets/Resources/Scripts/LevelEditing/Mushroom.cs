@@ -24,7 +24,7 @@ public class Mushroom : MonoBehaviour {
 		if (isBumping)
 		{
 			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
-			GameManager.instance.AddToScore(bumpScore);
+			GameManager.instance.AddToScore(bumpScore,gameObject);
 			if (!gameObject.GetComponent<iTween>())
 			{
 				iTween.PunchScale(gameObject,iTween.Hash("amount",scaleEffectAmp * Vector3.one,"time",scaleEffectTime));

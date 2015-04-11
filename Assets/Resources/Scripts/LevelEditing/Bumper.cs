@@ -21,7 +21,7 @@ public class Bumper : MonoBehaviour {
 		if (isBumping)
 		{
 			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
-			GameManager.instance.AddToScore(bumpScore);
+			GameManager.instance.AddToScore(bumpScore,gameObject);
 			if (!gameObject.GetComponent<iTween>())
 			{
 				Vector3 targetPos = (Vector3)inColl.contacts[0].normal;
