@@ -4,16 +4,11 @@ using System.Collections;
 public class Exit : MonoBehaviour {
 
 	private bool isEnabled = true;
-	private SpriteRenderer sprite;
-	private Color32 enabledColor;
-	private Color32 disabledColor;
+	
 	
 	
 	void Awake () 
 	{
-		sprite = gameObject.GetComponent<SpriteRenderer>();
-		enabledColor = sprite.color;
-		disabledColor = new Color32(255,255,255,128);
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}
