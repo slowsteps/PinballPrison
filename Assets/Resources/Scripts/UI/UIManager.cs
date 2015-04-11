@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour {
 	public GameObject Settings;
 	public GameObject Pause;
 	public GameObject Goals;
-	public GameObject ScoreIncrease;
 	public GameObject Tilt;
 	public GameObject EndOfLevel;
 	public static UIManager instance;
@@ -27,7 +26,6 @@ public class UIManager : MonoBehaviour {
 //		Settings.SetActive(true);
 		Pause.SetActive(true);
 		Goals.SetActive(true);
-		ScoreIncrease.SetActive(true);
 		Tilt.SetActive(true);	
 	}
 	

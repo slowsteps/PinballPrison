@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour {
 	public int balls;
 	public long score = 0;
 	public int ScoreMultiplier = 1;
-	public ScoreIncreaseDisplay ScoreUpdateLabel;
 	public int currentLevel = 1; // player progression
 	public int loadedLevel = 0;
 	public bool hasPlayerClicked = false;
@@ -159,7 +158,6 @@ public class GameManager : MonoBehaviour {
 			}
 			score = score + (ScoreMultiplier * extraScore);
 			if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
-			if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
 			
 			scoreParticles.gameObject.transform.position = sender.transform.position;
 			//scoreParticles.startSize = 100/extraScore;
