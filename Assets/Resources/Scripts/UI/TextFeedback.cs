@@ -19,9 +19,6 @@ public class TextFeedback : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
-		case EventManager.EVENT_EXIT_VISIBLE:
-			SetText("Exit is now open");
-			break;
 		case EventManager.EVENT_LEVEL_START:
 			SetText("Tap and drag the ball");
 			break;

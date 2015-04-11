@@ -3,9 +3,17 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
+	private bool isEnabled = true;
+	private SpriteRenderer sprite;
+	private Color32 enabledColor;
+	private Color32 disabledColor;
+	
 	
 	void Awake () 
 	{
+		sprite = gameObject.GetComponent<SpriteRenderer>();
+		enabledColor = sprite.color;
+		disabledColor = new Color32(255,255,255,128);
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
 	}
@@ -13,12 +21,15 @@ public class Exit : MonoBehaviour {
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		ball.gameObject.SetActive(false);
-		GetComponent<ParticleSystem>().time = 0f;
-		GetComponent<ParticleSystem>().Play();
-		iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
-		Invoke("DelayedEvent",2f);	
-		SoundManager.instance.PlaySound("ExitEnter_SFX");
+		if (isEnabled)
+		{
+			ball.gameObject.SetActive(false);
+			GetComponent<ParticleSystem>().time = 0f;
+			GetComponent<ParticleSystem>().Play();
+			iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
+			Invoke("DelayedEvent",2f);	
+			SoundManager.instance.PlaySound("ExitEnter_SFX");
+		}
 	}
 	
 	private void DelayedEvent()
@@ -37,22 +48,32 @@ public class Exit : MonoBehaviour {
 			else gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_MINIMUMSCORE_REACHED:
-			//print ("min score reached");
 			Show();
 			break;
 		case EventManager.EVENT_ALL_COLLECTABLES_FOUND:
-			//print ("all collectables found");
 			Show();
 			break;
+		case EventManager.EVENT_TILT_START:
+			Hide();
+			break;	
+		case EventManager.EVENT_TILT_END:
+			Show();
+			break;	
 		}
 	}
 	
+	private void Hide()
+	{
+		isEnabled = false;
+		gameObject.SetActive(false);
+	}
+			
 	private void Show()
 	{
+		isEnabled = true;
 		gameObject.SetActive(true);
 		iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),1f);
 		SoundManager.instance.PlaySound("ExitAppear_SFX");
-		EventManager.fireEvent(EventManager.EVENT_EXIT_VISIBLE);
 	}
 	
 	void OnDestroy()

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
+		
 	}
 
 	
