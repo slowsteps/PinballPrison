@@ -30,7 +30,7 @@ public class Danger : MonoBehaviour {
 	
 	public void OnDestroy()
 	{
-		Debug.Log(" destroyed");
+		//Debug.Log(" destroyed");
 		CancelInvoke();
 	}
 	

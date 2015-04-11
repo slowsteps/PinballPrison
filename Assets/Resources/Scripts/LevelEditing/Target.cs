@@ -96,7 +96,7 @@ public class Target : MonoBehaviour {
 		if (isCollectable) 
 		{
 			StopDetecting();
-			print ("collectable found " + this.name);
+			//print ("collectable found " + this.name);
 			EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
 		}
 		

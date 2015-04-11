@@ -7,7 +7,7 @@ using UnityEngine.Sprites;
 public class Ball : MonoBehaviour {
 
 
-	private Vector3 origPos = Vector3.zero;
+	//private Vector3 origPos = Vector3.zero;
 	private Vector2 catapultForce = Vector2.zero;
 	public float tiltToleranceTime = 2f;
 	public float MinForce = 200f;
@@ -21,11 +21,12 @@ public class Ball : MonoBehaviour {
 	public static Ball selectedBall = null;
 	public static Ball instance = null;
 	public bool isCaptured = false;
-	private bool isFirstClick = true;
+	public bool isFirstClick = true;
 	public float currentGravityScale = 1f;
 	public bool isDetectingTaps = true;
-	public List<float> tiltClicks;
+	private List<float> tiltClicks;
 	private bool isTilt = false;
+	
 	
 	
 	
@@ -38,7 +39,7 @@ public class Ball : MonoBehaviour {
 			
 		cursor.SetActive(false);
 		EventManager.Subscribe(OnEvent);
-		origPos = transform.position;
+		//origPos = transform.position;
 		gameObject.SetActive(false);
 		tiltClicks = new List<float>();
 		tiltClicks.Add(Time.timeSinceLevelLoad);
@@ -71,18 +72,33 @@ public class Ball : MonoBehaviour {
 		case EventManager.EVENT_TILT_END:
 			isTilt = false;
 			break;
-		case EventManager.EVENT_MENU_SHOW:
-			gameObject.SetActive(false);
+		case EventManager.HAMBURGER_BUTTON_CLICKED:
+			Pause();
 			break;
-			
+		case EventManager.RESUME_BUTTON_CLICKED:
+			Resume();
+			break;
+					
 		}
 	}
 	
 
+	private void Pause()
+	{
+		isFirstClick = true;
+		enabled = false;
+	}
+	
+	private void Resume()
+	{
+		isFirstClick = false;
+		enabled = true;
+		
+	}
 	
 	private void Init() 
 	{
-		//transform.position = origPos;
+	
 		if (MagnetSpawnPoint.currentSavePoint) transform.position = MagnetSpawnPoint.currentSavePoint.transform.position;
 		else if (MagnetSpawnPoint.startPointMagnet) transform.position = MagnetSpawnPoint.startPointMagnet.transform.position;
 		gameObject.SetActive(true);

@@ -12,7 +12,7 @@ public class EventManager {
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
 	public const string GOALS_OK_BUTTON_CLICKED = "GOALS_OK_BUTTON_CLICKED";
 	public const string LEVEL_BUTTON_CLICKED = "LEVEL_BUTTON_CLICKED";
-	public const string SETTINGS_BUTTON_CLICKED = "SETTINGS_BUTTON_CLICKED";
+	public const string HAMBURGER_BUTTON_CLICKED = "HAMBURGER_BUTTON_CLICKED";
 	public const string PAUSE_BUTTON_CLICKED = "PAUSE_BUTTON_CLICKED";
 	public const string RESUME_BUTTON_CLICKED = "RESUME_BUTTON_CLICKED";
 	public const string EVENT_BALL_SHOT = "EVENT_BALL_SHOT";

@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour {
 	
 	public void StopAllSounds()
 	{
-		print("stopAllSounds");
+		//print("stopAllSounds");
 		Speaker.Stop();
 	}
 	

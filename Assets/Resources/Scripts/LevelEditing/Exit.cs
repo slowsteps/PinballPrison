@@ -37,11 +37,11 @@ public class Exit : MonoBehaviour {
 			else gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_MINIMUMSCORE_REACHED:
-			print ("min score reached");
+			//print ("min score reached");
 			Show();
 			break;
 		case EventManager.EVENT_ALL_COLLECTABLES_FOUND:
-			print ("all collectables found");
+			//print ("all collectables found");
 			Show();
 			break;
 		}

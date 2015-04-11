@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
 	public ScoreIncreaseDisplay ScoreUpdateLabel;
 	public int currentLevel = 1; // player progression
 	public int loadedLevel = 0;
+	public bool hasPlayerClicked = false;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
@@ -166,7 +167,7 @@ public class GameManager : MonoBehaviour {
 	
 	public void LoadGameLevel(int levelNumber) 
 	{
-		Settings.hasPlayerClicked = true;
+		hasPlayerClicked = true;
 		if (Application.CanStreamedLevelBeLoaded("Level"+levelNumber)) 
 		{
 			Application.LoadLevelAdditive("Level"+levelNumber);

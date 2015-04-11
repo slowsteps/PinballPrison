@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Sprites;
+using UnityEngine.UI;
 
 public class ColorCycle : MonoBehaviour {
 	
+	[Header("Works for sprites and UI Images")]
+	[Space(1)]
 	public Color32 FromColor;
 	public Color32 ToColor;
 	public float Duration=1f;
 	public float Delay=0f;
 	public Patterns Pattern = Patterns.Triangle;
-	private SpriteRenderer sprite;
+	private SpriteRenderer sprite; //sprite
+	private Image img; //ui image
 	public float ratio;
 	private	float MyTime;
 	 
@@ -19,6 +23,7 @@ public class ColorCycle : MonoBehaviour {
 	void Start () 
 	{
 		sprite = gameObject.GetComponent<SpriteRenderer>();		
+		if (!sprite) img = gameObject.GetComponent<Image>();
 	}
 	
 	
@@ -30,7 +35,8 @@ public class ColorCycle : MonoBehaviour {
 		if (Pattern == Patterns.Triangle) ratio = Mathf.PingPong(MyTime/Duration,1f);
 		if (Pattern == Patterns.Block) ratio =  Mathf.Round(Mathf.Repeat(MyTime/Duration,1f));
 		
-		sprite.color = Color32.Lerp(FromColor,ToColor,ratio);
+		if (sprite) sprite.color = Color32.Lerp(FromColor,ToColor,ratio);
+		else if (img) img.color = Color32.Lerp(FromColor,ToColor,ratio);
 	}
 	
 	

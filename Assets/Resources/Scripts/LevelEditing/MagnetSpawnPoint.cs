@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 public class MagnetSpawnPoint : MonoBehaviour {
@@ -8,16 +9,21 @@ public class MagnetSpawnPoint : MonoBehaviour {
 	public static MagnetSpawnPoint currentMagnet;
 	public static MagnetSpawnPoint currentSavePoint;
 	public static MagnetSpawnPoint startPointMagnet;
+	public static List<MagnetSpawnPoint> startPoints;
 	public bool isStartPoint = false;
 	public bool isSafePoint = false;
 
 	public void Awake()
 	{
-		if (startPointMagnet)  print("duplicate isStartPoint Magnet : " + name);
+		//if (startPointMagnet)  print("duplicate isStartPoint Magnet : " + name);
 		
 		enabled = false;
-		if (isStartPoint) {
+		if (isStartPoint) 
+		{
 			startPointMagnet = this;
+			if (startPoints == null) startPoints = new List<MagnetSpawnPoint>();
+			startPoints.Add(this);
+			foreach(var item in startPoints) print ("startPoints: " + item);	
 		}
 		EventManager.Subscribe(OnEvent);
 	}
