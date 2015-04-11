@@ -32,7 +32,6 @@ public class EventManager {
 	public const string EVENT_COLLECTABLE_FOUND = "EVENT_COLLECTABLE_FOUND";
 	public const string EVENT_ALL_COLLECTABLES_FOUND = "EVENT_ALL_COLLECTABLES_FOUND";
 	public const string EVENT_EXIT_VISIBLE = "EVENT_EXIT_VISIBLE";
-	public const string EVENT_CHARGE_DEPLETED = "EVENT_CHARGE_DEPLETED";
 	public const string EVENT_SCORE_MULTIPLIER = "EVENT_SCORE_MULTIPLIER";
 	public const string EVENT_SCORE_MULTIPLIER_END = "EVENT_SCORE_MULTIPLIER_END";
 	public const string EVENT_SCORE_INCREASE = "EVENT_SCORE_INCREASE";
@@ -40,8 +39,6 @@ public class EventManager {
 	public const string EVENT_LEVELMAP_PAGE_CHANGE = "EVENT_LEVELMAP_PAGE_CHANGE";
 	public const string EVENT_TILT_START = "EVENT_TILT_START";
 	public const string EVENT_TILT_END = "EVENT_TILT_END";
-	
-
 	
 	
 
@@ -71,7 +68,7 @@ public class EventManager {
 	{
 		//Debug.Log("EVENT: " + customevent);
 		
-		//if (customevent.Equals(EventManager.EVENT_LEVEL_START)) Debug.Log("Eventmanager callbackMethods size: " + EventManager.instance.callbackMethods.Count);		
+		if (customevent.Equals(EventManager.EVENT_LEVEL_START)) Debug.Log("Eventmanager callbackMethods size: " + EventManager.instance.callbackMethods.Count);		
 		foreach (Callbackmethod method in EventManager.instance.callbackMethods) 
 		{
 			method(customevent);	

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
+	private bool isScoreAdditionAllowed = true;
 	
 
 	void Start () 
@@ -78,11 +79,13 @@ public class GameManager : MonoBehaviour {
 	
 	private void StartTilt()
 	{
+		isScoreAdditionAllowed = false;
 		Invoke("EndTilt",tiltCooldownTime);
 	}
 	
 	private void EndTilt()
 	{
+		isScoreAdditionAllowed = true;
 		EventManager.fireEvent(EventManager.EVENT_TILT_END);
 	}
 	
@@ -145,15 +148,18 @@ public class GameManager : MonoBehaviour {
 	
 	public void AddToScore(int extraScore)
 	{
-		//check if updated score breaks thru threshold
-		if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
+		if (isScoreAdditionAllowed)
 		{
-			if (Level.instance.hasMinScore) EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
-			isMinimimScoreReached = true;
+			//check if updated score breaks thru threshold
+			if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
+			{
+				if (Level.instance.hasMinScore) EventManager.fireEvent(EventManager.EVENT_MINIMUMSCORE_REACHED);
+				isMinimimScoreReached = true;
+			}
+			score = score + (ScoreMultiplier * extraScore);
+			if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
+			if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
 		}
-		score = score + (ScoreMultiplier * extraScore);
-		if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
-		if (ScoreUpdateLabel) ScoreUpdateLabel.SetText("+" +  ScoreMultiplier * extraScore);
 	}
 				
 					
