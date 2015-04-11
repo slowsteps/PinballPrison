@@ -26,7 +26,8 @@ public class TimeDisplay : MonoBehaviour {
 		}
 		else 
 		{
-			gameObject.SetActive(false);
+			TimeLeftLabel.text = "no timelimit";
+			//gameObject.SetActive(false);
 		}
 	}
 	
@@ -40,16 +41,21 @@ public class TimeDisplay : MonoBehaviour {
 			break;
 		case EventManager.EVENT_BALL_EXIT:
 			CancelInvoke("UpdateTimeDisplay");
-			gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			CancelInvoke("UpdateTimeDisplay");
-			gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_BALL_DEATH:
 			CancelInvoke("UpdateTimeDisplay");
 			InitTimeDisplay();
 			break;
+		case EventManager.HAMBURGER_BUTTON_CLICKED:
+			CancelInvoke("UpdateTimeDisplay");
+			break;	
+		case EventManager.RESUME_BUTTON_CLICKED:
+			InvokeRepeating("UpdateTimeDisplay",1f,1f);
+			break;		
+			//TODO QA with Invoke in Pause menu
 		}
 	}
 	
