@@ -23,7 +23,7 @@ public class MagnetSpawnPoint : MonoBehaviour {
 			startPointMagnet = this;
 			if (startPoints == null) startPoints = new List<MagnetSpawnPoint>();
 			startPoints.Add(this);
-			foreach(var item in startPoints) print ("startPoints: " + item);	
+			//foreach(var item in startPoints) print ("startPoints: " + item);	
 		}
 		EventManager.Subscribe(OnEvent);
 	}

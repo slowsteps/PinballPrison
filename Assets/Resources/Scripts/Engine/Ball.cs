@@ -67,11 +67,11 @@ public class Ball : MonoBehaviour {
 			gameObject.SetActive(false);
 			break;
 		case EventManager.EVENT_TILT_START:
-			enabled = false;
+			//enabled = false;
 			isTilt = true;
 			break;
 		case EventManager.EVENT_TILT_END:
-			enabled = true;
+			//enabled = true;
 			isTilt = false;
 			break;
 		case EventManager.HAMBURGER_BUTTON_CLICKED:
@@ -154,7 +154,7 @@ public class Ball : MonoBehaviour {
 		else 
 		{
 			//valid onscreen mouseup
-			if (IsInsideScreen()) OnUp();
+			if (!isTilt && IsInsideScreen()) OnUp();
 			//swipe off screen
 			else DeselectBall(); 
 			

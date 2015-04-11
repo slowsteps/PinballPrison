@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour {
 				isMinimimScoreReached = true;
 			}
 			score = score + (ScoreMultiplier * extraScore);
-			if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
+			//if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
 			
 			scoreParticles.gameObject.transform.position = sender.transform.position;
 			//scoreParticles.startSize = 100/extraScore;

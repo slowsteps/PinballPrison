@@ -8,13 +8,14 @@ public class ScoreDisplay : MonoBehaviour {
 	public static ScoreDisplay instance;
 	private Text ScoreText;
 
-	void Awake()
+	void Start()
 	{
 		instance = this;
 		enabled = false;
 		EventManager.Subscribe(OnEvent);
 		ScoreText = GetComponent<Text>();
 		//gameObject.SetActive(false);
+		StartCoroutine(AnimateScore());
 	}
 
 
@@ -38,7 +39,17 @@ public class ScoreDisplay : MonoBehaviour {
 		ScoreText.text = GameManager.instance.score.ToString("000,000,000,000");
 	}
 
-
+	IEnumerator AnimateScore()
+	{
+		print ("Kicking off IENumerator " + Time.time);
+		for (;;)
+		{
+			displayScore = Mathf.CeilToInt( Mathf.Lerp(displayScore,GameManager.instance.score,0.5f));
+			ScoreText.text = string.Format("{0:#,###0}",displayScore);
+			ScoreText.text = displayScore.ToString("000,000,000,000");
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
 
 
 
