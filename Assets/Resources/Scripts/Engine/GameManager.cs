@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	private levelOverReasons levelOverReason;
 	private bool isScoreAdditionAllowed = true;
 	public ParticleSystem scoreParticles;
+	public Texture[] scoreTextures;
 	
 
 	void Start () 
@@ -27,7 +28,6 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
-		
 	}
 
 	
@@ -157,11 +157,18 @@ public class GameManager : MonoBehaviour {
 				isMinimimScoreReached = true;
 			}
 			score = score + (ScoreMultiplier * extraScore);
-			//if (ScoreDisplay.instance) ScoreDisplay.instance.UpdateScoreDisplay();
+
+			int index = 0;
+			if (extraScore == 100) index = 0;
+			if (extraScore == 250) index = 1;
+			if (extraScore == 500) index = 2;
+			if (extraScore == 1000) index = 3;
 			
 			scoreParticles.gameObject.transform.position = sender.transform.position;
-			//scoreParticles.startSize = 100/extraScore;
+			//TODO cache reference
+			scoreParticles.GetComponent<Renderer>().material.mainTexture = scoreTextures[index];
 			scoreParticles.Emit(1);
+			
 			
 		}
 	}
