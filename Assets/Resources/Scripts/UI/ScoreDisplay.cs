@@ -41,7 +41,7 @@ public class ScoreDisplay : MonoBehaviour {
 
 	IEnumerator AnimateScore()
 	{
-		print ("Kicking off IENumerator " + Time.time);
+		//print ("Kicking off IENumerator " + Time.time);
 		for (;;)
 		{
 			displayScore = Mathf.CeilToInt( Mathf.Lerp(displayScore,GameManager.instance.score,0.5f));

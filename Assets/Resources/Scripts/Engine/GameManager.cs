@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour {
 	public long score = 0;
 	public int ScoreMultiplier = 1;
 	public int currentLevel = 1; // player progression
-	public int loadedLevel = 0;
+	public int loadedLevel = 0; // level loaded in scene
+	public int totalLevels = 40;
 	public bool hasPlayerClicked = false;
 	private bool isMinimimScoreReached = false;
 	public int shotsPlayed = 0;
@@ -193,5 +194,19 @@ public class GameManager : MonoBehaviour {
 			loadedLevel = levelNumber;
 		}
 		else print("can't load scene Level"+levelNumber) ;						
-	}															
+	}	
+	
+	public void LoadNextGameLevel() 
+	{
+		if (NextLevelIsAvailable()) LoadGameLevel(loadedLevel+1);
+		else print ("last level reached");
+	}
+	
+	public bool NextLevelIsAvailable()
+	{
+		if (loadedLevel < totalLevels) return true;
+		else return false;
+	}
+															
+																																											
 }

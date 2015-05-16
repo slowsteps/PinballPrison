@@ -9,6 +9,8 @@ public class GUIEndOfLevel : MonoBehaviour {
 	public GameObject SuccessHeader;
 	public GameObject FailedHeader;
 	public GameObject TryAgainButton;
+	public GameObject NextLevelButton;
+	
 	
 	void Start () 
 	{
@@ -31,6 +33,8 @@ public class GUIEndOfLevel : MonoBehaviour {
 			TryAgainButton.SetActive(false);
 			SuccessHeader.SetActive(true);
 			FailedHeader.SetActive(false);
+			if (GameManager.instance.NextLevelIsAvailable()) NextLevelButton.SetActive(true);
+			else NextLevelButton.SetActive(false);
 			gameObject.GetComponent<Animator>().SetTrigger("isShow");
 			break;
 		case EventManager.EVENT_LEVEL_FAILED:
@@ -38,6 +42,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 			TryAgainButton.SetActive(true);
 			SuccessHeader.SetActive(false);
 			FailedHeader.SetActive(true);
+			NextLevelButton.SetActive(false);
 			SoundManager.instance.PlaySound("LevelFail_SFX");
 			break;
 		}
@@ -47,7 +52,6 @@ public class GUIEndOfLevel : MonoBehaviour {
 	{
 		EventManager.fireEvent(EventManager.EVENT_QUIT);
 		SoundManager.instance.PlaySound("Select_SFX");
-		//gameObject.GetComponent<Animator>().SetTrigger("isHide");	
 		gameObject.SetActive(false);
 	}
 
@@ -57,10 +61,17 @@ public class GUIEndOfLevel : MonoBehaviour {
 	
 		SoundManager.instance.PlaySound("Select_SFX");
 		gameObject.SetActive(false);
-		//gameObject.GetComponent<Animator>().SetTrigger("isHide");	
+	}
+	
+	public void OnNextLevelButton()
+	{
+		GameManager.instance.LoadNextGameLevel();
+		SoundManager.instance.PlaySound("Select_SFX");
+		gameObject.SetActive(false);
 	}
 	
 			
+									
 	public void OnHideAnimComplete()
 	{
 		EventManager.fireEvent(EventManager.EVENT_MESSAGE_OK);

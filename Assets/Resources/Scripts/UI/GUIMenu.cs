@@ -10,7 +10,7 @@ public class GUIMenu : MonoBehaviour {
 	public GameObject logo;
 	public GameObject levelButton;
 	public GameObject gridLayout;
-	public int numLevels=40;
+	//public int numLevels=40;
 	public int pageSize=20;
 	public int page=0;
 	

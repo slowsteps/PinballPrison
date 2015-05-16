@@ -5,6 +5,7 @@ using System;
 
 public class GUIGoals : MonoBehaviour {
 
+	public Text LevelNumberLabel;
 	public Text ScoreLabel;
 	public Text ShotsLabel;
 	public Text Timelabel;
@@ -19,6 +20,7 @@ public class GUIGoals : MonoBehaviour {
 	
 	private void Clear()
 	{
+		LevelNumberLabel.text = "";
 		ScoreLabel.text = "";
 		ShotsLabel.text = "";
 		Timelabel.text = "";
@@ -35,6 +37,8 @@ public class GUIGoals : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(true);
 			Clear();
+			LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;
+			
 			if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
 			if (Level.instance.hasMaxShots) ShotsLabel.text = "Allowed shots: " + Level.instance.allowedShots;
 			if (Level.instance.hasCollectables) KeysLabel.text = "Required keys: " + Level.instance.requiredCollectables;

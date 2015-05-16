@@ -75,7 +75,7 @@ public class Exit : MonoBehaviour {
 	{
 		EventManager.UnSubscribe(OnEvent);
 		CancelInvoke();
-		iTween.Stop();
+		//iTween.Stop();
 	}
 	
 }
