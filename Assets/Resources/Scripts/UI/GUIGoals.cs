@@ -34,21 +34,34 @@ public class GUIGoals : MonoBehaviour {
 		case EventManager.LEVEL_BUTTON_CLICKED:
 			gameObject.SetActive(true);
 			break;
+		case EventManager.NEXT_LEVEL_BUTTON_CLICKED:
+			gameObject.SetActive(true);
+			break;
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(true);
-			Clear();
-			LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;
-			
-			if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
-			if (Level.instance.hasMaxShots) ShotsLabel.text = "Allowed shots: " + Level.instance.allowedShots;
-			if (Level.instance.hasCollectables) KeysLabel.text = "Required keys: " + Level.instance.requiredCollectables;
-			if (Level.instance.hasMaxTime) 
-			{	
-				TimeSpan ts = TimeSpan.FromSeconds(Level.instance.allowedTime);
-				Timelabel.text = "Allowed time: " + ts.Minutes + ":" + ts.Seconds;
-			}
+			ShowGoals();
 			break;
 		}
+	}
+	
+	private void ShowGoals()
+	{
+		print ("showing goals");
+		
+		Clear();
+		LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;
+		
+		if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
+		if (Level.instance.hasMaxShots) ShotsLabel.text = "Allowed shots: " + Level.instance.allowedShots;
+		if (Level.instance.hasCollectables) KeysLabel.text = "Required keys: " + Level.instance.requiredCollectables;
+		if (Level.instance.hasMaxTime) 
+		{	
+			TimeSpan ts = TimeSpan.FromSeconds(Level.instance.allowedTime);
+			Timelabel.text = "Allowed time: " + ts.Minutes + ":" + ts.Seconds;
+		}
+	
+		gameObject.GetComponent<Animator>().Play("LevelGoalsAppear");
+				
 	}
 	
 	public void OnOkButton()

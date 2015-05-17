@@ -67,6 +67,8 @@ public class GUIEndOfLevel : MonoBehaviour {
 	{
 		GameManager.instance.LoadNextGameLevel();
 		SoundManager.instance.PlaySound("Select_SFX");
+		print ("setting endoflevel to false");
+		EventManager.fireEvent(EventManager.NEXT_LEVEL_BUTTON_CLICKED);
 		gameObject.SetActive(false);
 	}
 	
