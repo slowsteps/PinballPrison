@@ -50,6 +50,7 @@ public class Level : MonoBehaviour {
 		if (!GameManager.instance)
 		{
 			Application.LoadLevelAdditive("Main");
+			GameObject.Destroy(gameObject);
 		}
 		//TODO can't remember why this is needed
 		if (!GameManager.instance.hasPlayerClicked)
