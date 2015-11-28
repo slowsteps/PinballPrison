@@ -20,8 +20,8 @@ public class GameManager : MonoBehaviour {
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
 	private bool isScoreAdditionAllowed = true;
-	public ParticleSystem scoreParticles;
-	public bool doEmitScoreParticlesFromTrigger = true;
+	public ParticleSystem scoreParticles; // display point increase
+	public ParticleSystem touchParticles; // accentuate impact
 	public Texture[] scoreTextures;
 	
 
@@ -166,10 +166,13 @@ public class GameManager : MonoBehaviour {
 			if (extraScore == 500) index = 2;
 			if (extraScore == 1000) index = 3;
 			
-			if (doEmitScoreParticlesFromTrigger) scoreParticles.gameObject.transform.position = sender.transform.position;
+			scoreParticles.gameObject.transform.position = sender.transform.position;
 			//TODO cache reference
 			scoreParticles.GetComponent<Renderer>().material.mainTexture = scoreTextures[index];
 			scoreParticles.Emit(1);
+			
+			touchParticles.gameObject.transform.position = sender.transform.position;
+			touchParticles.Emit(3);
 			
 			
 		}
