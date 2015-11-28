@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour {
 			if (extraScore == 500) index = 2;
 			if (extraScore == 1000) index = 3;
 			
-			scoreParticles.gameObject.transform.position = sender.transform.position;
+			//scoreParticles.gameObject.transform.position = sender.transform.position;
 			//TODO cache reference
 			scoreParticles.GetComponent<Renderer>().material.mainTexture = scoreTextures[index];
 			scoreParticles.Emit(1);
