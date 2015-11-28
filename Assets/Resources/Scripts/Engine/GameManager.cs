@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	private levelOverReasons levelOverReason;
 	private bool isScoreAdditionAllowed = true;
 	public ParticleSystem scoreParticles;
+	public bool doEmitScoreParticlesFromTrigger = true;
 	public Texture[] scoreTextures;
 	
 
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour {
 			if (extraScore == 500) index = 2;
 			if (extraScore == 1000) index = 3;
 			
-			//scoreParticles.gameObject.transform.position = sender.transform.position;
+			if (doEmitScoreParticlesFromTrigger) scoreParticles.gameObject.transform.position = sender.transform.position;
 			//TODO cache reference
 			scoreParticles.GetComponent<Renderer>().material.mainTexture = scoreTextures[index];
 			scoreParticles.Emit(1);
