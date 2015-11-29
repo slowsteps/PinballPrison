@@ -23,17 +23,23 @@ public class Mushroom : MonoBehaviour {
 	{
 		if (isBumping)
 		{
-			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
-			GameManager.instance.AddToScore(bumpScore,gameObject);
 			if (!gameObject.GetComponent<iTween>())
 			{
 				iTween.PunchScale(gameObject,iTween.Hash("amount",scaleEffectAmp * Vector3.one,"time",scaleEffectTime));
 			}
-			SoundManager.instance.PlaySound("Select_SFX");
+			
 		}
 	}
 	
-	
+	public void OnCollisionExit2D(Collision2D inColl)
+	{
+		if (isBumping)
+		{	
+			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
+			GameManager.instance.AddToScore(bumpScore,gameObject);
+			SoundManager.instance.PlaySound("Select_SFX");
+		}
+	}
 	
 	public void OnEvent(string customEvent)
 	{

@@ -53,11 +53,13 @@ public class Level : MonoBehaviour {
 			GameObject.Destroy(gameObject);
 		}
 		//TODO can't remember why this is needed
+		/*
 		if (!GameManager.instance.hasPlayerClicked)
 		{
 			GameObject.Destroy(gameObject);
 			gameObject.SetActive(false);
 		}
+		*/
 		
 		LongDescription = Description;
 		if (hasMinScore) LongDescription += " - Goal: " + requiredScore + " Points";
