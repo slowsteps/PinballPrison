@@ -49,8 +49,8 @@ public class Ball : MonoBehaviour {
 		
 		trail = gameObject.GetComponent<TrailRenderer>();
 		
-		trail.sortingLayerName = "Effects";
-		trail.sortingOrder = 40;
+		trail.sortingLayerName = "Outlines";
+		trail.sortingOrder = 0;
 	}
 	
 	public void OnEvent(string customEvent)
