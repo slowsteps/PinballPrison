@@ -5,7 +5,7 @@ public class ColorRollOver : MonoBehaviour {
 
 	[Header("Light up when ball rolls over")]
 	[Space(1)]
-	public Color32 FromColor;
+	private Color32 FromColor;
 	public Color32 ToColor;
 	
 	private Color32 savedFromColor;
@@ -23,10 +23,10 @@ public class ColorRollOver : MonoBehaviour {
 	void Awake () 
 	{
 		sprite = gameObject.GetComponent<SpriteRenderer>();		
-		sprite.color = FromColor;
-		savedFromColor = FromColor;
+		savedFromColor = sprite.color;
 		savedToColor = ToColor;
-		ToColor = FromColor; 
+		FromColor = sprite.color;
+		ToColor = sprite.color; 
 	}
 	
 	public void OnTriggerEnter2D (Collider2D ball)

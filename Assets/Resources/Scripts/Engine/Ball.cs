@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour {
 	public bool isDetectingTaps = true;
 	private List<float> tiltClicks;
 	private bool isTilt = false;
+	private TrailRenderer trail;
 	
 	
 	
@@ -45,6 +46,11 @@ public class Ball : MonoBehaviour {
 		tiltClicks.Add(Time.timeSinceLevelLoad);
 		tiltClicks.Add(Time.timeSinceLevelLoad);
 		tiltClicks.Add(Time.timeSinceLevelLoad);
+		
+		trail = gameObject.GetComponent<TrailRenderer>();
+		
+		trail.sortingLayerName = "Effects";
+		trail.sortingOrder = 40;
 	}
 	
 	public void OnEvent(string customEvent)
