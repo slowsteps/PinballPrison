@@ -8,7 +8,7 @@ public class CoinPickup : MonoBehaviour {
 
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		print("hit: " + ball);
+		
 		
 		if (ball.tag == "ball") 
 		{
