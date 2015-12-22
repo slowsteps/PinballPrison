@@ -57,7 +57,7 @@ public class Target : MonoBehaviour {
 	
 	
 	//if down sprites are not available, use color to indicate state
-	public void OnCollisionEnter2D (Collision2D inColl)
+	public void OnCollisionExit2D (Collision2D inColl)
 	{
 		inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
 		if (isDetecting) HandleBallContact();
