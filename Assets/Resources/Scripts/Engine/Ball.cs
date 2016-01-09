@@ -277,7 +277,7 @@ public class Ball : MonoBehaviour {
 			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
 			SoundManager.instance.PlaySound("BallRelease_SFX");
-			Time.timeScale = 1f;	
+
 			
 			//Title when clicking too fast
 			

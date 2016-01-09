@@ -16,25 +16,20 @@ public class Bumper : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 	}	
 		
-	public void OnCollisionEnter2D (Collision2D inColl)
+	
+	public void OnCollisionExit2D(Collision2D inColl)
 	{
 		if (isBumping)
 		{
+			GameManager.instance.AddToScore(bumpScore,gameObject);	
+			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
 			
-			GameManager.instance.AddToScore(bumpScore,gameObject);
 			if (!gameObject.GetComponent<iTween>())
 			{
 				Vector3 targetPos = (Vector3)inColl.contacts[0].normal;
 				iTween.PunchPosition(gameObject,iTween.Hash("amount",-scaleEffectAmp * targetPos,"time",scaleEffectTime,"space",Space.World));
 			}
-		}
-	}
-	
-	public void OnCollisionExit2D(Collision2D inColl)
-	{
-		if (isBumping)
-		{	
-			inColl.rigidbody.AddForce(-bumpForce * inColl.contacts[0].normal);
+			
 		}
 	}
 

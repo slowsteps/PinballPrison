@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		InitBalls();
+		//Time.timeScale = 0.2f;
 	}
 
 	
@@ -152,6 +153,9 @@ public class GameManager : MonoBehaviour {
 	{
 		if (isScoreAdditionAllowed)
 		{
+		
+			print ("extraScore " + extraScore + " - sender " + sender); 
+		
 			//check if updated score breaks thru threshold
 			if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
 			{
