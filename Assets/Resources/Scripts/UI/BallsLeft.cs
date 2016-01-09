@@ -32,7 +32,7 @@ public class BallsLeft : MonoBehaviour {
 	
 	private void UpdateText()
 	{
-		BallsLeftText.text = "Balls left: " + GameManager.instance.balls;
+		BallsLeftText.text = "Balls left: " + (GameManager.instance.balls - 1);
 	}
 	
 	
