@@ -57,7 +57,7 @@ public class GUIGoals : MonoBehaviour {
 		if (Level.instance.hasMaxTime) 
 		{	
 			TimeSpan ts = TimeSpan.FromSeconds(Level.instance.allowedTime);
-			Timelabel.text = "Allowed time: " + ts.Minutes + ":" + ts.Seconds;
+			Timelabel.text = string.Format("Allowed time: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);			
 		}
 	
 		gameObject.GetComponent<Animator>().Play("LevelGoalsAppear");

@@ -8,6 +8,7 @@ public class TimeDisplay : MonoBehaviour {
 	private float allowedTime = 0;
 	private float curTime = 0;
 	private Text TimeLeftLabel;
+	private TimeSpan ts;
 
 
 	void Awake()
@@ -64,9 +65,8 @@ public class TimeDisplay : MonoBehaviour {
 		curTime = curTime - 1;
 		if (curTime > 0)
 		{
-			//TODO move declaration 
-			TimeSpan ts = TimeSpan.FromSeconds(curTime);
-			TimeLeftLabel.text = "Time left: " + ts.Minutes + ":" + ts.Seconds;
+			ts = TimeSpan.FromSeconds(curTime);
+			TimeLeftLabel.text = string.Format("Time left: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
 		}
 		else
 		{
