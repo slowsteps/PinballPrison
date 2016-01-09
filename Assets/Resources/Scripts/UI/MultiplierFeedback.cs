@@ -4,13 +4,12 @@ using UnityEngine.UI;
 
 public class MultiplierFeedback : MonoBehaviour {
 
-	private Text Label;
+	public Text Label;
 
 	// Use this for initialization
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
-		Label = gameObject.GetComponent<Text>();
 		gameObject.SetActive(false);
 	}
 	

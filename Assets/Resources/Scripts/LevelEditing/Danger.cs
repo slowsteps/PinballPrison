@@ -7,6 +7,7 @@ public class Danger : MonoBehaviour {
 	
 	void Start () 
 	{
+		//TODO this can now also be set manually in the property inspector
 		if (GetComponent<ParticleSystem>()) GetComponent<ParticleSystem>().GetComponent<Renderer>().sortingLayerName = "Effects";
 	}
 	
@@ -18,6 +19,7 @@ public class Danger : MonoBehaviour {
 			GetComponent<ParticleSystem>().time = 0f;
 			GetComponent<ParticleSystem>().Play();
 		}
+		//TODO this is dirty, should be encapsulated in Ball
 		ball.gameObject.SetActive(false);
 		Ball.instance.DeselectBall();
 		
@@ -32,7 +34,6 @@ public class Danger : MonoBehaviour {
 	
 	public void OnDestroy()
 	{
-		//Debug.Log(" destroyed");
 		CancelInvoke();
 	}
 	
