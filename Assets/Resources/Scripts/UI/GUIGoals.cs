@@ -46,7 +46,7 @@ public class GUIGoals : MonoBehaviour {
 	
 	private void ShowGoals()
 	{
-		print ("showing goals");
+		
 		
 		Clear();
 		LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;

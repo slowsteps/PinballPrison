@@ -19,6 +19,8 @@ public class Danger : MonoBehaviour {
 			GetComponent<ParticleSystem>().Play();
 		}
 		ball.gameObject.SetActive(false);
+		Ball.instance.DeselectBall();
+		
 		Invoke("DelayedEvent",2f);
 		SoundManager.instance.PlaySound("Danger_SFX");
 	}

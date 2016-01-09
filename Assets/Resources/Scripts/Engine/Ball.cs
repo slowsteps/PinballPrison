@@ -61,6 +61,7 @@ public class Ball : MonoBehaviour {
 			Init();
 			break;
 		case EventManager.EVENT_BALL_DEATH:
+			print("ball death");
 			Init();
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
@@ -179,7 +180,7 @@ public class Ball : MonoBehaviour {
 		else return false;
 	}
 
-	private void DeselectBall()
+	public void DeselectBall()
 	{
 		selectedBall = null;
 		cursor.SetActive(false);
