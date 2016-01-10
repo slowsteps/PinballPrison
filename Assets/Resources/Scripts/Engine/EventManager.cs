@@ -40,6 +40,7 @@ public class EventManager {
 	public const string EVENT_LEVELMAP_PAGE_CHANGE = "EVENT_LEVELMAP_PAGE_CHANGE";
 	public const string EVENT_TILT_START = "EVENT_TILT_START";
 	public const string EVENT_TILT_END = "EVENT_TILT_END";
+	public const string EVENT_ALL_COINS_COLLECTED = "EVENT_ALL_COINS_COLLECTED";
 	
 	
 
