@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour {
 		if (isScoreAdditionAllowed)
 		{
 		
-			print ("extraScore " + extraScore + " - sender " + sender); 
+			//print ("extraScore " + extraScore + " - sender " + sender); 
 		
 			//check if updated score breaks thru threshold
 			if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour {
 			if (extraScore == 1000) index = 3;
 			
 			scoreParticles.gameObject.transform.position = sender.transform.position;
-			//TODO cache reference
+			//TODO cache reference - do we still use this??
 			scoreParticles.GetComponent<Renderer>().material.mainTexture = scoreTextures[index];
 			scoreParticles.Emit(1);
 			
