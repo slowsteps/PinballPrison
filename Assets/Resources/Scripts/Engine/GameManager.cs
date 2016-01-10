@@ -29,8 +29,10 @@ public class GameManager : MonoBehaviour {
 	{
 		EventManager.Subscribe(OnEvent);
 		instance = this;
+		balls = startBalls;
 		InitBalls();
 		//Time.timeScale = 0.2f;
+		
 	}
 
 	
@@ -143,7 +145,7 @@ public class GameManager : MonoBehaviour {
 							
 	private void InitBalls()
 	{
-		balls = startBalls;
+		//balls = startBalls;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		score = 0;
 	}
