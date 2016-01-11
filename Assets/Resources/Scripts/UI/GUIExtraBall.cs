@@ -2,11 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class AllCoinsCollected : MonoBehaviour {
+public class GUIExtraBall : MonoBehaviour {
 
-	public Text Label;
-
-	// Use this for initialization
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
@@ -20,10 +17,8 @@ public class AllCoinsCollected : MonoBehaviour {
 		case EventManager.EVENT_LEVEL_START:
 			gameObject.SetActive(false);
 			break;
-		case EventManager.EVENT_ALL_COINS_COLLECTED:
+		case EventManager.EVENT_EXTRA_BALL:
 			gameObject.SetActive(true);
-			Label.text = "All " + CoinPickup.coinList.Count + " coins collected!";
-			GameManager.instance.AddBall();
 			Invoke("Hide",3f);
 			break;
 		}

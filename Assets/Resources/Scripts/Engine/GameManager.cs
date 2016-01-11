@@ -54,14 +54,8 @@ public class GameManager : MonoBehaviour {
 		case EventManager.EVENT_QUIT:
 			OnGameOver(levelOverReasons.QUIT);
 			break;
-		case EventManager.EVENT_BALL_SHOT:
-			//BallShot();
-			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			OnGameOver(levelOverReasons.OUT_OF_BALLS);
-			break;
-		case EventManager.EVENT_OUT_OF_SHOTS:
-			OnGameOver(levelOverReasons.OUT_OF_SHOTS);
 			break;
 		case EventManager.EVENT_OUT_OF_TIME:
 			OnGameOver(levelOverReasons.OUT_OF_TIME);
@@ -73,15 +67,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 	
-		
-	private void BallShot()
-	{
-		if (Level.instance.hasMaxShots && shotsPlayed == Level.instance.allowedShots)
-		{
-			EventManager.fireEvent(EventManager.EVENT_OUT_OF_SHOTS);
-		}
-	}
-	
+			
 	private void StartTilt()
 	{
 		isScoreAdditionAllowed = false;
@@ -101,13 +87,6 @@ public class GameManager : MonoBehaviour {
 		balls = balls + deltaBalls;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
-		
-		if (Level.instance.hasMaxShots && shotsPlayed == Level.instance.allowedShots)
-		{
-			EventManager.fireEvent(EventManager.EVENT_OUT_OF_SHOTS);
-		}
-		
-		
 	}
 	
 	private void OnGameOver(levelOverReasons reason)
@@ -122,10 +101,6 @@ public class GameManager : MonoBehaviour {
 		case levelOverReasons.OUT_OF_BALLS:
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
 			GUIEndOfLevel.instance.SetMessage("Out of balls\n " + Level.instance.FailMessage);
-			break;
-		case levelOverReasons.OUT_OF_SHOTS:
-			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
-			GUIEndOfLevel.instance.SetMessage("Out of shots\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
@@ -217,6 +192,13 @@ public class GameManager : MonoBehaviour {
 		if (loadedLevel < totalLevels) return true;
 		else return false;
 	}
-															
+				
+	public void AddBall()
+	{
+		balls++;
+		EventManager.fireEvent(EventManager.EVENT_EXTRA_BALL);
+		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
+		
+	}																									
 																																											
 }

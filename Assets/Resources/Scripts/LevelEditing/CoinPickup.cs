@@ -8,14 +8,11 @@ public class CoinPickup : MonoBehaviour {
 	public string feedbackText = "Coin";
 	public bool isCollected = false;
 	public static List<CoinPickup> coinList;
-	public int coinCount = 0;
 
 	public void Start()
 	{
 		if (coinList == null) coinList = new List<CoinPickup>();
 		coinList.Add(this);
-		//TODO does not fire in Level 5
-		coinCount = coinList.Count;
 	}
 
 
@@ -41,6 +38,10 @@ public class CoinPickup : MonoBehaviour {
 		}
 	}
 	
+	public void OnDestroy()
+	{
+		coinList.Clear();
+	}
 
-	//TODO will garbage collector remove coinList when changing levels?
+	
 }

@@ -52,7 +52,6 @@ public class GUIGoals : MonoBehaviour {
 		LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;
 		
 		if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
-		if (Level.instance.hasMaxShots) ShotsLabel.text = "Allowed shots: " + Level.instance.allowedShots;
 		if (Level.instance.hasCollectables) KeysLabel.text = "Required keys: " + Level.instance.requiredCollectables;
 		if (Level.instance.hasMaxTime) 
 		{	

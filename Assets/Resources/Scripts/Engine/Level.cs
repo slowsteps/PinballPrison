@@ -30,8 +30,6 @@ public class Level : MonoBehaviour {
 	public string LongDescription = "";
 	
 	public bool hasMinScore = false;
-	[HideInInspector]
-	public bool hasMaxShots = false;
 	public bool hasMaxTime = false;
 	public bool hasCollectables = false;
 	public int requiredScore = 0;
@@ -64,7 +62,6 @@ public class Level : MonoBehaviour {
 		LongDescription = Description;
 		if (hasMinScore) LongDescription += " - Goal: " + requiredScore + " Points";
 		if (hasCollectables) LongDescription += " - Goal: " + requiredCollectables + " Keys";
-		if (hasMaxShots) LongDescription += " - Max Shots: " + allowedShots;
 		if (hasMaxTime) LongDescription += " - Max Time: " + allowedTime;
 		
 		EventManager.Subscribe(OnEvent);

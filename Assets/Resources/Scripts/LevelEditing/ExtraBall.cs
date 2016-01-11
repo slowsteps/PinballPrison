@@ -16,9 +16,9 @@ public class ExtraBall : MonoBehaviour {
 			
 			ballVisual.SetActive(false);
 			
-			//TODO expand eventmanager so that is can pass data in event objects)
-			GameManager.instance.balls++;
-			EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
+			
+			GameManager.instance.AddBall();
+			
 			
 			Destroy(GetComponent<Collider2D>());
 

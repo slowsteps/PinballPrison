@@ -22,7 +22,6 @@ public class EventManager {
 	public const string EVENT_LEVEL_FAILED = "EVENT_LEVEL_FAILED";
 	public const string EVENT_BALLS_UPDATED = "EVENT_BALLS_UPDATED";
 	public const string EVENT_OUT_OF_BALLS = "EVENT_OUT_OF_BALLS";
-	public const string EVENT_OUT_OF_SHOTS = "EVENT_OUT_OF_SHOTS";
 	public const string EVENT_OUT_OF_TIME = "EVENT_OUT_OF_TIME";
 	public const string EVENT_MINIMUMSCORE_REACHED = "EVENT_MINIMUMSCORE_REACHED";
 	public const string EVENT_MENU_SHOW = "EVENT_MENU_SHOW";
@@ -41,6 +40,7 @@ public class EventManager {
 	public const string EVENT_TILT_START = "EVENT_TILT_START";
 	public const string EVENT_TILT_END = "EVENT_TILT_END";
 	public const string EVENT_ALL_COINS_COLLECTED = "EVENT_ALL_COINS_COLLECTED";
+	public const string EVENT_EXTRA_BALL = "EVENT_EXTRA_BALL";
 	
 	
 
