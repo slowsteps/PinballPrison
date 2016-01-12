@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour {
 	public float tiltToleranceTime = 2f;
 	public float MinForce = 200f;
 	public float MaxForce = 1000f;
-	public GameObject mainCam = null;
+	public Camera mainCam = null;
 	public GameObject cursor = null;
 	public float clickRadius = 0.5f;
 	private Vector3 clickPos = Vector3.zero;
@@ -134,6 +134,8 @@ public class Ball : MonoBehaviour {
 		}
 		
 		clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		
+		//clickPos = mainCam.ScreenToWorldPoint(Input.mousePosition);
 		
 		if (Input.GetMouseButtonDown(0))
 		{

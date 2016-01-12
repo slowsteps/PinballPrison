@@ -22,6 +22,7 @@ public class Exit : MonoBehaviour {
 			GetComponent<ParticleSystem>().time = 0f;
 			GetComponent<ParticleSystem>().Play();
 			iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
+			EventManager.fireEvent(EventManager.EVENT_BALL_EXIT_ENTERED);
 			Invoke("DelayedEvent",2f);	
 			SoundManager.instance.PlaySound("ExitEnter_SFX");
 		}

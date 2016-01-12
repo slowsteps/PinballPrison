@@ -40,7 +40,7 @@ public class TimeDisplay : MonoBehaviour {
 		case EventManager.GOALS_OK_BUTTON_CLICKED:
 			InitTimeDisplay();
 			break;
-		case EventManager.EVENT_BALL_EXIT:
+		case EventManager.EVENT_BALL_EXIT_ENTERED:
 			CancelInvoke("UpdateTimeDisplay");
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
