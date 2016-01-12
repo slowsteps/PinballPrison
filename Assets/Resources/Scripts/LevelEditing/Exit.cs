@@ -4,6 +4,7 @@ using System.Collections;
 public class Exit : MonoBehaviour {
 
 	private bool isEnabled = true;
+	private bool isTiltActive = false;
 	
 	
 	
@@ -16,7 +17,7 @@ public class Exit : MonoBehaviour {
 	
 	public void OnTriggerEnter2D (Collider2D ball)
 	{
-		if (isEnabled)
+		if (isEnabled && !isTiltActive)
 		{
 			ball.gameObject.SetActive(false);
 			GetComponent<ParticleSystem>().time = 0f;
@@ -50,10 +51,10 @@ public class Exit : MonoBehaviour {
 			Show();
 			break;
 		case EventManager.EVENT_TILT_START:
-			Hide();
+			isTiltActive = true;
 			break;	
 		case EventManager.EVENT_TILT_END:
-			Show();
+			isTiltActive = false;
 			break;	
 		}
 	}
