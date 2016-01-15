@@ -8,7 +8,7 @@ public class Exit : MonoBehaviour {
 	
 	
 	
-	void Awake () 
+	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
