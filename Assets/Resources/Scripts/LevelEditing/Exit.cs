@@ -12,6 +12,9 @@ public class Exit : MonoBehaviour {
 	{
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
+		//TODO hardcoded reference hack
+		Shockwave.instance.transform.position = transform.position;
+		Shockwave.instance.gameObject.SetActive(false);
 	}
 	
 	
@@ -24,8 +27,10 @@ public class Exit : MonoBehaviour {
 			GetComponent<ParticleSystem>().Play();
 			iTween.PunchScale(gameObject,new Vector3(0.6f,0.6f,0.6f),1f);
 			EventManager.fireEvent(EventManager.EVENT_BALL_EXIT_ENTERED);
-			Invoke("DelayedEvent",2f);	
+			Invoke("DelayedEvent",3f);	
 			SoundManager.instance.PlaySound("ExitEnter_SFX");
+			Shockwave.instance.gameObject.SetActive(true);
+			Shockwave.instance.GetComponent<Animator>().Play("Shockwave");
 		}
 	}
 	
