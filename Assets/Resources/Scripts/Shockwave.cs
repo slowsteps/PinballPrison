@@ -10,10 +10,8 @@ public class Shockwave : MonoBehaviour {
 	void Awake () 
 	{
 		instance = this;
+		gameObject.SetActive(false);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
