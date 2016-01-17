@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour {
 			
 		cursor.SetActive(false);
 		EventManager.Subscribe(OnEvent);
-		//origPos = transform.position;
+		
 		gameObject.SetActive(false);
 		tiltClicks = new List<float>();
 		tiltClicks.Add(Time.timeSinceLevelLoad);
@@ -110,7 +110,9 @@ public class Ball : MonoBehaviour {
 		gameObject.SetActive(true);
 		GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		GetComponent<Rigidbody2D>().angularVelocity = 0f;
-		if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		//TODO if this tween needs to be deleted at onUp, just like the one in OnMagnet, or make it an animation
+		//if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+	
 		enabled = true;
 	}
 	
