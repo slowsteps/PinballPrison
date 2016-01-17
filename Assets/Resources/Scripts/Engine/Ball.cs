@@ -112,6 +112,7 @@ public class Ball : MonoBehaviour {
 		GetComponent<Rigidbody2D>().angularVelocity = 0f;
 		//TODO if this tween needs to be deleted at onUp, just like the one in OnMagnet, or make it an animation
 		//if (!gameObject.GetComponent<iTween>()) iTween.PunchScale(gameObject,new Vector3(0.3f,0.3f,0.3f),2f);
+		gameObject.GetComponent<Animator>().SetTrigger("doInit");
 	
 		enabled = true;
 	}
