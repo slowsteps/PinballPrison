@@ -10,6 +10,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 	public GameObject FailedHeader;
 	public GameObject TryAgainButton;
 	public GameObject NextLevelButton;
+	public GameObject MenuButton;
 	
 	
 	void Start () 
@@ -47,12 +48,18 @@ public class GUIEndOfLevel : MonoBehaviour {
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:
 			gameObject.SetActive(true);
-			TryAgainButton.SetActive(true);
+			TryAgainButton.SetActive(false);
 			SuccessHeader.SetActive(false);
 			FailedHeader.SetActive(true);
 			NextLevelButton.SetActive(false);
+			MenuButton.SetActive(false);
 			SoundManager.instance.PlaySound("LevelFail_SFX");
 			break;
+		case EventManager.EVENT_EXTRA_BALL:
+			TryAgainButton.SetActive(true);
+			MenuButton.SetActive(true);
+			break;
+			
 		}
 	}
 	
@@ -75,7 +82,6 @@ public class GUIEndOfLevel : MonoBehaviour {
 	{
 		GameManager.instance.LoadNextGameLevel();
 		SoundManager.instance.PlaySound("Select_SFX");
-		print ("setting endoflevel to false");
 		EventManager.fireEvent(EventManager.NEXT_LEVEL_BUTTON_CLICKED);
 		gameObject.SetActive(false);
 	}

@@ -61,7 +61,6 @@ public class Ball : MonoBehaviour {
 			Init();
 			break;
 		case EventManager.EVENT_BALL_DEATH:
-			print("ball death");
 			Init();
 			break;
 		case EventManager.EVENT_OUT_OF_BALLS:

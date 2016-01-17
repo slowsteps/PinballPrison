@@ -171,7 +171,15 @@ public class GameManager : MonoBehaviour {
 	
 	public void LoadGameLevel(int levelNumber) 
 	{
+		//TODO check for zero balls
 		hasPlayerClicked = true;
+		
+		if (balls == 0) 
+		{
+			print ("no more balls");
+			return;
+		}
+		
 		if (Application.CanStreamedLevelBeLoaded("Level"+levelNumber)) 
 		{
 			Application.LoadLevelAdditive("Level"+levelNumber);
