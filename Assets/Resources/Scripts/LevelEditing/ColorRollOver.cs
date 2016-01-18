@@ -14,10 +14,11 @@ public class ColorRollOver : MonoBehaviour {
 	private float Duration=1f;
 	public float rampUpDuration = 0.3f;
 	public float rampDownDuration = 2f;
-	private SpriteRenderer sprite; //sprite
+	private SpriteRenderer sprite;
 	private float ratio;
 	private	float deltaTime;
 	private float savedTime;
+
 	
 	
 	void Awake () 
@@ -55,10 +56,8 @@ public class ColorRollOver : MonoBehaviour {
 	//TODO no need to run this every frame?		
 	void Update () 
 	{
-		{
-			deltaTime = Time.time - savedTime;
-			ratio = Mathf.Min(deltaTime/Duration,1f);
-			sprite.color = Color32.Lerp(FromColor,ToColor,ratio);
-		}
+		deltaTime = Time.time - savedTime;
+		ratio = Mathf.Min(deltaTime/Duration,1f);
+		sprite.color = Color32.Lerp(FromColor,ToColor,ratio);
 	}
 }
