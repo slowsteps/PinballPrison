@@ -8,6 +8,7 @@ public class Target : MonoBehaviour {
 	public int scoreValue = 1;
 	private Sprite targetUp;
 	public Sprite targetDown;
+	public Sprite ComboAchieved;
 	public Color notActivatedColor = Color.white;
 	public Color activatedColor = Color.red;
 	[HideInInspector]
@@ -18,17 +19,19 @@ public class Target : MonoBehaviour {
 	public List<TargetGroupEffect> targetGroupEffects;
 	[HideInInspector]
 	public bool isDetecting = true;
+	private SpriteRenderer mySpriteRenderer;
 	
 	void Awake()
 	{
 		EventManager.Subscribe(OnEvent);
-		targetUp = gameObject.GetComponent<SpriteRenderer>().sprite;
+		mySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+		targetUp = mySpriteRenderer.sprite;
 		if (isLight) GetComponent<Collider2D>().isTrigger = true;
 	}
 	
 	void Start()
 	{
-		if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
+		if (!targetDown) mySpriteRenderer.color = notActivatedColor;
 	
 	}
 	
@@ -73,20 +76,20 @@ public class Target : MonoBehaviour {
 			
 			if (!targetDown) 
 			{
-				if (isActivated) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
-				else gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
+				if (isActivated) mySpriteRenderer.color = activatedColor;
+				else mySpriteRenderer.color = notActivatedColor;
 			}
 			else 
 			{
-				if (isActivated) gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;
-				else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
+				if (isActivated) mySpriteRenderer.sprite = targetDown;
+				else mySpriteRenderer.sprite = targetUp;
 			}
 		}
 		else 
 		{
 			isActivated = true;
-			if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = activatedColor;
-			else gameObject.GetComponent<SpriteRenderer>().sprite = targetDown;		
+			if (!targetDown) mySpriteRenderer.color = activatedColor;
+			else mySpriteRenderer.sprite = targetDown;		
 			gameObject.GetComponent<Collider2D>().isTrigger = true;
 			StopDetecting();
 		}
@@ -106,6 +109,7 @@ public class Target : MonoBehaviour {
 	public void StopDetecting()
 	{
 		isDetecting = false;
+		if (ComboAchieved) mySpriteRenderer.sprite = ComboAchieved;
 	}
 
 	//TargetDown is a sprite image
@@ -113,8 +117,8 @@ public class Target : MonoBehaviour {
 	{
 		isDetecting = true;
 		isActivated = false;
-		if (!targetDown) gameObject.GetComponent<SpriteRenderer>().color = notActivatedColor;
-		else gameObject.GetComponent<SpriteRenderer>().sprite = targetUp;
+		if (!targetDown) mySpriteRenderer.color = notActivatedColor;
+		else mySpriteRenderer.sprite = targetUp;
 		
 		if (isLight) GetComponent<Collider2D>().isTrigger = true;
 		else GetComponent<Collider2D>().isTrigger = false;
