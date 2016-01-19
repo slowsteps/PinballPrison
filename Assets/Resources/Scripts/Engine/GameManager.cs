@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour {
 
 	public static GameManager instance;
@@ -185,6 +186,7 @@ public class GameManager : MonoBehaviour {
 			Application.LoadLevelAdditive("Level"+levelNumber);
 			SoundManager.instance.PlaySound("Select_SFX");
 			loadedLevel = levelNumber;
+			
 		}
 		else print("can't load scene Level"+levelNumber) ;						
 	}	
