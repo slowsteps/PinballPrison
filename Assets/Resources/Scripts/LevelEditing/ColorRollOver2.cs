@@ -9,10 +9,15 @@ public class ColorRollOver2 : MonoBehaviour {
 	public Color32 ToColor;
 	
 	private SpriteRenderer sprite;
-	public float sprayTotal = 0f;
+	private float sprayTotal = 0f;
 	private bool isSpraying = false;
-	private Rigidbody2D ballRigidbody;
-	private float fadeoutSpeed = 0.1f;
+	private static Rigidbody2D ballRigidbody;
+	[Header("color ramp up speed")]
+	[Range(0,1)]
+	public float speedMultiplier = 0.2f;
+	[Header("time (secs) to fade back to original color")]
+	public float fadeoutDuration = 1f;
+	
 	
 	void Start () 
 	{
@@ -45,10 +50,10 @@ public class ColorRollOver2 : MonoBehaviour {
 		
 		if (isSpraying)
 		{
-			sprayTotal = sprayTotal + ballRigidbody.velocity.magnitude;
+			sprayTotal = sprayTotal + (speedMultiplier * ballRigidbody.velocity.magnitude);
 		}
 		
-		sprayTotal = Mathf.Clamp01(sprayTotal - fadeoutSpeed);
+		sprayTotal = Mathf.Clamp01(sprayTotal - (Time.deltaTime / fadeoutDuration));
 		sprite.color = Color32.Lerp(FromColor,ToColor,sprayTotal);
 	}
 }
