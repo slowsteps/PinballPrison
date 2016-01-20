@@ -5,15 +5,12 @@ public class Exit : MonoBehaviour {
 
 	private bool isEnabled = true;
 	private bool isTiltActive = false;
-	public GameObject shockwave;
-	
 	
 	
 	void Awake () 
 	{
 		EventManager.Subscribe(OnEvent);
 		gameObject.SetActive(false);
-		if (!shockwave) Debug.LogError("shockwave effect not linked");
 	}
 	
 	
@@ -28,8 +25,6 @@ public class Exit : MonoBehaviour {
 			EventManager.fireEvent(EventManager.EVENT_BALL_EXIT_ENTERED);
 			Invoke("DelayedEvent",3f);	
 			SoundManager.instance.PlaySound("ExitEnter_SFX");
-			shockwave.gameObject.SetActive(true);
-			shockwave.GetComponent<Animator>().Play("Shockwave");
 		}
 	}
 	
@@ -81,7 +76,6 @@ public class Exit : MonoBehaviour {
 	{
 		EventManager.UnSubscribe(OnEvent);
 		CancelInvoke();
-		//iTween.Stop();
 	}
 	
 }

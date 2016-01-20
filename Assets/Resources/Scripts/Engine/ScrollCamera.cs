@@ -16,7 +16,7 @@ public class ScrollCamera : MonoBehaviour {
 		instance = this;
 		EventManager.Subscribe(OnEvent);
 		enabled = false;
-		GetComponent<Camera>().enabled = false;
+		//GetComponent<Camera>().enabled = false;
 		#if UNITY_EDITOR
 		GetComponent<Camera>().orthographicSize = 5.68f;
 		#endif
