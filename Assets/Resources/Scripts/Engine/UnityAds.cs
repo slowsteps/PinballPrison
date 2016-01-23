@@ -18,9 +18,6 @@ public class UnityAds : MonoBehaviour
 		{
 		case ShowResult.Finished:
 			Debug.Log("The ad was successfully shown.");
-			//
-			// YOUR CODE TO REWARD THE GAMER
-			// Give coins etc.
 			GameManager.instance.AddBall();
 			break;
 		case ShowResult.Skipped:

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour {
 
@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour {
 	private void UpdateBalls(int deltaBalls = 0)
 	{
 		balls = balls + deltaBalls;
+		if (balls < 0) balls = 0;
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
 	}
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour {
 			GUIEndOfLevel.instance.SetMessage("Out of balls\n " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
+			UpdateBalls(-1);
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
 			GUIEndOfLevel.instance.SetMessage("Out of time\n " + Level.instance.FailMessage);
 			break;
