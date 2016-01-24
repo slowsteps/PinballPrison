@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour {
 	public int totalLevels = 40;
 	public bool hasPlayerClicked = false;
 	private bool isMinimimScoreReached = false;
-	public int shotsPlayed = 0;
 	private enum levelOverReasons {OUT_OF_BALLS,OUT_OF_SHOTS,OUT_OF_TIME,EXIT_REACHED,COLLECTABLES_FOUND,QUIT};
 	private levelOverReasons levelOverReason;
 	private bool isScoreAdditionAllowed = true;
@@ -25,14 +24,28 @@ public class GameManager : MonoBehaviour {
 	public ParticleSystem touchParticles; // accentuate impact
 	public Texture[] scoreTextures;
 	
+	
 
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
 		instance = this;
-		balls = startBalls;
+		
+		if (PlayerPrefs.HasKey("isFirstPlay"))
+		{
+			//picking up from previous play
+			print ("found old game");
+			if (PlayerPrefs.HasKey("balls")) balls = PlayerPrefs.GetInt("balls");
+			if (PlayerPrefs.HasKey("currentLevel")) currentLevel = PlayerPrefs.GetInt("currentLevel");
+		}
+		else
+		{
+			balls = startBalls;
+			PlayerPrefs.SetInt("balls",balls);
+			PlayerPrefs.SetInt("isFirstPlay",0);
+		}
+		
 		InitBalls();
-		//Time.timeScale = 0.2f;
 		
 	}
 
@@ -44,7 +57,6 @@ public class GameManager : MonoBehaviour {
 		{
 		case EventManager.EVENT_LEVEL_START:
 			isMinimimScoreReached = false;
-			shotsPlayed = 0;
 			break;
 		case EventManager.EVENT_BALL_DEATH:
 			UpdateBalls(-1);
@@ -87,6 +99,7 @@ public class GameManager : MonoBehaviour {
 	{
 		balls = balls + deltaBalls;
 		if (balls < 0) balls = 0;
+		PlayerPrefs.SetInt("balls",balls);
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		if (balls == 0) EventManager.fireEvent(EventManager.EVENT_OUT_OF_BALLS);
 	}
@@ -98,6 +111,7 @@ public class GameManager : MonoBehaviour {
 		case levelOverReasons.EXIT_REACHED:
 			GUIEndOfLevel.instance.SetMessage(Level.instance.SuccesMessage);
 			currentLevel++;
+			PlayerPrefs.SetInt("currentLevel",currentLevel);
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
@@ -133,8 +147,6 @@ public class GameManager : MonoBehaviour {
 	{
 		if (isScoreAdditionAllowed)
 		{
-		
-			//print ("extraScore " + extraScore + " - sender " + sender); 
 		
 			//check if updated score breaks thru threshold
 			if ( !isMinimimScoreReached && (score + extraScore) >= Level.instance.requiredScore )
@@ -174,7 +186,7 @@ public class GameManager : MonoBehaviour {
 	
 	public void LoadGameLevel(int levelNumber) 
 	{
-		//TODO check for zero balls
+
 		hasPlayerClicked = true;
 		
 		if (balls == 0) 
@@ -192,6 +204,13 @@ public class GameManager : MonoBehaviour {
 		}
 		else print("can't load scene Level"+levelNumber) ;						
 	}	
+	
+	//TODO collapse try again and next level buttons actions into one continue button
+	public void ContinuePlay()
+	{
+		//TODO check for reaching last level
+		LoadGameLevel(currentLevel);
+	}
 	
 	public void LoadNextGameLevel() 
 	{
@@ -211,6 +230,14 @@ public class GameManager : MonoBehaviour {
 		EventManager.fireEvent(EventManager.EVENT_EXTRA_BALL);
 		EventManager.fireEvent(EventManager.EVENT_BALLS_UPDATED);
 		
-	}																									
+	}	
+	
+	public void ResetSaveGame()
+	{
+		PlayerPrefs.DeleteAll();
+		print ("all data deleted, please restart the game");
+	}																								
+																																																	
+																																																																																																	
 																																											
 }

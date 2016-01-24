@@ -20,16 +20,22 @@ public class GUIBallEndOfLevel : MonoBehaviour {
 	{
 		switch(customEvent)
 		{
+		case EventManager.EVENT_GAME_START:
+			UpdateLabel();
+			break;
 		case EventManager.EVENT_BALLS_UPDATED:
-			ballLabel.text = "You have " + GameManager.instance.balls + " balls ";
+			UpdateLabel();
 			break;
 		case EventManager.EVENT_EXTRA_BALL:
-			ballLabel.text = "You have " + GameManager.instance.balls + " balls ";
+			UpdateLabel();
 			break;
 		}
 	}
 	
 	
-	
+	private void UpdateLabel()
+	{
+		ballLabel.text = "You have " + GameManager.instance.balls + " balls ";
+	}	
 	
 }

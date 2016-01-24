@@ -20,10 +20,8 @@ public class UIManager : MonoBehaviour {
 	{
 		instance = this;
 		TopBar.SetActive(true);
-//		BottomBar.SetActive(true);
 		Message.SetActive(true);
-		Menu.SetActive(true);
-//		Settings.SetActive(true);
+		//Menu.SetActive(true);
 		Pause.SetActive(true);
 		Goals.SetActive(true);
 		Tilt.SetActive(true);	

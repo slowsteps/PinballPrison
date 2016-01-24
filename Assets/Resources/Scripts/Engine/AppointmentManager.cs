@@ -16,6 +16,12 @@ public class AppointmentManager : MonoBehaviour {
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
+		//picking up from last session.
+		if(PlayerPrefs.HasKey("savedTimeInSeconds")) 
+		{
+			print("retreived countdown");
+			isCountingDown = true;
+		}
 	}
 	
 	public void OnEvent(string customEvent)
@@ -32,6 +38,7 @@ public class AppointmentManager : MonoBehaviour {
 	{
 		savedTimeInSeconds = Time.realtimeSinceStartup;
 		isCountingDown = true;
+		PlayerPrefs.SetFloat("savedTimeInSeconds",savedTimeInSeconds);
 	}
 	
 	void Update()
@@ -47,6 +54,7 @@ public class AppointmentManager : MonoBehaviour {
 	{
 		if (GameManager.instance.balls == 0) GameManager.instance.AddBall();
 		isCountingDown = false;
+		PlayerPrefs.DeleteKey("savedTimeInSeconds");
 	}
 	
 	

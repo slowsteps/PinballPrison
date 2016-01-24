@@ -275,7 +275,6 @@ public class Ball : MonoBehaviour {
 			
 			GetComponent<Rigidbody2D>().AddForce(catapultForce);
 			cursor.SetActive(false);
-			GameManager.instance.shotsPlayed++;
 			EventManager.fireEvent(EventManager.EVENT_BALL_SHOT);
 			SoundManager.instance.PlaySound("BallRelease_SFX");
 
