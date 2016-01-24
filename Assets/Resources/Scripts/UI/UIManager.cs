@@ -6,7 +6,6 @@ public class UIManager : MonoBehaviour {
 
 	public GameObject TopBar;
 	public GameObject BottomBar;
-	public GameObject Message;
 	public GameObject Menu;
 	public GameObject Settings;
 	public GameObject Pause;
@@ -20,7 +19,7 @@ public class UIManager : MonoBehaviour {
 	{
 		instance = this;
 		TopBar.SetActive(true);
-		Message.SetActive(true);
+		EndOfLevel.SetActive(false);
 		//Menu.SetActive(true);
 		Pause.SetActive(true);
 		Goals.SetActive(true);

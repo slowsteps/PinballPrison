@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class GUIBallEndOfLevel : MonoBehaviour {
+public class GUIBalls : MonoBehaviour {
 
 	private Text ballLabel;
 	
@@ -35,6 +35,7 @@ public class GUIBallEndOfLevel : MonoBehaviour {
 	
 	private void UpdateLabel()
 	{
+		//print ("updating Balls label");
 		ballLabel.text = "You have " + GameManager.instance.balls + " balls ";
 	}	
 	

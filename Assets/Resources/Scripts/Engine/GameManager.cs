@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour {
 		EventManager.Subscribe(OnEvent);
 		instance = this;
 		
+		
+		
+		
 		if (PlayerPrefs.HasKey("isFirstPlay"))
 		{
 			//picking up from previous play
@@ -40,12 +43,20 @@ public class GameManager : MonoBehaviour {
 		}
 		else
 		{
+			//clean start .
 			balls = startBalls;
 			PlayerPrefs.SetInt("balls",balls);
 			PlayerPrefs.SetInt("isFirstPlay",0);
+			currentLevel = 1;
 		}
 		
+		
+		
+		
 		InitBalls();
+		LoadGameLevel(currentLevel);
+		print ("firing game start");
+		EventManager.fireEvent(EventManager.EVENT_GAME_START);
 		
 	}
 
@@ -189,11 +200,6 @@ public class GameManager : MonoBehaviour {
 
 		hasPlayerClicked = true;
 		
-		if (balls == 0) 
-		{
-			print ("no more balls");
-			return;
-		}
 		
 		if (Application.CanStreamedLevelBeLoaded("Level"+levelNumber)) 
 		{

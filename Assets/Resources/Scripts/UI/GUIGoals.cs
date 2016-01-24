@@ -7,12 +7,13 @@ public class GUIGoals : MonoBehaviour {
 
 	public Text LevelNumberLabel;
 	public Text ScoreLabel;
-	public Text ShotsLabel;
 	public Text Timelabel;
 	public Text KeysLabel;
+	public GameObject OkButton;
 	
 	void Start () 
 	{
+		print ("subscribing guigoals");
 		EventManager.Subscribe(OnEvent);
 		Clear();
 		gameObject.SetActive(false);
@@ -22,7 +23,6 @@ public class GUIGoals : MonoBehaviour {
 	{
 		LevelNumberLabel.text = "";
 		ScoreLabel.text = "";
-		ShotsLabel.text = "";
 		Timelabel.text = "";
 		KeysLabel.text = "";
 	}
@@ -38,6 +38,12 @@ public class GUIGoals : MonoBehaviour {
 			gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_LEVEL_START:
+			print ("goals - level start received");
+			gameObject.SetActive(true);
+			ShowGoals();
+			break;
+		case EventManager.EVENT_GAME_START:
+			print ("goals - game start");
 			gameObject.SetActive(true);
 			ShowGoals();
 			break;
@@ -47,9 +53,10 @@ public class GUIGoals : MonoBehaviour {
 	private void ShowGoals()
 	{
 		
+		print ("updating level number");
 		
 		Clear();
-		LevelNumberLabel.text = "Level " + GameManager.instance.loadedLevel;
+		LevelNumberLabel.text =  GameManager.instance.currentLevel.ToString();
 		
 		if (Level.instance.hasMinScore) ScoreLabel.text = "Required score: " + Level.instance.requiredScore;
 		if (Level.instance.hasCollectables) KeysLabel.text = "Required keys: " + Level.instance.requiredCollectables;
@@ -60,6 +67,10 @@ public class GUIGoals : MonoBehaviour {
 		}
 	
 		gameObject.GetComponent<Animator>().Play("LevelGoalsAppear");
+		
+		//TODO make method in gamemanager to check this
+		if (GameManager.instance.balls == 0) OkButton.SetActive(false);
+		else OkButton.SetActive(true);
 				
 	}
 	

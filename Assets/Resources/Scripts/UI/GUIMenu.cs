@@ -20,7 +20,7 @@ public class GUIMenu : MonoBehaviour {
 	{
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		EventManager.fireEvent(EventManager.EVENT_GAME_START);
+		//EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 	
 	

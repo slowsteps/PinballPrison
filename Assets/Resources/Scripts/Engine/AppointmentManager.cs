@@ -6,7 +6,7 @@ public class AppointmentManager : MonoBehaviour {
 
 	[Header("Manages countdown for extra ball")]
 	public float duration = 30f;
-	private float savedTimeInSeconds;
+	public DateTime savedDateTime;
 	public float timeRemaining;
 	public bool isCountingDown = false;
 	public static AppointmentManager instance;
@@ -17,9 +17,11 @@ public class AppointmentManager : MonoBehaviour {
 		instance = this;
 		EventManager.Subscribe(OnEvent);
 		//picking up from last session.
-		if(PlayerPrefs.HasKey("savedTimeInSeconds")) 
+		if(PlayerPrefs.HasKey("savedDateTime")) 
 		{
-			print("retreived countdown");
+			long temp = Convert.ToInt64(PlayerPrefs.GetString("savedDateTime"));
+			savedDateTime = DateTime.FromBinary(temp);
+			print("retreived savedDateTime: " + savedDateTime.Hour + ":"  + savedDateTime.Minute);
 			isCountingDown = true;
 		}
 	}
@@ -36,16 +38,18 @@ public class AppointmentManager : MonoBehaviour {
 	
 	private void startCountdown()
 	{
-		savedTimeInSeconds = Time.realtimeSinceStartup;
+		savedDateTime = DateTime.Now;
+		
 		isCountingDown = true;
-		PlayerPrefs.SetFloat("savedTimeInSeconds",savedTimeInSeconds);
+		PlayerPrefs.SetString("savedDateTime",savedDateTime.ToBinary().ToString());
+		print("storing savedTimeInSeconds: " + savedDateTime.Hour + ":"  + savedDateTime.Minute);
 	}
 	
 	void Update()
 	{
 		if (isCountingDown)
 		{
-			timeRemaining = duration - (Time.realtimeSinceStartup - savedTimeInSeconds);
+			timeRemaining = duration - ( (float) DateTime.Now.Subtract(savedDateTime).TotalSeconds );
 			if (timeRemaining < 0) GrantExtraBall();
 		}
 	}

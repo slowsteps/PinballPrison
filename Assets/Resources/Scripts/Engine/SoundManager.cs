@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour {
 	public AudioClip[] AudioClips;
 	private AudioSource Speaker;
 	
-	void Start()
+	void Awake()
 	{
 		instance = this;
 		Speaker = gameObject.GetComponent<AudioSource>();
