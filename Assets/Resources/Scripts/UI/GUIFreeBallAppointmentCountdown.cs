@@ -20,8 +20,8 @@ public class GUIFreeBallAppointmentCountdown : MonoBehaviour {
 		if (am.isCountingDown)
 		{
 			gameObject.SetActive(true);
-			ts = TimeSpan.FromSeconds(Mathf.RoundToInt(am.timeRemaining));
-			label.text = string.Format("Time to extra ball: {0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
+			
+			label.text = "time remaining " + am.timeRemaining;
 		}
 		else gameObject.SetActive(false);
 	}

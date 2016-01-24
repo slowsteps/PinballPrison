@@ -5,9 +5,9 @@ using System;
 public class AppointmentManager : MonoBehaviour {
 
 	[Header("Manages countdown for extra ball")]
-	public float duration = 30f;
+	public double duration = 30;
 	public DateTime savedDateTime;
-	public float timeRemaining;
+	public double timeRemaining;
 	public bool isCountingDown = false;
 	public static AppointmentManager instance;
 
@@ -49,7 +49,7 @@ public class AppointmentManager : MonoBehaviour {
 	{
 		if (isCountingDown)
 		{
-			timeRemaining = duration - ( (float) DateTime.Now.Subtract(savedDateTime).TotalSeconds );
+			timeRemaining = duration - ( DateTime.Now.Subtract(savedDateTime).TotalSeconds );
 			if (timeRemaining < 0) GrantExtraBall();
 		}
 	}
