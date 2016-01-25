@@ -21,7 +21,7 @@ public class GUIFreeBallAppointmentCountdown : MonoBehaviour {
 		{
 			gameObject.SetActive(true);
 			
-			label.text = "time remaining " + am.timeRemaining;
+			label.text = string.Format("Next ball countdown: {0:D2}:{1:D2}", am.timeRemaining.Minutes, am.timeRemaining.Seconds);		
 		}
 		else gameObject.SetActive(false);
 	}

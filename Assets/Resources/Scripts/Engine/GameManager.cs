@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEngine.Analytics;
+
 
 public class GameManager : MonoBehaviour {
 
@@ -199,7 +200,9 @@ public class GameManager : MonoBehaviour {
 	{
 
 		hasPlayerClicked = true;
-		
+		//Hack for level loading from menu - calling this directly
+		currentLevel = levelNumber;
+		//end Hack
 		
 		if (Application.CanStreamedLevelBeLoaded("Level"+levelNumber)) 
 		{
@@ -208,8 +211,14 @@ public class GameManager : MonoBehaviour {
 			loadedLevel = levelNumber;
 			
 		}
-		else print("can't load scene Level"+levelNumber) ;						
+		else print("can't load scene Level"+levelNumber) ;	
+		
+		
+		
+																						
 	}	
+	
+	
 	
 	//TODO collapse try again and next level buttons actions into one continue button
 	public void ContinuePlay()
@@ -244,6 +253,6 @@ public class GameManager : MonoBehaviour {
 		print ("all data deleted, please restart the game");
 	}																								
 																																																	
-																																																																																																	
-																																											
+
+																																									
 }

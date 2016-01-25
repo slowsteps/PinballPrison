@@ -13,7 +13,6 @@ public class GUIGoals : MonoBehaviour {
 	
 	void Start () 
 	{
-		print ("subscribing guigoals");
 		EventManager.Subscribe(OnEvent);
 		Clear();
 		gameObject.SetActive(false);
@@ -38,12 +37,10 @@ public class GUIGoals : MonoBehaviour {
 			gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			print ("goals - level start received");
 			gameObject.SetActive(true);
 			ShowGoals();
 			break;
 		case EventManager.EVENT_GAME_START:
-			print ("goals - game start");
 			gameObject.SetActive(true);
 			ShowGoals();
 			break;
@@ -53,7 +50,7 @@ public class GUIGoals : MonoBehaviour {
 	private void ShowGoals()
 	{
 		
-		print ("updating level number");
+		
 		
 		Clear();
 		LevelNumberLabel.text =  GameManager.instance.currentLevel.ToString();

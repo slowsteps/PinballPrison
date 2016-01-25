@@ -16,11 +16,12 @@ public class GUIMenu : MonoBehaviour {
 	
 	
 
-	void Start()
+	void Awake()
 	{
+		print ("start menu");
+		MakeLevelButtons();
 		instance = this;
 		EventManager.Subscribe(OnEvent);
-		//EventManager.fireEvent(EventManager.EVENT_GAME_START);
 	}
 	
 	
@@ -31,16 +32,9 @@ public class GUIMenu : MonoBehaviour {
 		case EventManager.EVENT_QUIT:
 			Show();
 			break;
-		case EventManager.EVENT_GAME_START:
-			MakeLevelButtons();
-			SoundManager.instance.PlaySound("MenuSong",true);
-			break;
 		case EventManager.EVENT_LEVEL_START:
 			Hide();
 			break;
-		case EventManager.LEVEL_BUTTON_CLICKED:
-			//Hide();
-			break;			
 		}
 	}
 	
@@ -61,6 +55,9 @@ public class GUIMenu : MonoBehaviour {
 	
 	private void MakeLevelButtons()
 	{
+		
+		print ("MakeLevelButtons");
+	
 		page = Mathf.FloorToInt(GameManager.instance.currentLevel / pageSize);
 		int topleftNumber = pageSize*page;
 		int sequenceNumber = 1;

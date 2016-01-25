@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour {
 		instance = this;
 		TopBar.SetActive(true);
 		EndOfLevel.SetActive(false);
-		//Menu.SetActive(true);
+		Menu.SetActive(true);
 		Pause.SetActive(true);
 		Goals.SetActive(true);
 		Tilt.SetActive(true);	
