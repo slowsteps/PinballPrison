@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GUIEndOfLevel : MonoBehaviour {
 	
 	public static GUIEndOfLevel instance;
-	public Text textField;
+	public Text levelResultLabel;
 	public GameObject SuccessHeader;
 	public GameObject FailedHeader;
 	public GameObject ContinueButton;
@@ -34,6 +34,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 			gameObject.SetActive(true);
 			SuccessHeader.SetActive(true);
 			FailedHeader.SetActive(false);
+			VideoAdButton.SetActive(false);
 			if (GameManager.instance.NextLevelIsAvailable()) ContinueButton.SetActive(true);
 			else ContinueButton.SetActive(false);
 			gameObject.GetComponent<Animator>().SetTrigger("isShow");
@@ -44,19 +45,15 @@ public class GUIEndOfLevel : MonoBehaviour {
 			else ContinueButton.SetActive(false);
 			SuccessHeader.SetActive(false);
 			FailedHeader.SetActive(true);
+			VideoAdButton.SetActive(true);
+			ExtraBallCountdownLabel.SetActive(true);
 			SoundManager.instance.PlaySound("LevelFail_SFX");
 			break;
 		case EventManager.EVENT_EXTRA_BALL:
 			ContinueButton.SetActive(true);
 			VideoAdButton.SetActive(false);
 			ExtraBallCountdownLabel.SetActive(false);
-			break;
-		case EventManager.EVENT_OUT_OF_BALLS:
-			ContinueButton.SetActive(false);
-			VideoAdButton.SetActive(true);
-			ExtraBallCountdownLabel.SetActive(true);
-			break;
-			
+			break;			
 		}
 	}
 	
@@ -105,7 +102,7 @@ public class GUIEndOfLevel : MonoBehaviour {
 	public void SetMessage(string inText)
 	{
 		gameObject.SetActive(true);
-		textField.text = inText;
+		levelResultLabel.text = inText;
 	}
 	
 	

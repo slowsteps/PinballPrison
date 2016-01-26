@@ -37,21 +37,22 @@ public class GUIGoals : MonoBehaviour {
 			gameObject.SetActive(true);
 			break;
 		case EventManager.EVENT_LEVEL_START:
-			gameObject.SetActive(true);
 			ShowGoals();
 			break;
 		case EventManager.EVENT_GAME_START:
-			gameObject.SetActive(true);
 			ShowGoals();
+			break;
+		case EventManager.EVENT_LEVEL_INCREASE:
+			LevelNumberLabel.text =  GameManager.instance.currentLevel.ToString();
 			break;
 		}
 	}
 	
+	
+	
 	private void ShowGoals()
-	{
-		
-		
-		
+	{	
+		gameObject.SetActive(true);
 		Clear();
 		LevelNumberLabel.text =  GameManager.instance.currentLevel.ToString();
 		
