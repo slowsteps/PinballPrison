@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour {
 	
 	private void OnGameOver(levelOverReasons reason)
 	{
+		//TODO can this case statement be replaced by events directly?
 		switch (reason)
 		{
 		case levelOverReasons.EXIT_REACHED:
@@ -127,13 +128,14 @@ public class GameManager : MonoBehaviour {
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_INCREASE);
 			break;
 		case levelOverReasons.OUT_OF_BALLS:
+			//TODO there is an out of balls event, GUIEndOFLevel should respond to that instead of hard call from here
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
-			GUIEndOfLevel.instance.SetMessage("Out of balls\n " + Level.instance.FailMessage);
+			GUIEndOfLevel.instance.SetMessage("Out of balls, " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.OUT_OF_TIME:
 			UpdateBalls(-1);
 			EventManager.fireEvent(EventManager.EVENT_LEVEL_FAILED);
-			GUIEndOfLevel.instance.SetMessage("Out of time\n " + Level.instance.FailMessage);
+			GUIEndOfLevel.instance.SetMessage("Out of time, " + Level.instance.FailMessage);
 			break;
 		case levelOverReasons.QUIT:
 			break;
