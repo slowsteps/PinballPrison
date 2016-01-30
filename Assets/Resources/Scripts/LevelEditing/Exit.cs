@@ -5,6 +5,7 @@ public class Exit : MonoBehaviour {
 
 	private bool isEnabled = true;
 	private bool isTiltActive = false;
+	public bool isFinalExit = false;
 	
 	
 	void Awake () 
@@ -30,7 +31,10 @@ public class Exit : MonoBehaviour {
 	
 	private void DelayedEvent()
 	{
-		EventManager.fireEvent(EventManager.EVENT_BALL_EXIT);
+		
+		if (isFinalExit) EventManager.fireEvent(EventManager.EVENT_GAME_COMPLETED);
+		else EventManager.fireEvent(EventManager.EVENT_BALL_EXIT);
+		
 		SoundManager.instance.PlaySound("LevelSucces_SFX");
 	}
 	

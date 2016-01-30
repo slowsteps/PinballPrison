@@ -86,6 +86,10 @@ public class Level : MonoBehaviour {
 			iTween.Stop(); 
 			GameObject.Destroy(gameObject);
 			break;
+		case EventManager.EVENT_GAME_RESET:
+			iTween.Stop(); 
+			GameObject.Destroy(gameObject);
+			break;			
 		case EventManager.EVENT_LEVEL_FAILED:
 			iTween.Stop(); 
 			GameObject.Destroy(gameObject);

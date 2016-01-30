@@ -250,6 +250,10 @@ public class GameManager : MonoBehaviour {
 	public void ResetSaveGame()
 	{
 		PlayerPrefs.DeleteAll();
+		currentLevel = 1;
+		score = 0;
+		ContinuePlay();
+		EventManager.fireEvent(EventManager.EVENT_GAME_RESET);
 		print ("all data deleted, please restart the game");
 	}																								
 																																																	

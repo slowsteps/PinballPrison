@@ -9,6 +9,8 @@ public class EventManager {
 	private List<Callbackmethod> callbackMethods; 
 
 	public const string EVENT_GAME_START = "EVENT_GAME_START";
+	public const string EVENT_GAME_COMPLETED = "EVENT_GAME_COMPLETED";
+	public const string EVENT_GAME_RESET = "EVENT_GAME_RESET";
 	public const string EVENT_LEVEL_START = "EVENT_LEVEL_START";
 	public const string GOALS_OK_BUTTON_CLICKED = "GOALS_OK_BUTTON_CLICKED";
 	public const string LEVEL_BUTTON_CLICKED = "LEVEL_BUTTON_CLICKED";
