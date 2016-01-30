@@ -11,6 +11,7 @@ public class GUIGoals : MonoBehaviour {
 	public Text KeysLabel;
 	public GameObject OkButton;
 	
+	
 	void Start () 
 	{
 		EventManager.Subscribe(OnEvent);
@@ -69,6 +70,8 @@ public class GUIGoals : MonoBehaviour {
 		//TODO make method in gamemanager to check this
 		if (GameManager.instance.balls == 0) OkButton.SetActive(false);
 		else OkButton.SetActive(true);
+		
+		
 				
 	}
 	

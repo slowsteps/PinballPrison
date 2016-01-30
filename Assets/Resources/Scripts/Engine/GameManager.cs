@@ -251,10 +251,9 @@ public class GameManager : MonoBehaviour {
 	{
 		PlayerPrefs.DeleteAll();
 		currentLevel = 1;
-		score = 0;
+		InitBalls();
 		ContinuePlay();
 		EventManager.fireEvent(EventManager.EVENT_GAME_RESET);
-		print ("all data deleted, please restart the game");
 	}																								
 																																																	
 
