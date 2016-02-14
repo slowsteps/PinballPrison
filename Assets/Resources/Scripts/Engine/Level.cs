@@ -102,11 +102,12 @@ public class Level : MonoBehaviour {
 	
 	private void IncreaseCollectables()
 	{
+		print (name + " IncreaseCollectables");
 		collectables++;
 		if (collectables == Level.instance.requiredCollectables) 
 		{
 			EventManager.fireEvent(EventManager.EVENT_ALL_COLLECTABLES_FOUND);
-			
+			print (name + " EVENT_ALL_COLLECTABLES_FOUND");
 		}
 	}		
 	

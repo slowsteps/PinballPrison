@@ -101,6 +101,7 @@ public class Target : MonoBehaviour {
 			StopDetecting();
 			//print ("collectable found " + this.name);
 			EventManager.fireEvent(EventManager.EVENT_COLLECTABLE_FOUND);
+			print (this.name + " EVENT_COLLECTABLE_FOUND");
 		}
 		
 	}

@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
-	private bool isEnabled = true;
-	private bool isTiltActive = false;
+	public bool isEnabled = true;
+	public bool isTiltActive = false;
+	
+	[Header("Only tick when this is final level")]
 	public bool isFinalExit = false;
 	
 	
